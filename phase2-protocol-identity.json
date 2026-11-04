@@ -1,0 +1,31 @@
+{
+  "study_id": "corporate-event-alpha-v1",
+  "repository": "https://github.com/Olliemac0707/Corporate-Events.git",
+  "branch": "main",
+  "expected_freeze_commit": "eb1d28dc8fa5b651baac6f0aff91f4db3182d00e",
+  "expected_annotated_tag": "corporate-event-alpha-v1-phase1-event-data-protocol-v1-standalone",
+  "expected_freeze_manifest_sha256": "1461b12b2c2860564700868763bd4d9a8b9f94ab561ec8059dd9c1eadab464ff",
+  "frozen_payload_count": 10,
+  "imported_files_including_manifest": 11,
+  "identity_change_scope": "STANDALONE_REPOSITORY_IDENTITY_ONLY",
+  "original_frozen_payload_bytes_unchanged": true,
+  "original_freeze_commit_provenance_only": "853902a1e2cb3ccba2d274e9cb2e271cb59b315d",
+  "original_tag_provenance_only": "corporate-event-alpha-v1-phase1-event-data-protocol-v1",
+  "original_history_imported": false,
+  "original_payload_branch_and_base_commit_fields": "PROVENANCE_ONLY; canonical standalone repository identity is in this file",
+  "phase2_authorization": "OUTCOME_BLIND_SEC_EVENTS_ONLY; exact standalone preflight plus real SEC contact before SEC networking",
+  "SEC_contact_status": "NOT_CONFIGURED",
+  "SEC_ingestion_started": false,
+  "phase3_authorized": false,
+  "phase4plus_authorized": false,
+  "event_outcomes_observed": 0,
+  "event_price_joins": 0,
+  "prospective_accesses": 0,
+  "preflight_requirements": [
+    "HEAD contains expected_freeze_commit",
+    "expected_annotated_tag has object type tag and resolves to expected_freeze_commit",
+    "freeze-manifest.json raw SHA256 equals expected_freeze_manifest_sha256",
+    "all ten frozen payload hashes match the manifest",
+    "runtime research contact configured privately before SEC networking"
+  ]
+}
