@@ -1,0 +1,10 @@
+{
+  "package": "tzdata",
+  "version": "2026.6",
+  "zone": "America/New_York",
+  "source": "https://github.com/python/tzdata",
+  "source_path": "tzdata/zoneinfo/America/New_York",
+  "tzif_sha256": "d7f2206b3a45989fc9ad63d558922532fa7352280d5f87176bf1db79cb1d1fa9",
+  "purpose": "Information-clock timezone only; no exchange calendar/session authority frozen",
+  "license": "timezone-LICENSE.txt"
+}

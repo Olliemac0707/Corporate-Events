@@ -1,0 +1,476 @@
+"study_id" = "corporate-event-alpha-v1"
+"schema_version" = "1.0"
+"status" = "FROZEN_EVENT_DATA_ONLY"
+"audit_date" = "2026-11-04"
+"phase" = "1D"
+"phase2_authorized" = true
+"universe_frozen" = false
+"historical_authority_decision" = "CRSP_CORE_VALIDATED_MATERIAL_SUPPLEMENT_REQUIRED"
+"free_data_decision" = "NO_EVIDENCED_AUTHORITY_INSUFFICIENT"
+"base_commit" = "c1b9f08defb179d178636212f1fdc9ee48ef353e"
+"branch" = "research/corporate-event-alpha-v1"
+"blockers" = ["PHASE3_SECURITY_MAPPING", "PHASE3_TERMINAL_ECONOMICS", "PHASE3_HORIZON_MATURITY", "PHASE3_SPAC_LIFECYCLE", "PHASE3_CALENDAR", "PHASE3_FORMULAS", "VENDOR_PUBLICATION_RIGHTS"]
+
+[scope]
+"families" = ["SHARE_REPURCHASE", "INSIDER_OPEN_MARKET_PURCHASE", "ACTIVIST_13D", "DIVIDEND_POSITIVE_CHANGE", "SPINOFF_ANNOUNCEMENT"]
+"excluded_signal_families" = ["EARNINGS_SURPRISE", "ANALYST_REVISION", "GUIDANCE_UPGRADE", "MA_TARGET", "MA_ACQUIRER", "STOCK_SPLIT", "IPO", "SEO", "DEBT_RESTRUCTURING", "CREDIT_RATING_CHANGE", "INDEX_CHANGE", "FDA_APPROVAL", "PATENT", "CONTRACT_AWARD"]
+"excluded_families_may_be_context_only" = true
+"no_result_computation" = true
+"no_event_price_joins" = true
+"no_research_scale_ingestion" = false
+"no_prospective_access" = true
+"ingestion_scope" = "Phase 2 SEC-source event records only; no market observations, mapping or performance"
+
+[target_universe]
+"status" = "INTENT_ONLY_PHASE3_AUTHORITY_NOT_FROZEN"
+"incorporation" = "US"
+"security_type" = "ordinary common equity"
+"entry_listing_venues" = ["NYSE", "Nasdaq", "NYSE American"]
+"eligibility_required_at" = ["registered_public_time", "scheduled_entry_time"]
+"include_later_delisted_acquired_bankrupt_if_historically_eligible" = true
+"reit_ordinary_common_may_qualify" = true
+"exclusions" = ["ADR_ADS", "FOREIGN_ORDINARY", "ETF", "ETN", "OPEN_END_FUND", "CLOSED_END_FUND", "PREFERRED", "UNIT", "WARRANT", "RIGHT", "OTC_ONLY_AT_ENTRY", "PRE_COMBINATION_SPAC"]
+"security_primary_key" = "permanent_security_identifier_not_ticker_not_cik"
+"vendor_code_translation" = "DEFERRED_TO_PHASE3; Phase1C candidate is not final eligibility"
+"issuer_wide_multiclass_rule" = "UNRESOLVED_PENDING_HISTORICAL_CLASS_AUTHORITY; preserve all links; never choose by outcomes"
+
+[source_registry]
+"authority" = "public SEC-hosted records only"
+"discovery" = ["historical_master_indexes", "historical_form_indexes", "submissions_metadata_with_historical_references"]
+"never_seed_from_current_survivors" = true
+"documents" = ["complete_submission_text", "filing_index", "filing_documents", "ownership_xml", "beneficial_ownership_xml", "exhibits"]
+"initial_insider_forms" = ["4"]
+"insider_correction_forms" = ["4/A"]
+"initial_13d_forms" = ["SC 13D", "SCHEDULE 13D"]
+"amended_13d_context_forms" = ["SC 13D/A", "SCHEDULE 13D/A"]
+"passive_rejection_context_forms" = ["SC 13G", "SC 13G/A", "SCHEDULE 13G", "SCHEDULE 13G/A"]
+"issuer_forms" = ["8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A"]
+"spinoff_registration_context_forms" = ["10-12B", "10-12B/A", "10-12G", "10-12G/A", "S-1", "S-1/A", "S-4", "S-4/A", "DEF 14A", "DEFM14A", "PRE 14A", "PREM14A"]
+"exhibit_priority" = ["EX-99.1", "other_evidenced_relevant_exhibits"]
+"item_priorities_not_exclusive_filters" = ["7.01", "8.01", "2.02", "9.01"]
+"legal_furnished_status_does_not_exclude_public_information" = true
+"source_priority_cannot_override_earliest_qualifying_registered_disclosure" = true
+"raw_form_type_always_preserved" = true
+"schema_catalogue" = "https://www.sec.gov/submit-filings/technical-specifications"
+"schema_versions_to_validate" = ["Detect and retain actual historical SEC schema/version; unknown schema is retained unresolved, never guessed"]
+"schema_archives_acquired" = false
+"allowed_hosts" = ["www.sec.gov", "data.sec.gov"]
+"allowed_scheme" = "https"
+"archive_prefixes" = ["/Archives/edgar/full-index/", "/Archives/edgar/daily-index/", "/Archives/edgar/data/", "/Archives/edgar/Feed/", "/Archives/edgar/Oldloads/"]
+"submissions_prefix" = "/submissions/"
+"current_ticker_lists_are_discovery_authority" = false
+"external_news_or_current_search_rank_is_first_disclosure_authority" = false
+"context_before_start_only_for" = ["dividend_baseline", "repurchase_program_history", "earliest_disclosure"]
+"no_unbounded_full_archive_crawl" = true
+"unknown_form_or_schema" = "RETAIN_UNRESOLVED; review original registered bytes; no silent parser coercion"
+"corrections" = "append source versions and PAC/removal evidence; never overwrite original cached bytes"
+"follow_historical_submission_references" = true
+
+[source_registry.presentation_aliases]
+"Form 4-A" = "4/A"
+"Form 8-K-A" = "8-K/A"
+"Form 10-Q-A" = "10-Q/A"
+"Form 10-K-A" = "10-K/A"
+
+[source_registry.form_aliases]
+"4" = "4"
+"4/A" = "4/A"
+"4-A" = "4/A"
+"FORM 4" = "4"
+"FORM 4-A" = "4/A"
+"SC 13D" = "INITIAL_13D"
+"SCHEDULE 13D" = "INITIAL_13D"
+"SC 13D/A" = "AMENDED_13D"
+"SCHEDULE 13D/A" = "AMENDED_13D"
+"SC 13G" = "PASSIVE_13G"
+"SCHEDULE 13G" = "PASSIVE_13G"
+"SC 13G/A" = "AMENDED_13G"
+"SCHEDULE 13G/A" = "AMENDED_13G"
+"8-K" = "8-K"
+"8-K/A" = "8-K/A"
+"10-Q" = "10-Q"
+"10-Q/A" = "10-Q/A"
+"10-K" = "10-K"
+"10-K/A" = "10-K/A"
+"10-12B" = "10-12B"
+"10-12B/A" = "10-12B/A"
+"10-12G" = "10-12G"
+"10-12G/A" = "10-12G/A"
+"S-1" = "S-1"
+"S-1/A" = "S-1/A"
+"S-4" = "S-4"
+"S-4/A" = "S-4/A"
+"DEF 14A" = "DEF 14A"
+"DEFM14A" = "DEFM14A"
+"PRE 14A" = "PRE 14A"
+"PREM14A" = "PREM14A"
+"8-K-A" = "8-K/A"
+"10-Q-A" = "10-Q/A"
+"10-K-A" = "10-K/A"
+
+[fair_access]
+"research_user_agent" = "REQUIRED_NOT_SUPPLIED"
+"contact_address" = "REQUIRED_NOT_SUPPLIED"
+"network_enabled" = false
+"maximum_requests_per_second_global" = 2
+"initial_concurrency" = 1
+"rate_limit_scope" = "all SEC hosts, workers and machines under this research identity"
+"burst_policy" = "no bursts; request starts at least 500ms apart"
+"cache" = "immutable raw-byte objects; request-to-object manifest; reuse prior successful fetches"
+"hash_algorithm" = "SHA-256"
+"validate" = ["HTTP_status", "content_type", "content_length", "expected_document_structure", "no_error_html_as_success"]
+"maximum_attempts_including_initial" = 5
+"backoff_seconds_before_jitter" = [1, 2, 4, 8]
+"jitter_seconds" = [0.0, 0.5]
+"retry_after" = "honor server delay even if longer than local cap; defer rather than exceed task deadline"
+"transient_retry_statuses" = [408, 429, 500, 502, 503, 504]
+"http_403_action" = "stop batch; inspect policy/contact; do not immediate-retry or evade"
+"repeated_429_action" = "stop batch after two consecutive rate-limit responses; record deferred state"
+"request_timeout_seconds" = 30
+"identity_or_ip_rotation" = false
+"unnecessary_repeat_downloads" = false
+"request_accounting_required" = true
+"full_corpus_download_authorized" = false
+"runtime_network_gate" = "Actual user contact plus global one-owner scheduler and SEC-only audited fetch adapter required before download"
+"contact_configuration" = "SEC_RESEARCH_CONTACT from runtime secret/config, never tracked; reject empty/example/placeholder contact"
+"cache_write" = "exclusive create by SHA256, verify bytes on reuse; append request manifest, never overwrite"
+"request_accounting_fields" = ["request_id", "utc", "host", "path", "attempt", "status", "headers_hash", "response_sha256", "bytes", "cache_hit", "delay", "deferred_reason"]
+"cache_root" = "reports/corporate-event-alpha-v1/phase2-private/objects"
+"max_response_bytes" = 52428800
+"redirects" = "revalidate HTTPS hostname and registered path on every hop; never send credentials; no off-registry redirect"
+"schema_downloads" = "official SEC technical documentation only; separately registered and cached"
+"global_coordination" = "single owner process for this identity; a second worker/machine is forbidden unless same global scheduler enforces 2 rps"
+
+[public_clock]
+"timezone" = "America/New_York"
+"normalized_storage_timezone" = "UTC"
+"operational_buffer_seconds" = 900
+"buffer_interpretation" = "retrieval, classification, decision and order preparation; not measured SEC latency"
+"distinct_fields" = ["economic_event_date", "filing_date", "acceptance_datetime_raw", "acceptance_datetime_et", "acceptance_datetime_utc", "verified_dissemination_datetime", "public_time_lower_bound", "public_time_upper_bound", "public_time_basis", "timestamp_precision", "registered_public_datetime", "classification_available_at", "observed_at_utc", "transaction_date", "board_approval_date", "public_disclosure_date", "classification_reconstructed_from_packet"]
+"verified_time_rule" = "use independently evidenced public dissemination timestamp; retain source proof"
+"day_bound_rule" = "end of independently evidenced dissemination day in America/New_York; never infer a public-day guarantee from filing_date alone"
+"registered_public_datetime" = "usable verified timestamp or conservative public upper bound; not raw acceptance by default"
+"acceptance_cross_checks" = ["submissions_metadata", "complete_submission_header", "filing_index_acceptance"]
+"conflicting_or_unresolved_time" = "TIMESTAMP_UNRESOLVED; no tradable eligibility"
+"economic_date_may_replace_public_date" = false
+"printed_press_release_date_may_replace_sec_public_time" = false
+"current_retrieval_may_backdate_historical_publication" = false
+"future_document_classification" = "forbidden; a dependency disclosed later delays classification_available_at"
+"source_hierarchy" = ["independently evidenced SEC public dissemination timestamp tied to accession/document", "independently evidenced SEC dissemination day tied to accession/document, bounded at local day end", "TIMESTAMP_UNRESOLVED"]
+"day_bound_evidence" = ["archival SEC public Feed/Oldloads membership with documented dissemination-day meaning and source/version provenance", "other registered official SEC evidence explicitly proving the public dissemination day"]
+"index_filing_date_is_day_proof" = false
+"acceptance_plus_900_is_dissemination_proof" = false
+"retrieved_today_is_historical_day_proof" = false
+"public_lower_bound" = "verified timestamp or beginning of independently proven dissemination day; never invented"
+"public_upper_bound" = "verified timestamp, or 23:59:59.999999 America/New_York on independently proven dissemination day"
+"date_or_timestamp_conflict" = "TIMESTAMP_UNRESOLVED; retain all evidence; no averaging or earliest-value tie-break"
+"precision" = "EXACT_SOURCE_TIMESTAMP or DAY_BOUND or UNRESOLVED; preserve source precision"
+"timezone_conflict" = "TIMESTAMP_UNRESOLVED; SGML/JSON offsets checked using source-specific semantics, no naive Z relabelling"
+"classification_available_at" = "maximum usable public bound of all facts needed by the frozen classification rule; NULL if not reconstructible"
+"review_time_is_historical_knowledge" = false
+"classification_reconstruction" = "blinded reviewer must document same-public-packet reconstructibility; later dependency delays time; reviewed_at retained independently"
+"disclosure_date" = "unique evidenced SEC public ET date; no economic-date or filing-date substitution"
+"uncertain_study_or_split_date" = "retain candidate as UNRESOLVED_DATE, never assign favorable split or delete"
+
+[[public_clock.form_era_rules]]
+"forms" = ["8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A", "registration_forms"]
+"era" = "entire target interval, subject to versioned SEC rules"
+"cutoff_context" = "ordinary 17:30 ET processing cutoff; some later submissions disseminated next SEC business day"
+"usable_bound" = "requires independent dissemination-time/day evidence; late acceptance alone does not prove same-day availability"
+
+[[public_clock.form_era_rules]]
+"forms" = ["4", "4/A"]
+"era" = "2006-2024"
+"cutoff_context" = "22:00 ET ownership filing cutoff; timely filing date is not proof of exact public dissemination"
+"usable_bound" = "requires independent dissemination-time/day evidence"
+
+[[public_clock.form_era_rules]]
+"forms" = ["SC 13D", "SC 13D/A", "SCHEDULE 13D", "SCHEDULE 13D/A"]
+"era" = "before 2024-02-05"
+"cutoff_context" = "prior 17:30 ET filing cutoff and ten-calendar-day initial deadline"
+"usable_bound" = "requires independent dissemination-time/day evidence"
+
+[[public_clock.form_era_rules]]
+"forms" = ["SC 13D", "SC 13D/A", "SCHEDULE 13D", "SCHEDULE 13D/A"]
+"era" = "from 2024-02-05"
+"cutoff_context" = "22:00 ET filing cutoff; five-business-day initial and two-business-day amendment deadline"
+"usable_bound" = "requires independent dissemination-time/day evidence; acquisition date never determines availability"
+
+[entry]
+"rule" = "first eligible regular-session OPEN strictly greater than max(usable_public_time_upper_bound, classification_available_at) + 900 seconds"
+"premarket" = "same regular open only if strictly after buffered availability"
+"at_or_too_near_open" = "next eligible regular open"
+"in_session" = "next eligible regular open"
+"after_close" = "next eligible regular open"
+"weekend_or_holiday" = "next eligible regular open"
+"acceptance_only_with_supported_day_bound" = "first regular open after bounded dissemination day plus buffer"
+"halt_or_missing_scheduled_open" = "NO_VALID_FIRST_TRADABLE_BAR; retain event"
+"indefinite_roll_to_available_price" = false
+"prior_close_to_entry_open_gap_is_post_entry_return" = false
+"daily_open_is_execution_proxy_not_guaranteed_fill" = true
+"materialize_phase2_session" = false
+"phase2_status" = "DEFERRED_TO_PHASE3_CALENDAR; keep inputs only; no price lookup"
+"calendar_gate" = "No calendar authority frozen in this version"
+
+[calendar]
+"status" = "DEFERRED_TO_PHASE3_NOT_FROZEN"
+"authority_intent" = "frozen exchange calendar + timezone + official exceptions; not price-row presence"
+"phase2_session_materialization" = false
+
+[repurchases]
+"eligible_classes" = ["NEW_AUTHORIZATION", "AUTHORIZATION_INCREASE"]
+"context_classes" = ["EXTENSION_ONLY", "ROUTINE_ACTUAL_REPURCHASES", "EXPIRATION", "COMPLETION", "ASR_AGREEMENT", "TENDER_OFFER", "AMBIGUOUS"]
+"retain" = ["authorization_total", "incremental_amount_if_supported", "currency", "share_units", "prior_authorization", "remaining_authorization", "approval_date", "announcement_date", "expiration", "program_scope", "open_market_permission", "source_language", "evidence_locator"]
+"headline_minus_remaining_inference" = "forbidden unless source explicitly supports that exact economic relationship"
+"extension_without_new_capacity_qualifies" = false
+"ordinary_item703_historical_totals_qualify" = false
+"mixed_asr_or_tender_with_separate_authorization" = "retain components; authorization must independently meet eligibility"
+"economic_size_threshold" = "NONE"
+
+[form4]
+"candidate_rules" = ["Form 4", "Table I", "non-derivative transaction", "code P", "acquired flag A", "mapped ordinary-common class or retain class unresolved"]
+"candidate_does_not_imply" = ["open_market", "discretionary", "non_plan", "eligible_common_stock"]
+"venue_states" = ["OPEN_MARKET_SUPPORTED", "PRIVATE_PURCHASE", "VENUE_UNRESOLVED"]
+"discretion_states" = ["NON_PLAN_DISCRETION_SUPPORTED", "PLAN_TRANSACTION", "DISCRETION_UNRESOLVED"]
+"instrument_states" = ["NONDERIVATIVE_COMMON_SUPPORTED", "DERIVATIVE_OR_OTHER", "SECURITY_CLASS_UNRESOLVED"]
+"absence_of_checkbox_is_proof_of_discretion" = false
+"filing_level_plan_flag_may_be_assigned_to_all_rows_without_evidence" = false
+"retain" = ["issuer_cik", "reporting_owner_cik", "all_joint_owners", "relationships", "verbatim_officer_title", "transaction_date", "deemed_execution_date", "shares", "acquired_disposed", "ownership_form", "holdings_after", "transaction_codes", "footnote_links_and_text", "10b5_1_indicator", "plan_adoption_date", "amendment_linkage", "row_locator", "schema_version", "transaction_consideration_source_locator"]
+"unknown_equals_false" = false
+"transaction_date_controls_entry" = false
+"plan_indicator_regime_start" = "2023-04-01"
+"size_role_or_cluster_thresholds" = "NONE"
+"transaction_consideration_policy" = "Documentary transaction amounts may remain in original SEC bytes; no structured market-price/result field in event schema"
+
+[activist13d]
+"intent_states" = ["ACTIVIST_INTENT_SUPPORTED", "NONACTIVIST_INITIAL_13D", "INTENT_UNRESOLVED"]
+"supported_intent" = "specific affirmative plan or action to influence board, management, strategy, capital allocation or control, evidenced in initial public Item 4/exhibits"
+"nonactivist_intent" = "initial filing explicitly establishes investment/founder/other reporting circumstances without activist action; record evidence"
+"ambiguous_intent" = "boilerplate reserved rights, generic may-discuss language, mixed or missing evidence; no automatic activism"
+"later_campaign_success_may_resolve_initial_intent" = false
+"additional_ownership_cutoff" = "NONE"
+"retain" = ["subject_issuer_cik", "security_class", "cusip_if_available", "filer_cik_separate", "all_reporting_persons", "reporting_group", "reported_ownership_percent", "reported_denominator", "voting_power", "dispositive_power", "item4_text_and_evidence", "exhibits", "public_time", "economic_threshold_and_acquisition_dates"]
+"sum_overlapping_reporter_positions" = false
+"deadline_regime_change" = "2024-02-05"
+"structured_requirement_start" = "2024-12-18"
+"voluntary_xml_start" = "2023-12-18"
+
+[dividends]
+"positive_subtypes" = ["DIVIDEND_INITIATION", "DIVIDEND_INCREASE", "SPECIAL_DIVIDEND"]
+"context_states" = ["UNCHANGED", "DECREASE", "SUSPENSION", "RESUMPTION", "UNKNOWN_BASELINE"]
+"baseline" = "most recent comparable regular declared rate publicly known strictly before new disclosure"
+"baseline_keys" = ["issuer_cik", "SEC_disclosed_security_class", "currency", "payment_frequency", "per_share_denominator"]
+"special_changes_regular_baseline" = false
+"increase" = "strictly larger comparable ordinary declared rate; no minimum percent threshold"
+"split_adjustment" = "only evidenced split/class changes known at comparison time; never current-vintage global adjustment factors"
+"changed_currency_or_frequency" = "explicit rate/unit bridge required; otherwise BASELINE_UNRESOLVED"
+"initiation" = "positive source evidence of first regular dividend plus consistent known prehistory; missing baseline is not proof of initiation"
+"resumption" = "separate from initiation; retain prior suspension and known declaration history"
+"left_censored" = "LEFT_CENSORED_HISTORY and UNKNOWN_BASELINE; no finite absence-implies-initiation shortcut"
+"history_may_extend_before_2006" = true
+"retain" = ["declared_cash_per_share", "currency", "class", "frequency", "regular_or_special", "declaration_date", "record_date_if_stated", "ex_date_if_stated", "payment_date_if_stated", "baseline_source_ids", "evidence"]
+
+[spinoffs]
+"target" = "first registered public disclosure of stated intended spin-off or separation"
+"states" = ["SPINOFF_INTENTION", "STRATEGIC_ALTERNATIVES_REVIEW", "ASSET_SALE", "CARVE_OUT_IPO", "SPLIT_OFF", "COMPLETION_ONLY_RECAP", "CANCELLED_PROPOSAL", "AMBIGUOUS"]
+"chronology" = "search parent issuer sources and references backward; Form 10-12B is a discovery/corroboration seed, never presumed first"
+"earlier_source_evidence_missing" = "LEFT_CENSORED_HISTORY or TIMESTAMP_UNRESOLVED as applicable; do not certify first disclosure"
+"future_completion_or_cancellation_may_change_original_classification" = false
+"study_security" = "eligible parent common share class at disclosure/entry, not later spinco"
+"retain" = ["parent_cik", "parent_security", "spinco_identity_if_known", "business_segment", "structure", "announcement", "board_intent", "conditions", "expected_timing", "later_completion_separate", "later_cancellation_separate", "source_evidence"]
+
+[normalized_model]
+"tables" = ["issuer_identities", "disclosures", "source_evidence", "timing_authority", "events", "event_revisions", "event_clusters", "cluster_link_decisions", "classification_reviews", "event_security_mapping_placeholders", "mapping_coverage_status", "qa_source_controls", "reporting_owners", "event_reporting_owners", "repurchase_facts", "insider_purchase_facts", "activist_facts", "dividend_facts", "spinoff_facts"]
+"stable_event_key" = "SHA256 canonical JSON [study_id,family,first_disclosure_id,economic_action_anchor]; never recompute an existing ID after earlier provenance is discovered; append alias/revision"
+"identity_may_be_ticker_only" = false
+"economic_dates_distinct_from_information_dates" = true
+"unresolved_mapping_may_prevent_event_retention" = false
+"decimals_serialized_as_strings" = true
+"source_hash_algorithm" = "SHA-256"
+"revisions_append_only" = true
+"security_mapping_nullable" = true
+"price_data_required" = false
+"phase2_vendor_mapping" = false
+"append_only" = true
+"event_performance_fields" = false
+"schema" = "event-schema.sql"
+
+[deduplication]
+"unit" = "economic-action disclosure cluster with immutable document-level provenance"
+"anchors" = ["issuer_and_class", "action_specific_program_or_declaration_or_transaction_or_campaign_or_business", "explicit_cross_references", "evidenced_amounts_and_economic_dates"]
+"text_similarity_or_day_window_alone_is_sufficient" = false
+"press_release_and_8k_duplicate_action" = "one cluster; separate source documents"
+"periodic_recap_or_registration" = "context/corroboration, not a reset of first disclosure"
+"amendments" = "own public timestamp, revision/provenance link; never backfill later facts silently"
+"materially_new_action" = "new linked event only with separate economic evidence"
+"joint_ownership_reports" = "avoid multiplying same purchase or summing overlapping holdings"
+"multiple_dividend_components" = "keep separate subtypes linked to one disclosure bundle"
+"cross_family_coannouncements" = "distinct events, linked bundle; not independent information shocks"
+"may_use_subsequent_prices_or_completion_success" = false
+"cluster_id" = "stable issuer/action anchor; immutable decisions, membership derived from decisions"
+"uncertain_merge" = "retain separate candidates and AMBIGUOUS link decision until blinded adjudication"
+"later_original_first_source" = "append earlier-source revision/link; keep stable event ID, preserve old timing and new availability"
+"price_or_success_features" = false
+
+[review]
+"reviewer_blinding" = ["post_event_prices", "returns", "CAR_BHAR", "later_strategy_inclusion", "holdout_outcomes", "later_completion_success", "later_cancellation_outcome"]
+"packet_cutoff" = "documents public by classification reference time only; later provenance maintenance cannot enrich an earlier feature snapshot"
+"record" = ["reviewer", "reviewed_at", "reason", "input_hashes", "evidence_locators", "decision", "adjudicator", "adjudication_reason", "superseded_decision_id"]
+"states" = ["PENDING", "ACCEPTED", "REJECTED", "AMBIGUOUS", "ADJUDICATED"]
+"disagreement" = "second blinded reviewer; unresolved disagreement remains ambiguous"
+"qa_eras" = ["2006-2012", "2013-2022", "2023-2024"]
+"qa_strata" = ["family", "era", "exact_form_alias", "primary_body_vs_exhibit_or_periodic_context", "parser_candidate_vs_independent_source_control"]
+"qa_quota_per_nonempty_cell" = 5
+"qa_rank" = "ascending SHA256 UTF8(study_id|phase2-qa-v1|family|era|form|source_kind|accession|source_document_sha256); tie by stable source ID"
+"qa_shortfall" = "record shortfall; no replacement from a better-performing cell"
+"qa_edge_cases" = ["amendments", "private_P", "plan_P", "derivative_P", "routine_Item703", "frequency_change", "left_censored_dividend", "late_Form10", "joint_reporting", "coannouncements", "timestamp_conflicts"]
+"qa_negative_source_review" = "independent form/source controls to investigate missed events; candidate precision alone is not recall"
+"qa_sample_drawn" = false
+"qa_control_status" = "stratum includes candidate versus independent source control; controls selected before candidate filtering"
+"qa_threshold_policy" = "no outcome-based sample/quota/parser changes; freeze patches transparently before use"
+"packet_manifest" = "source hashes, evidence locators, public cutoff and omitted/redacted items; no market-provider inputs"
+"adjudication" = "independent second reviewer; ties remain ambiguous; never use later outcomes"
+
+[missingness]
+"preserve_every_event_on_join_failure" = true
+"codes" = ["PRICE_SERIES_UNAVAILABLE", "SECURITY_MAPPING_UNRESOLVED", "DELISTED_PRICE_UNAVAILABLE", "NO_VALID_FIRST_TRADABLE_BAR", "CORPORATE_ACTION_AMBIGUITY", "TIMESTAMP_UNRESOLVED", "BASELINE_UNRESOLVED", "INTENT_UNRESOLVED", "SECURITY_TYPE_UNRESOLVED", "LEFT_CENSORED_HISTORY", "INSUFFICIENT_PRE_EVENT_HISTORY", "RIGHT_CENSORED_HORIZON", "SPLIT_WINDOW_CROSSES_BOUNDARY"]
+"coverage_axes" = ["public_disclosure_year", "event_family", "event_subtype", "security_status", "exchange"]
+"stages" = ["source_records", "candidates", "qualifying_events", "deduplicated_events", "historical_eligibility", "mapped_securities", "valid_entries", "usable_horizons"]
+"later_security_status_is_screen" = false
+"phase2_expected" = ["SECURITY_MAPPING_UNRESOLVED"]
+"phase2_coverage_axes" = ["public_disclosure_year", "event_family", "event_subtype", "source_kind", "form", "candidate_or_control", "resolution_status"]
+"phase3_coverage_axes" = ["security_status", "exchange"]
+"unmeasured_market_coverage" = "NOT_ASSESSED_IN_PHASE2, never imply unavailable from not queried"
+
+[historical_intent]
+"event_start" = "2006-01-01"
+"event_end" = "2024-12-31"
+"context_before_start_allowed" = true
+"development" = ["2006-01-01", "2015-12-31"]
+"validation" = ["2016-01-01", "2020-12-31"]
+"sealed_holdout" = ["2021-01-01", "2024-12-31"]
+"outside_initial_study_years" = "2025 onward"
+"move_dates_using_event_counts_or_outcomes" = false
+
+[later_phase4_intent]
+"status" = "SEALED_INTENT_ONLY_PHASE4_NOT_AUTHORIZED"
+"primary_horizon_sessions" = 21
+"secondary_horizons_sessions" = [5, 63, 126, 252]
+"primary_candidate" = "market-adjusted post-entry CAR from aligned open-to-open total-economic increments"
+"factor_sensitivities" = "secondary; daily close-to-close factors require separately aligned delayed-close entry or independent open-aligned authority"
+"total_fwer" = "0.05"
+"family_budget" = "0.01"
+"dividend_primary_subtype_adjustment" = "Holm within dividend family budget 0.01"
+"statistical_tests_implemented" = false
+"filters_or_thresholds_optimized" = false
+
+[transition]
+"prior_gate" = "Required complete historical security/price/action/terminal authority before Phase 2"
+"clarification" = "OUTCOME_BLIND_PRE_EVENT_RESULT_PRE_EVENT_PRICE_JOIN"
+"rationale" = "SEC event facts can be built without prices. Complete Phase3 economics before Phase2 unnecessarily couples independent authority layers."
+"original_gate_retained_as_history" = true
+"prior_blocked_spec_sha256" = "9163967ffbbc40eddcc74e859d737d844d47f6c3748365c8431d207b8abb654f"
+"event_results_observed_before_clarification" = 0
+"event_price_joins_before_clarification" = 0
+"phase2_requirements" = ["ontology_fixed", "source_registry_fixed", "timing_fixed", "dedup_review_fixed", "schema_valid", "market_firewall_enforced", "synthetic_checks_pass", "commit_and_annotated_tag"]
+"phase2_authorized" = true
+"phase2_authorization_scope" = "OUTCOME_BLIND_SEC_EVENTS_ONLY"
+"phase3_authorized" = false
+"phase3_transition" = "Successful Phase2 only satisfies prerequisite; later explicit task must authorize Phase3 market/security authority and outcome-blind mapping/coverage QA"
+"phase3_returns_authorized" = false
+"phase4plus_authorized" = false
+"successful_phase2_outputs" = ["candidate_ledger", "qualifying_ledger", "rejection_ledger", "clusters", "classification_review_history", "source_evidence", "public_time_evidence", "event_database", "coverage_missingness_reports"]
+"phase2_must_not" = ["CRSP_price_queries", "Compustat_observations", "CIK_GVKEY_PERMNO_mapping", "post_event_prices", "event_returns", "CAR_BHAR", "regressions", "filter_optimization", "outcome_ranking", "portfolios", "backtests"]
+"no_automatic_return_authorization" = true
+
+[horizon_maturity]
+"rule" = "Complete required exit session and all required economic observations in immutable market authority; otherwise RIGHT_CENSORED_HORIZON"
+"forbidden" = ["shorten_horizon", "substitute_last_date", "carry_stale_price", "delete_event", "move_event_sample_end"]
+"newer_snapshot" = "May mature same registered event/horizon only; preserve identity/methodology, record authority version; no outcome-based change"
+
+[terminal_gate]
+"hard_return_gate" = true
+"phase2_ingestion_gate" = false
+"required_authorities" = ["cash_acquisitions", "stock_mergers", "bankruptcy_delisting", "security_cancellation", "received_security_distributions", "spinoffs", "unresolved_CRSP_terminal_flags"]
+"forbidden_defaults" = ["zero", "last_close", "cash", "generic_minus_100_percent", "event_deletion"]
+
+[spac_gate]
+"pre_combination_excluded" = true
+"phase3_dated_lifecycle_required" = true
+"phase2_events_retained_regardless_of_eventual_eligibility" = true
+
+[rights]
+"technical_WRDS_access_established" = true
+"academic_noncommercial_only" = true
+"terms_url" = "https://wrds-www.wharton.upenn.edu/users/tou/"
+"terms_reviewed_on" = "2026-11-04"
+"publication_status" = "VENDOR_AND_INSTITUTION_PERMISSIONS_UNRESOLVED"
+"raw_vendor_data" = "PRIVATE_SECURE_NO_REDISTRIBUTION"
+"never_publish" = ["raw_CRSP_rows", "bulk_vendor_extracts", "licensed_observation_level_mapping_tables", "credentials"]
+"phase2" = "SEC_SOURCE_ONLY; no vendor redistribution authorized"
+
+[phase_register]
+"phase0" = "COMPLETE"
+"phase1a" = "BLOCKED — no historical authority initially evidenced"
+"phase1b" = "COMPLETE — authenticated WRDS schema access established"
+"phase1c" = "COMPLETE — CRSP core validated, supplements remain"
+"phase1d" = "EVENT-DATA PROTOCOL FREEZE"
+"phase2" = "AUTHORIZED ONLY FOR OUTCOME-BLIND SEC EVENT INGESTION"
+"phase3" = "NOT YET AUTHORIZED except by later explicit task"
+"phase4plus" = "NOT AUTHORIZED"
+
+[firewall]
+"entrypoint" = "python -I -S -B tools/corporate_events/phase2.py"
+"standalone_no_trading_package_import" = true
+"network" = "DENY_ALL in currently implemented local Phase2 commands; SEC fetch adapter must retain registered fair-access gates before later download task"
+"imports" = "standard library only; reject vendor/provider/performance/backtest packages and dangerous process/native escape modules"
+"files" = "protocol/source read-only; only dedicated Phase2-private run directory writable; no other data/audit/database reads"
+"execution" = "subprocess, exec/spawn, native-library escape and arbitrary code loading prohibited"
+"database" = "only new-schema Phase2-private sqlite; ATTACH/extensions forbidden"
+"prospective_access" = false
+
+[preclarification_firewall]
+"event_returns" = 0
+"abnormal_returns" = 0
+"CAR" = 0
+"BHAR" = 0
+"event_price_joins" = 0
+"backtests" = 0
+"portfolio_simulations" = 0
+"regressions" = 0
+"bootstrap" = 0
+"Monte_Carlo" = 0
+"optimizations" = 0
+"prospective_accesses" = 0
+
+[information_timezone]
+package = "tzdata"
+version = "2026.6"
+zone = "America/New_York"
+tzif_sha256 = "d7f2206b3a45989fc9ad63d558922532fa7352280d5f87176bf1db79cb1d1fa9"
+exchange_calendar_frozen = false
+
+[qualifying_evidence]
+repurchase = "NEW_AUTHORIZATION or AUTHORIZATION_INCREASE with independently evidenced open-market permission/new capacity; ASR/tender components alone do not qualify"
+insider = "Form4 TableI codeP acquiredA plus OPEN_MARKET_SUPPORTED, NON_PLAN_DISCRETION_SUPPORTED, NONDERIVATIVE_COMMON_SUPPORTED; otherwise retain controlled context/unresolved state; no role/size/cluster threshold"
+activist = "INITIAL_13D plus ACTIVIST_INTENT_SUPPORTED from original public Item4; no additional ownership cutoff"
+dividend = "DIVIDEND_INITIATION with positive initiation/prehistory evidence, or comparable ordinary DIVIDEND_INCREASE with prior public baseline, or explicitly SPECIAL_DIVIDEND; no minimum increase; missing is not initiation"
+spinoff = "SPINOFF_INTENTION evidenced as intended spin-off/separation structure, not review/sale/IPO/split-off/completion; first registered public disclosure must be supported or unresolved"
+mapping = "SEC-described class evidence is separate from Phase3 vendor mapping; vendor mapping remains NULL and cannot delete an event"
+final_ledger = "Phase2 freeze must audit family facts, reviews and evidence before certifying qualifying/rejection ledgers; SQL is a storage schema, not an automatic event classifier"
+
+[acceptance_normalization]
+sgml_rule = "Normalize 14-digit local SGML only after source-specific America/New_York semantics independently verified; reject ambiguous/nonexistent local times"
+structured_rule = "Preserve supplied timezone/offset and raw bytes; do not route JSON Z timestamps through SGML local-time parser or relabel without source verification"
+unknown = "Retain raw acceptance; normalized fields NULL and TIMESTAMP_UNRESOLVED as appropriate; acceptance never proves dissemination"
+
+[phase1c_status]
+classification = "CRSP CORE VALIDATED — MATERIAL SUPPLEMENT STILL REQUIRED"
+confirmed_strengths = ["survivorship_safe_historical_identity", "inactive_deceased_retention", "dated_ticker_security_history", "daily_prices", "daily_opening_observations", "volume", "delisting_records", "distribution_records", "dated_exchange_history", "dated_security_type_history"]
+phase3_remaining = ["2026_horizon_maturity", "terminal_payout_edge_cases", "merger_security_distribution_details", "early_missing_CIK_mapping", "SPAC_lifecycle", "calendar_freeze", "return_formula_action_ordering", "publication_use_rights"]
+no_phase2_vendor_use = true
+
+[dividend_baseline_phase2]
+identity = "SEC issuer CIK plus source-evidenced class designation; no permanent vendor mapping required"
+class_change = "Explicit prior-public SEC class/unit bridge required; otherwise BASELINE_UNRESOLVED; retain event"
+ordinary_baseline = "Only comparable regular declarations public strictly before candidate disclosure; special never updates baseline"

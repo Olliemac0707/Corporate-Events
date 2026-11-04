@@ -1,0 +1,6 @@
+.gitattributes text eol=lf
+# Stable bytes for the Corporate Event Alpha event-data freeze only.
+protocols/corporate-event-alpha-v1/** text eol=lf
+protocols/corporate-event-alpha-v1/*.tzif -text
+tools/corporate_events/phase2.py text eol=lf
+tests/test_corporate_event_phase2.py text eol=lf

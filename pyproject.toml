@@ -1,0 +1,15 @@
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --basetemp=.pytest-temp -p no:cacheprovider"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["tools/corporate_events/phase2.py", "tests/test_corporate_event_phase2.py"]

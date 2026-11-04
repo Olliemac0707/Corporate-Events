@@ -1,0 +1,21 @@
+# Private runtime configuration and data are never repository payloads.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+/data/
+/state/
+/reports/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest-temp/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.db
+*.sqlite
+*.sqlite3
+*.log

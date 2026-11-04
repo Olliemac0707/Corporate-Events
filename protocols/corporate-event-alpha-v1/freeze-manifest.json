@@ -1,0 +1,20 @@
+{
+  "study_id": "corporate-event-alpha-v1",
+  "version": "1.0",
+  "scope": "OUTCOME_BLIND_SEC_EVENT_DATA_ONLY",
+  "date": "2026-11-04",
+  "base_commit": "c1b9f08defb179d178636212f1fdc9ee48ef353e",
+  "self_hash": "Excluded to avoid self-reference; annotated tag records this manifest SHA256",
+  "files": {
+    ".gitattributes": "5d06278e9ec23ef4e7302ce5dc450197f5b653df5f48301427c8eb76776ad158",
+    "protocols/corporate-event-alpha-v1/README.md": "152c2653f5af869e91323d2b2358444694f117835f058dfb676f31ed8fca5f6a",
+    "protocols/corporate-event-alpha-v1/event-data-protocol.toml": "7ea4068670d4e05dff80399c1fa9a1863a593c4521d4e6c70d067e0e67a36932",
+    "protocols/corporate-event-alpha-v1/event-schema.sql": "82a24987ffa77c5046fbe5fa29b0ed36a41ca4dcb2f03110ba50481574c5748a",
+    "protocols/corporate-event-alpha-v1/source-evidence.md": "0eb4221d9a58270d77dcd2836bee13658f530a75b6a007700bc3b1f1054247c1",
+    "protocols/corporate-event-alpha-v1/America_New_York.tzif": "d7f2206b3a45989fc9ad63d558922532fa7352280d5f87176bf1db79cb1d1fa9",
+    "protocols/corporate-event-alpha-v1/timezone-LICENSE.txt": "df58f69ea88683035d720b5375bcef0cf5aeaa98a1d098d572e0992c378deb46",
+    "protocols/corporate-event-alpha-v1/timezone-provenance.json": "7b858a2120ce079a1ebd7983ad19dea8fa5a3796f6fa4288cb85366e56854dcc",
+    "tools/corporate_events/phase2.py": "251df52795f81e6bd021b5eed4b1bd1affb35e4ba4002a36b0665d5902a0f10e",
+    "tests/test_corporate_event_phase2.py": "d8febf3bb2247f65a0b6341453fe01e451396017652e46f49fed0a70a4f293d8"
+  }
+}
