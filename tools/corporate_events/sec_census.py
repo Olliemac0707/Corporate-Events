@@ -646,11 +646,16 @@ class Client:
             try:
                 response = self.transport.get(target, self.agent)
             except (OSError, http.client.HTTPException, AcquisitionError) as error:
-                reason = str(error) if isinstance(error, AcquisitionError) else "TRANSPORT_FAILURE"
+                if isinstance(error, FirewallError):
+                    reason = "LOCAL_FIREWALL_DENIAL:" + str(error)
+                else:
+                    reason = (
+                        str(error) if isinstance(error, AcquisitionError) else "TRANSPORT_FAILURE"
+                    )
                 log.update(status=None, error_type=type(error).__name__, reason=reason)
                 append_record(self.requests, log)
                 self.fail(url, reason, attempt)
-                if isinstance(error, AcquisitionError) or attempt == 5:
+                if isinstance(error, (AcquisitionError, FirewallError)) or attempt == 5:
                     raise AcquisitionError(reason) from error
                 self.scheduler.hold(2 ** (attempt - 1) + self.jitter(), reason)
                 continue

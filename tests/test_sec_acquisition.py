@@ -477,3 +477,13 @@ def test_batched_dedup_matches_same_identity_across_index_files() -> None:
             8,
             3,
         )
+
+
+def test_local_firewall_denial_is_diagnostic_and_never_retried(tmp_path: Path) -> None:
+    _, scheduler, snapshot = setup(tmp_path)
+    transport = FakeTransport(module.FirewallError("METADATA_ONLY_IMPORT_DENIED"), response())
+    with scheduler, pytest.raises(module.AcquisitionError, match="LOCAL_FIREWALL_DENIAL"):
+        client(tmp_path, snapshot, scheduler, transport).fetch(URL)
+    assert len(transport.calls) == 1
+    rows = [json.loads(line) for line in (snapshot / "requests.jsonl").read_text().splitlines()]
+    assert rows[0]["reason"] == "LOCAL_FIREWALL_DENIAL:METADATA_ONLY_IMPORT_DENIED"
