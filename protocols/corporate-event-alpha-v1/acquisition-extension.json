@@ -1,0 +1,26 @@
+{
+  "version": "phase2-acquisition-v1",
+  "scope": "HISTORICAL_MASTER_INDEX_METADATA_ONLY",
+  "original_protocol_manifest_sha256": "1461b12b2c2860564700868763bd4d9a8b9f94ab561ec8059dd9c1eadab464ff",
+  "entrypoint": "python -I -S -B tools/corporate_events/sec_census.py",
+  "index_years": [
+    2006,
+    2024
+  ],
+  "planned_quarters": 76,
+  "compression": "Official SEC full-index master.zip; sole master.idx member; raw ZIP and derived index hashes retained",
+  "registered_authority": "Frozen source registry historical_master_indexes and /Archives/edgar/full-index/ prefix",
+  "raw_objects": "reports/corporate-event-alpha-v1/phase2-private/objects/sha256",
+  "snapshots": "reports/corporate-event-alpha-v1/phase2-private/snapshots/<snapshot_id>",
+  "filing_bodies_permitted": false,
+  "event_extraction_permitted": false,
+  "market_data_permitted": false,
+  "contact_in_tracked_files": false,
+  "global_coordination": "One owner process under this workflow lock; no other client/machine under this research identity is permitted without a common scheduler",
+  "files": {
+    "tools/corporate_events/sec_census.py": "a700fc4cf4d7be347cd9c6dd717b3b666605efba822b2e5b6c6ca01ca515e2d4",
+    "tools/corporate_events/.gitattributes": "3d8d8cb9675b1e0f32e934a619041d716067b50534b6e5dadd475d9ff405f023",
+    "tests/test_sec_acquisition.py": "0bf783eed0471dec8c25e0bbeb99070b9abec6a4cda59559b9999a0dd39c900a",
+    "tests/.gitattributes": "5a11544edd3fb7538f6282e3c5f3733d2942b0f4ac3d1b88d7d1f6b0fd9ed811"
+  }
+}

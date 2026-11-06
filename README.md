@@ -43,3 +43,30 @@ The implemented commands validate the protocol or initialize an empty schema. Th
 Phase 3 requires a later explicit task. Phase 4+ returns/inference are unauthorized. Terminal-economics, security mapping, SPAC lifecycle, horizon maturity, exchange calendar and vendor-rights requirements remain intact.
 
 See protocols/corporate-event-alpha-v1/README.md for the full protocol map. Private sources, databases, runtime configuration and reports stay ignored. No event outcomes were observed during separation.
+
+## Phase-2 acquisition milestone
+
+The separate metadata-only extension is registered in protocols/corporate-event-alpha-v1/acquisition-extension.json. The original Phase-1D payload and manifest remain unchanged.
+
+    .venv/Scripts/python.exe -I -S -B tools/corporate_events/sec_census.py validate
+    .venv/Scripts/python.exe -I -S -B tools/corporate_events/sec_census.py census --snapshot UNIQUE_SNAPSHOT_ID
+
+The client accepts only SEC historical master indexes for all 76 quarters in 2006–2024. It does not accept filing-body, financial-observation, ticker-list or market-provider URLs. master.zip is the official compressed index container; its sole master.idx member and both byte hashes are validated.
+
+The real SEC_RESEARCH_CONTACT is read privately from the environment or ignored local .env. No contact value or complete User-Agent is written to request/report ledgers. Requests have a fixed identity, verified HTTPS, no proxy rotation and no cookie/authentication handling.
+
+A persistent single-owner lock governs this workflow, across all SEC hosts. No other worker or machine may use this research identity unless it shares a common scheduler. This implementation is a local workflow coordinator, not a distributed request broker. Request starts are at least 0.5 seconds apart, using wall and monotonic clocks; failed-attempt budgets persist across snapshots until a successful retrieval. Five attempts maximum, bounded exponential backoff/jitter, Retry-After, 30-second timeout, status/type/length checks and 50 MiB bounds apply. HTTP 403 stops and blocks the batch for review. Two consecutive 429 responses stop the batch. Long server delays are preserved and deferred rather than shortened.
+
+Private layout under reports/corporate-event-alpha-v1/phase2-private/:
+
+- objects/sha256/PREFIX/HASH: immutable raw accepted index objects.
+- object-versions.jsonl: append-only URL-to-object versions; cache reuse verifies the hash.
+- scheduler-state.json and sec-acquisition.lock: operational pacing/attempt/owner state.
+- snapshots/ID/: request and failure ledgers, source-object manifest, census SQLite, index plan, preflight evidence, summary and CSV count reports.
+- snapshots/ID/authority-manifest.json: final immutable artifact hashes, source/code identity and firewall counters.
+
+Snapshots cannot be overwritten. Reuse accepted cache objects by default; explicit refresh creates a new retrieval version without replacing older objects. A stale owner lock or blocked state requires review, not automatic bypass. Failed/partial snapshots are labeled incomplete; unobserved years/forms are not reported as zero populations.
+
+The census counts filing-index records, not qualifying events. It deduplicates canonical five-field index records and reports distinct filing paths separately. Family discovery routes are nonadditive: one issuer filing can feed three registered families. Amendments/passive forms remain context routes, not automatic activist/purchase events. Filing date is not public dissemination time. No event classification, security mapping, entry-session materialization or financial result is constructed.
+
+Parser/QA implementation becomes ready to begin only after the complete metadata census and reconciliation pass. It is not run by the acquisition command, and no full event-database freeze or Phase-3 authorization follows from this milestone.
