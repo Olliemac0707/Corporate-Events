@@ -36,9 +36,9 @@ Validate the frozen payload and the supported SEC-only boundary:
 
 ## Current phase
 
-Phase 2 is authorized for outcome-blind SEC event data only. No SEC filings have been ingested. A real user-supplied SEC_RESEARCH_CONTACT in private local configuration is still required before SEC networking. Never infer it from a Git author email or commit it.
+The current Phase-2 milestone is the SEC acquisition/cache layer and the 2006–2024 metadata-only historical-index census. A real SEC_RESEARCH_CONTACT must be configured privately before networking. The user explicitly approved using the local Git author contact for this research identity; never infer a contact without approval or commit it. Filing-body extraction, event classification and parser/QA implementation have not begun.
 
-The implemented commands validate the protocol or initialize an empty schema. They have no network capability. A future SEC acquisition adapter must enforce the registered SEC-only access, contact, rate/cache/retry controls and firewall.
+The unchanged frozen phase2.py entrypoint validates the protocol or initializes an empty schema and has no network capability. The separate sec_census.py entrypoint implements the restricted SEC metadata adapter described below. Its current local status and census evidence are kept in the ignored milestone reports.
 
 Phase 3 requires a later explicit task. Phase 4+ returns/inference are unauthorized. Terminal-economics, security mapping, SPAC lifecycle, horizon maturity, exchange calendar and vendor-rights requirements remain intact.
 
@@ -72,3 +72,5 @@ The census counts filing-index records, not qualifying events. It deduplicates c
 Parser/QA implementation becomes ready to begin only after the complete metadata census and reconciliation pass. It is not run by the acquisition command, and no full event-database freeze or Phase-3 authorization follows from this milestone.
 
 The first live metadata pilot was retained as an interrupted operational snapshot while row-wise SQL was replaced with batched inserts/joins for throughput. The five-field deduplication identity, forms and registered date range are unchanged; accepted raw objects are reused. Code hashes and Git commits distinguish the implementations, and the same synthetic controls are rerun.
+
+Local workflow firewall denials are recorded with their exact fixed reason code and stop immediately. They are not transient SEC failures and must not be retried automatically. Historical request/failure ledgers and exhausted attempt budgets remain preserved for review.
