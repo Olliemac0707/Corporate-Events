@@ -794,6 +794,11 @@ def discovery_routes(canonical: str) -> tuple[tuple[str, str], ...]:
 SCHEMA = """
 PRAGMA foreign_keys=ON;
 PRAGMA temp_store=MEMORY;
+PRAGMA cache_size=-262144;
+PRAGMA mmap_size=1073741824;
+CREATE TEMP TABLE staging (
+ digest BLOB PRIMARY KEY, year INTEGER, form_raw TEXT, form_canonical TEXT,
+ path_digest BLOB) WITHOUT ROWID;
 CREATE TABLE seen_records (digest BLOB PRIMARY KEY) WITHOUT ROWID;
 CREATE TABLE seen_filing_paths (digest BLOB PRIMARY KEY) WITHOUT ROWID;
 CREATE TABLE form_counts (
@@ -834,6 +839,7 @@ def ingest_index(
     record: dict[str, Any],
     aliases: dict[str, str],
 ) -> dict[str, int]:
+    """Same five-field identity as v1; batched SQL changes throughput only."""
     content, encoding = index_payload(raw, url)
     totals = dict(
         raw_rows=0,
@@ -843,44 +849,70 @@ def ingest_index(
         registered_records=0,
         unique_filing_paths=0,
     )
-    form: dict[tuple[int, str, str], list[int]] = {}
+    raw_form: dict[tuple[int, str, str], int] = {}
     routes: dict[tuple[int, str, str, str], int] = {}
+    batch: list[tuple[bytes, int, str, str, bytes]] = []
     with db:
+        db.execute("DELETE FROM staging")
         for row in parse_master(content, encoding):
             totals["raw_rows"] += 1
-            filed_year = int(row.filed[:4])
             if not "2006-01-01" <= row.filed <= "2024-12-31":
                 totals["outside_range"] += 1
                 continue
+            filed_year = int(row.filed[:4])
             canonical = aliases.get(row.form.upper(), "")
             key = filed_year, row.form, canonical
-            counts = form.setdefault(key, [0, 0])
-            counts[0] += 1
-            inserted = db.execute(
-                "INSERT OR IGNORE INTO seen_records VALUES (?)", (row.record_hash(),)
-            ).rowcount
-            if not inserted:
-                totals["duplicates"] += 1
-                continue
-            totals["unique_rows"] += 1
-            counts[1] += 1
-            totals["unique_filing_paths"] += db.execute(
-                "INSERT OR IGNORE INTO seen_filing_paths VALUES (?)",
-                (hashlib.sha256(row.filename.encode()).digest(),),
-            ).rowcount
-            if canonical:
-                totals["registered_records"] += 1
-            for family, role in discovery_routes(canonical):
-                rkey = filed_year, family, role, row.form
-                routes[rkey] = routes.get(rkey, 0) + 1
+            raw_form[key] = raw_form.get(key, 0) + 1
+            batch.append(
+                (
+                    row.record_hash(),
+                    filed_year,
+                    row.form,
+                    canonical,
+                    hashlib.sha256(row.filename.encode()).digest(),
+                )
+            )
+            if len(batch) == 10000:
+                db.executemany("INSERT OR IGNORE INTO staging VALUES (?,?,?,?,?)", batch)
+                batch.clear()
+        if batch:
+            db.executemany("INSERT OR IGNORE INTO staging VALUES (?,?,?,?,?)", batch)
         if totals["raw_rows"] == 0:
             raise AcquisitionError("MASTER_INDEX_HAS_NO_RECORDS")
+        new_form = {
+            (row[0], row[1], row[2]): row[3]
+            for row in db.execute(
+                "SELECT s.year,s.form_raw,s.form_canonical,count(*) "
+                "FROM staging s LEFT JOIN seen_records v ON v.digest=s.digest "
+                "WHERE v.digest IS NULL GROUP BY s.year,s.form_raw,s.form_canonical"
+            )
+        }
+        totals["unique_rows"] = sum(new_form.values())
+        totals["duplicates"] = totals["raw_rows"] - totals["outside_range"] - totals["unique_rows"]
+        totals["registered_records"] = sum(
+            count for (_, _, canonical), count in new_form.items() if canonical
+        )
+        totals["unique_filing_paths"] = db.execute(
+            "INSERT OR IGNORE INTO seen_filing_paths "
+            "SELECT DISTINCT s.path_digest FROM staging s "
+            "LEFT JOIN seen_records v ON v.digest=s.digest "
+            "WHERE v.digest IS NULL ORDER BY s.path_digest"
+        ).rowcount
+        inserted = db.execute(
+            "INSERT OR IGNORE INTO seen_records SELECT digest FROM staging ORDER BY digest"
+        ).rowcount
+        if inserted != totals["unique_rows"]:
+            raise AcquisitionError("BATCH_DEDUP_RECONCILIATION_FAILURE")
         db.executemany(
             "INSERT INTO form_counts VALUES (?,?,?,?,?) "
             "ON CONFLICT(year,form_raw) DO UPDATE SET "
             "raw_rows=raw_rows+excluded.raw_rows,unique_rows=unique_rows+excluded.unique_rows",
-            [(*key, *counts) for key, counts in form.items()],
+            [(*key, count, new_form.get(key, 0)) for key, count in raw_form.items()],
         )
+        for (filed_year, form, canonical), count in new_form.items():
+            for family, role in discovery_routes(canonical):
+                key_route = filed_year, family, role, form
+                routes[key_route] = routes.get(key_route, 0) + count
         db.executemany(
             "INSERT INTO route_counts VALUES (?,?,?,?,?) "
             "ON CONFLICT(year,family,route_role,form_raw) "

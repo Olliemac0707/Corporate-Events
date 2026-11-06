@@ -453,3 +453,27 @@ def test_https_non200_preserves_status_without_reading_error_body(
     monkeypatch.setattr(module.http.client, "HTTPSConnection", Connection)
     result = module.HttpsTransport().get(URL, AGENT)
     assert result.status == 403 and result.body == b""
+
+
+def test_batched_dedup_matches_same_identity_across_index_files() -> None:
+    aliases = {"4": "4", "SC 13D": "INITIAL_13D", "8-K": "8-K"}
+    raw = zipped(raw_index(duplicate=True))
+    with sqlite3.connect(":memory:") as db:
+        db.executescript(module.SCHEMA)
+        a = module.ingest_index(db, 2006, 1, URL, raw, {"sha256": module.sha(raw)}, aliases)
+        b = module.ingest_index(
+            db,
+            2006,
+            2,
+            URL.replace("QTR1", "QTR2"),
+            raw,
+            {"sha256": module.sha(raw)},
+            aliases,
+        )
+        assert a["unique_rows"] == 3 and a["duplicates"] == 1
+        assert b["unique_rows"] == 0 and b["duplicates"] == 4
+        assert b["registered_records"] == 0 and b["unique_filing_paths"] == 0
+        assert db.execute("SELECT sum(raw_rows),sum(unique_rows) FROM form_counts").fetchone() == (
+            8,
+            3,
+        )

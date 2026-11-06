@@ -18,9 +18,9 @@
   "contact_in_tracked_files": false,
   "global_coordination": "One owner process under this workflow lock; no other client/machine under this research identity is permitted without a common scheduler",
   "files": {
-    "tools/corporate_events/sec_census.py": "a700fc4cf4d7be347cd9c6dd717b3b666605efba822b2e5b6c6ca01ca515e2d4",
+    "tools/corporate_events/sec_census.py": "05024a19b3ccf8eac94343139226978c66d8cac808b808eb80b1c8793b0ee701",
     "tools/corporate_events/.gitattributes": "3d8d8cb9675b1e0f32e934a619041d716067b50534b6e5dadd475d9ff405f023",
-    "tests/test_sec_acquisition.py": "0bf783eed0471dec8c25e0bbeb99070b9abec6a4cda59559b9999a0dd39c900a",
+    "tests/test_sec_acquisition.py": "a97a367dbd2a8558ba2f7eab47cd2706cc97b914fc0296cec8726eacaf3cb950",
     "tests/.gitattributes": "5a11544edd3fb7538f6282e3c5f3733d2942b0f4ac3d1b88d7d1f6b0fd9ed811"
   }
 }
