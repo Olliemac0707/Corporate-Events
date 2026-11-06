@@ -93,6 +93,11 @@ def sha(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def file_sha(path: Path) -> str:
+    with path.open("rb") as source:
+        return hashlib.file_digest(source, "sha256").hexdigest()
+
+
 def utc_now() -> datetime:
     return datetime.now(UTC)
 
@@ -796,7 +801,7 @@ def discovery_routes(canonical: str) -> tuple[tuple[str, str], ...]:
     return ()
 
 
-SCHEMA = """
+SESSION_SQL = """
 PRAGMA foreign_keys=ON;
 PRAGMA temp_store=MEMORY;
 PRAGMA cache_size=-262144;
@@ -804,6 +809,8 @@ PRAGMA mmap_size=1073741824;
 CREATE TEMP TABLE staging (
  digest BLOB PRIMARY KEY, year INTEGER, form_raw TEXT, form_canonical TEXT,
  path_digest BLOB) WITHOUT ROWID;
+"""
+SCHEMA = SESSION_SQL + """
 CREATE TABLE seen_records (digest BLOB PRIMARY KEY) WITHOUT ROWID;
 CREATE TABLE seen_filing_paths (digest BLOB PRIMARY KEY) WITHOUT ROWID;
 CREATE TABLE form_counts (
@@ -1008,11 +1015,120 @@ def export_census(db: sqlite3.Connection, snapshot: Path, complete: bool) -> dic
     return summary
 
 
+
+CHECKPOINT_FILES = frozenset({
+    "index-plan.json", "preflight.json", "requests.jsonl", "failures.jsonl",
+    "source-objects.jsonl", "metadata-census.sqlite3", "census-summary.json",
+    "year-form-counts.csv", "year-family-route-counts.csv",
+})
+LEGACY_CHECKPOINT_CODE_SHA = "1f6f0bdf1eee1a8bdcf508cdfc5e3680c81546e4203cd9fa65f7f31cd3960dfc"
+
+
+def prepare_checkpoint(
+    snapshot: Path, resume: Path, client: Client, provenance: dict[str, Any]
+) -> int:
+    """Clone a finalized compatible prefix; retain the old snapshot byte-for-byte."""
+    authority_path = resume / "authority-manifest.json"
+    authority = json.loads(authority_path.read_bytes())
+    files = authority.get("files", {})
+    if set(files) not in (CHECKPOINT_FILES, CHECKPOINT_FILES | {"continuation.json"}):
+        raise AcquisitionError("CHECKPOINT_ARTIFACT_SCOPE_MISMATCH")
+    if authority.get("kind") != "SEC_HISTORICAL_INDEX_METADATA_ONLY":
+        raise AcquisitionError("CHECKPOINT_KIND_MISMATCH")
+    old_protocol = authority.get("protocol", {})
+    current_code = provenance.get("acquisition_code_hashes", {}).get(
+        "tools/corporate_events/sec_census.py"
+    )
+    old_code = old_protocol.get("acquisition_code_hashes", {}).get(
+        "tools/corporate_events/sec_census.py"
+    )
+    if (
+        old_protocol.get("manifest_sha256") != FROZEN_SHA
+        or not current_code
+        or old_code not in {current_code, LEGACY_CHECKPOINT_CODE_SHA}
+    ):
+        raise AcquisitionError("CHECKPOINT_PRODUCER_IDENTITY_MISMATCH")
+    for name, digest in files.items():
+        if file_sha(resume / name) != digest:
+            raise AcquisitionError("CHECKPOINT_ARTIFACT_HASH_MISMATCH")
+    if (resume / "index-plan.json").read_bytes() != json_bytes(index_plan()):
+        raise AcquisitionError("CHECKPOINT_INDEX_PLAN_MISMATCH")
+    summary = json.loads((resume / "census-summary.json").read_bytes())
+    count = summary.get("completed_indices", -1)
+    if not isinstance(count, int) or not 0 <= count <= 76:
+        raise AcquisitionError("CHECKPOINT_COUNT_INVALID")
+    if summary.get("firewall_counters") != dict.fromkeys(FIREWALL_COUNTERS, 0):
+        raise AcquisitionError("CHECKPOINT_OUTCOME_FIREWALL_MISMATCH")
+    if summary.get("filing_bodies_downloaded") != 0:
+        raise AcquisitionError("CHECKPOINT_BODY_SCOPE_MISMATCH")
+    objects = [
+        json.loads(line) for line in (resume / "source-objects.jsonl").read_bytes().splitlines()
+    ]
+    if [(r["year"], r["quarter"], r["url"]) for r in objects] != index_plan()[:count]:
+        raise AcquisitionError("CHECKPOINT_NOT_CONTIGUOUS_PREFIX")
+    payloads = {}
+    for record in objects:
+        validate_url(record["url"])
+        raw = client.cache.read(record["sha256"])
+        content, encoding = index_payload(raw, record["url"])
+        expected_locator = str(
+            client.cache.object_path(record["sha256"]).relative_to(client.cache.root)
+        ).replace("\\", "/")
+        if len(raw) != record["bytes"] or record["object_locator"] != expected_locator:
+            raise AcquisitionError("CHECKPOINT_RAW_LOCATOR_MISMATCH")
+        payloads[record["url"]] = (record["sha256"], sha(content), encoding)
+    copied = snapshot / "metadata-census.sqlite3"
+    with (resume / "metadata-census.sqlite3").open("rb") as source, copied.open("xb") as target:
+        while chunk := source.read(1024 * 1024):
+            target.write(chunk)
+    if file_sha(copied) != files["metadata-census.sqlite3"]:
+        raise AcquisitionError("CHECKPOINT_CLONE_HASH_MISMATCH")
+    # Examine the clone only. Do not open the original database for writes or recovery.
+    with sqlite3.connect(":memory:") as expected, sqlite3.connect(copied) as db:
+        expected.executescript(SCHEMA)
+        query = "SELECT name,sql FROM sqlite_master WHERE type='table' ORDER BY name"
+        if list(db.execute(query)) != list(expected.execute(query)):
+            raise AcquisitionError("CHECKPOINT_SCHEMA_MISMATCH")
+        rows = list(db.execute("SELECT * FROM index_files ORDER BY year,quarter"))
+        if [(r[0], r[1], r[2]) for r in rows] != index_plan()[:count]:
+            raise AcquisitionError("CHECKPOINT_DATABASE_PREFIX_MISMATCH")
+        for row in rows:
+            if (row[3], row[4], row[11]) != payloads[row[2]]:
+                raise AcquisitionError("CHECKPOINT_INDEX_IDENTITY_MISMATCH")
+        totals = summary["observed_partial_totals"]
+        for offset, name in enumerate((
+            "raw_rows", "unique_rows", "duplicates", "outside_range",
+            "registered_records", "unique_filing_paths",
+        ), 5):
+            if sum(row[offset] for row in rows) != totals[name]:
+                raise AcquisitionError("CHECKPOINT_TOTALS_MISMATCH")
+        if db.execute("SELECT coalesce(sum(unique_rows),0) FROM form_counts").fetchone()[0] != (
+            totals["unique_rows"]
+        ):
+            raise AcquisitionError("CHECKPOINT_FORM_TOTALS_MISMATCH")
+    expected.close()
+    db.close()
+    for record in objects:
+        append_record(snapshot / "source-objects.jsonl", record)
+    write_new(snapshot / "continuation.json", json_bytes({
+        "prior_snapshot_id": resume.name,
+        "prior_authority_manifest_sha256": file_sha(authority_path),
+        "checkpoint_database_sha256_before_append": files["metadata-census.sqlite3"],
+        "completed_indices_reused": count,
+        "raw_and_artifact_hashes_verified": True,
+        "same_schema_five_field_identity_forms_and_dates": True,
+        "old_snapshot_modified": False,
+        "attempt_budgets_reset": False,
+    }))
+    return count
+
+
 def run_census(
     snapshot: Path,
     client: Client,
     aliases: dict[str, str],
     provenance: dict[str, Any],
+    resume: Path | None = None,
 ) -> dict[str, Any]:
     write_new(snapshot / "index-plan.json", json_bytes(index_plan()))
     write_new(snapshot / "preflight.json", json_bytes(provenance))
@@ -1020,10 +1136,11 @@ def run_census(
         write_new(snapshot / name, b"")
     db_path = snapshot / "metadata-census.sqlite3"
     blocker = None
+    reused = prepare_checkpoint(snapshot, resume, client, provenance) if resume else 0
     with sqlite3.connect(db_path) as db:
-        db.executescript(SCHEMA)
+        db.executescript(SESSION_SQL if resume else SCHEMA)
         db.set_authorizer(sqlite_authorizer)
-        for year, quarter, url in index_plan():
+        for year, quarter, url in index_plan()[reused:]:
             try:
                 raw, record = client.fetch(url)
                 totals = ingest_index(db, year, quarter, url, raw, record, aliases)
@@ -1065,8 +1182,11 @@ def run_census(
         "year-form-counts.csv",
         "year-family-route-counts.csv",
     ]
+    if resume:
+        files.append("continuation.json")
     authority = {
         "snapshot_id": snapshot.name,
+        "checkpoint_indices_reused": reused,
         "kind": "SEC_HISTORICAL_INDEX_METADATA_ONLY",
         "created_at_utc": utc_now().isoformat(),
         "event_range": ["2006-01-01", "2024-12-31"],
@@ -1074,7 +1194,7 @@ def run_census(
         "status": summary["status"],
         "blocker": blocker,
         "raw_source_versions": "source-objects.jsonl",
-        "files": {name: sha((snapshot / name).read_bytes()) for name in files},
+        "files": {name: file_sha(snapshot / name) for name in files},
         "runtime": {"python": sys.version.split()[0], "dependencies": "Python standard library"},
         "request_control": {
             "global_ceiling_rps": 2,
@@ -1109,6 +1229,7 @@ def main() -> int:
     parser.add_argument("command", choices=("validate", "census"))
     parser.add_argument("--snapshot", default="")
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--resume-from", default="")
     parser.add_argument("--max-seconds", type=int, default=1800)
     args = parser.parse_args()
     try:
@@ -1131,6 +1252,11 @@ def main() -> int:
         if (
             not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,79}", args.snapshot)
             or args.snapshot in {".", ".."}
+            or (args.resume_from and not re.fullmatch(
+                r"[A-Za-z0-9][A-Za-z0-9._-]{0,79}", args.resume_from
+            ))
+            or args.resume_from in {".", ".."}
+            or (args.resume_from and args.refresh)
             or not 1 <= args.max_seconds <= 3600
         ):
             raise AcquisitionError("SNAPSHOT_OR_DEADLINE_INVALID")
@@ -1160,10 +1286,16 @@ def main() -> int:
                 refresh=args.refresh,
                 deadline=time.time() + args.max_seconds,
             )
-            outcome = run_census(snapshot, client, aliases, provenance)
+            outcome = run_census(
+                snapshot, client, aliases, provenance,
+                snapshots / args.resume_from if args.resume_from else None,
+            )
         print(json.dumps(outcome), flush=True)
         return 0 if outcome["status"] == "COMPLETE_METADATA_CENSUS" else 3
-    except (AcquisitionError, OSError, subprocess.CalledProcessError) as error:
+    except (
+        AcquisitionError, OSError, subprocess.CalledProcessError,
+        ValueError, KeyError, TypeError, sqlite3.DatabaseError,
+    ) as error:
         message = str(error) if isinstance(error, AcquisitionError) else type(error).__name__
         print(json.dumps({"status": "STOPPED", "reason": message}), file=sys.stderr)
         return 2

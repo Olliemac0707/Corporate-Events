@@ -487,3 +487,118 @@ def test_local_firewall_denial_is_diagnostic_and_never_retried(tmp_path: Path) -
     assert len(transport.calls) == 1
     rows = [json.loads(line) for line in (snapshot / "requests.jsonl").read_text().splitlines()]
     assert rows[0]["reason"] == "LOCAL_FIREWALL_DENIAL:METADATA_ONLY_IMPORT_DENIED"
+
+
+class CheckpointTransport:
+    def __init__(self, stop_after: int | None = None) -> None:
+        self.calls: list[str] = []
+        self.stop_after = stop_after
+
+    def get(self, url: str, agent: str) -> Any:
+        if self.stop_after is not None and len(self.calls) == self.stop_after:
+            raise module.AcquisitionError("SYNTHETIC_OPERATIONAL_STOP")
+        self.calls.append(url)
+        parts = url.split("/")
+        year, quarter = int(parts[-3]), int(parts[-2][-1])
+        # A repeated five-field record crosses the checkpoint boundary.
+        common = (
+            b"123|Synthetic Issuer 3|8-K|2006-03-01|"
+            b"edgar/data/123/0000000123-06-000013.txt\n"
+        )
+        return module.Response(
+            200, {"content-type": "application/zip"}, zipped(raw_index(year, quarter) + common)
+        )
+
+
+def checkpoint_provenance() -> dict[str, Any]:
+    return {
+        "manifest_sha256": module.FROZEN_SHA,
+        "acquisition_code_hashes": {
+            "tools/corporate_events/sec_census.py": module.file_sha(SCRIPT)
+        },
+    }
+
+
+def partial_checkpoint(tmp_path: Path) -> tuple[Any, Path, dict[str, Any]]:
+    _, scheduler, snapshot = setup(tmp_path)
+    provenance = checkpoint_provenance()
+    with scheduler:
+        result = module.run_census(
+            snapshot, client(tmp_path, snapshot, scheduler, CheckpointTransport(2)),
+            {"4": "4", "SC 13D": "INITIAL_13D", "8-K": "8-K"}, provenance,
+        )
+    assert result["completed_indices"] == 2
+    return scheduler, snapshot, provenance
+
+
+def test_checkpoint_continuation_matches_uninterrupted_census(tmp_path: Path) -> None:
+    scheduler, original, provenance = partial_checkpoint(tmp_path)
+    before = {p.name: module.file_sha(p) for p in original.iterdir()}
+    resumed = original.parent / "continued"
+    resumed.mkdir()
+    transport = CheckpointTransport()
+    with scheduler:
+        result = module.run_census(
+            resumed, client(tmp_path, resumed, scheduler, transport),
+            {"4": "4", "SC 13D": "INITIAL_13D", "8-K": "8-K"}, provenance, original,
+        )
+    assert result["status"] == "COMPLETE_METADATA_CENSUS"
+    assert transport.calls == [row[2] for row in module.index_plan()[2:]]
+    assert before == {p.name: module.file_sha(p) for p in original.iterdir()}
+    continuation = json.loads((resumed / "continuation.json").read_bytes())
+    assert continuation["completed_indices_reused"] == 2
+    assert continuation["attempt_budgets_reset"] is False
+    reference = original.parent / "reference"
+    reference.mkdir()
+    with scheduler:
+        module.run_census(
+            reference, client(tmp_path, reference, scheduler, CheckpointTransport()),
+            {"4": "4", "SC 13D": "INITIAL_13D", "8-K": "8-K"}, provenance,
+        )
+    actual = json.loads((resumed / "census-summary.json").read_bytes())
+    assert actual == json.loads((reference / "census-summary.json").read_bytes())
+    assert actual["complete_range_totals"]["duplicates"] == 76
+    assert actual["complete_range_totals"]["unique_rows"] == 228
+
+
+@pytest.mark.parametrize("fault", ["artifact", "producer", "schema", "prefix", "raw", "scope"])
+def test_checkpoint_rejects_incompatible_or_corrupted_prefix(
+    tmp_path: Path, fault: str
+) -> None:
+    scheduler, original, provenance = partial_checkpoint(tmp_path)
+    authority_path = original / "authority-manifest.json"
+    authority = json.loads(authority_path.read_bytes())
+    if fault == "artifact":
+        with (original / "census-summary.json").open("ab") as target:
+            target.write(b" ")
+    elif fault == "producer":
+        authority["protocol"]["acquisition_code_hashes"][
+            "tools/corporate_events/sec_census.py"
+        ] = "0" * 64
+    elif fault == "schema":
+        with sqlite3.connect(original / "metadata-census.sqlite3") as db:
+            db.execute("CREATE TABLE unexpected_input (value TEXT)")
+        db.close()
+        authority["files"]["metadata-census.sqlite3"] = module.file_sha(
+            original / "metadata-census.sqlite3"
+        )
+    elif fault == "prefix":
+        records = (original / "source-objects.jsonl").read_bytes().splitlines()
+        (original / "source-objects.jsonl").write_bytes(b"\n".join(reversed(records)) + b"\n")
+        authority["files"]["source-objects.jsonl"] = module.file_sha(
+            original / "source-objects.jsonl"
+        )
+    elif fault == "raw":
+        first = json.loads((original / "source-objects.jsonl").read_bytes().splitlines()[0])
+        (tmp_path / first["object_locator"]).write_bytes(b"corrupt synthetic bytes")
+    elif fault == "scope":
+        authority["files"]["../unregistered-input"] = "0" * 64
+    authority_path.write_bytes(module.json_bytes(authority))
+    resumed = original.parent / "rejected"
+    resumed.mkdir()
+    transport = CheckpointTransport()
+    with scheduler, pytest.raises(module.AcquisitionError):
+        module.run_census(
+            resumed, client(tmp_path, resumed, scheduler, transport), {}, provenance, original
+        )
+    assert transport.calls == []
