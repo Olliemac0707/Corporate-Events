@@ -764,7 +764,6 @@ def parse_master(content: bytes, encoding: str) -> Iterator[IndexRow]:
             len(fields) != 5
             or not re.fullmatch(r"[0-9]{1,10}", fields[0])
             or int(fields[0]) <= 0
-            or not fields[1]
             or not fields[2]
             or not re.fullmatch(
                 r"edgar/data/[0-9]{1,10}/[0-9]{10}-[0-9]{2}-[0-9]{6}\.txt", fields[4]
@@ -986,6 +985,7 @@ def export_census(db: sqlite3.Connection, snapshot: Path, complete: bool) -> dic
         "dedup_key": "SHA256 canonical JSON of all five normalized master-index fields",
         "unique_filing_paths_are_separate_from_source_records": True,
         "no_current_ticker_seed": True,
+        "blank_company_names_retained_as_empty_without_inference": True,
         "filing_bodies_downloaded": 0,
         "parser_QA_ready_to_begin": complete,
         "firewall_counters": dict.fromkeys(FIREWALL_COUNTERS, 0),
@@ -1021,7 +1021,10 @@ CHECKPOINT_FILES = frozenset({
     "source-objects.jsonl", "metadata-census.sqlite3", "census-summary.json",
     "year-form-counts.csv", "year-family-route-counts.csv",
 })
-LEGACY_CHECKPOINT_CODE_SHA = "1f6f0bdf1eee1a8bdcf508cdfc5e3680c81546e4203cd9fa65f7f31cd3960dfc"
+COMPATIBLE_CHECKPOINT_CODE_SHAS = frozenset({
+    "1f6f0bdf1eee1a8bdcf508cdfc5e3680c81546e4203cd9fa65f7f31cd3960dfc",
+    "a64dcc7eaa25213445ff220b8aa582d868261858bad03b216b484bf237afa98c",
+})
 
 
 def prepare_checkpoint(
@@ -1045,7 +1048,7 @@ def prepare_checkpoint(
     if (
         old_protocol.get("manifest_sha256") != FROZEN_SHA
         or not current_code
-        or old_code not in {current_code, LEGACY_CHECKPOINT_CODE_SHA}
+        or old_code not in {current_code, *COMPATIBLE_CHECKPOINT_CODE_SHAS}
     ):
         raise AcquisitionError("CHECKPOINT_PRODUCER_IDENTITY_MISMATCH")
     for name, digest in files.items():

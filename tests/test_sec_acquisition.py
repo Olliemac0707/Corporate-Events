@@ -602,3 +602,20 @@ def test_checkpoint_rejects_incompatible_or_corrupted_prefix(
             resumed, client(tmp_path, resumed, scheduler, transport), {}, provenance, original
         )
     assert transport.calls == []
+
+
+
+def test_blank_source_company_name_is_preserved_not_skipped_or_inferred(tmp_path: Path) -> None:
+    blank = raw_index().replace(b"Synthetic Issuer 1", b"")
+    rows = list(module.parse_master(blank, "utf-8-sig"))
+    assert len(rows) == 3 and rows[0].company_name == ""
+    assert rows[0].cik == "123" and rows[0].form == "4"
+    normal = list(module.parse_master(raw_index(), "utf-8-sig"))[0]
+    assert rows[0].record_hash() != normal.record_hash()
+    with sqlite3.connect(":memory:") as db:
+        db.executescript(module.SCHEMA)
+        totals = module.ingest_index(
+            db, 2006, 1, URL, zipped(blank), {"sha256": module.sha(zipped(blank))}, {"4": "4"}
+        )
+        assert totals["raw_rows"] == totals["unique_rows"] == 3
+        assert totals["registered_records"] == 1
