@@ -89,6 +89,7 @@ def resolve_submission(raw: bytes, accession: str) -> tuple[list[Document], dict
         "container_sha256": digest(raw),
         "container_status": "RESOLVED",
         "header_byte_end": len(header),
+        "unsupported_container_blocks": [],
         "accession_identity_status": "MATCHED" if found else "HEADER_IDENTITY_UNRESOLVED",
     }
     header_text, _ = decode(header)
@@ -116,6 +117,15 @@ def resolve_submission(raw: bytes, accession: str) -> tuple[list[Document], dict
         block = raw[marker.end() : block_end]
         text = re.search(rb"(?im)^<TEXT>[^\S\r\n]*\r?$", block)
         if not text:
+            metadata["unsupported_container_blocks"].append(
+                {
+                    "block_number": index + 1,
+                    "container_start": marker.start(),
+                    "container_end": block_end,
+                    "raw_block_sha256": digest(block),
+                    "status": "NO_TEXT_BOUNDARY_RETAINED_IN_ORIGINAL_CONTAINER",
+                }
+            )
             continue
         text_end = re.search(rb"(?im)^</TEXT>[^\S\r\n]*\r?$", block[text.end() :])
         if not text_end:

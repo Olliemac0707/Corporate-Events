@@ -451,3 +451,65 @@ def test_joint_owner_statement_duplicates_do_not_multiply_events_or_infer_issuer
             == expected
         )
     db.close()
+
+
+def test_sec_block_page_with_http_200_stops_shared_client(tmp_path: Path) -> None:
+    page = (
+        b"<html><title>SEC.gov | Your Request Originates from an "
+        b"Undeclared Automated Tool</title></html>"
+    )
+    transport = Fake(m.sec.Response(200, {"content-type": "text/html"}, page), response())
+    _, scheduler, client, _ = setup_client(tmp_path, transport)
+    with scheduler:
+        with pytest.raises(m.sec.AcquisitionError, match="SEC_BLOCKED_PAGE"):
+            client.fetch(URL)
+        assert scheduler.state()["blocked_reason"] == "SEC_BLOCKED_PAGE_STOP_REVIEW"
+    assert len(transport.calls) == 1 and client.cache.latest(URL) is None
+
+
+def test_unknown_container_component_is_explicitly_retained() -> None:
+    raw = (
+        submission() + b"<DOCUMENT>\n<TYPE>GRAPHIC\n<FILENAME>unknown.bin\n"
+        b"opaque unsupported bytes\n</DOCUMENT>\n"
+    )
+    docs, header = m.parsers.resolve_submission(raw, ACC)
+    assert len(docs) == 1
+    assert len(header["unsupported_container_blocks"]) == 1
+    assert header["unsupported_container_blocks"][0]["status"].startswith("NO_TEXT_BOUNDARY")
+
+
+@pytest.mark.parametrize("changed", ["plan", "policy", "metadata_binding"])
+def test_plan_or_policy_mutation_rejected_without_network(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, changed: str
+) -> None:
+    pilot = tmp_path / "pilot"
+    protocol = tmp_path / "protocol"
+    pilot.mkdir()
+    protocol.mkdir()
+    monkeypatch.setattr(m, "PILOT", pilot)
+    monkeypatch.setattr(m, "PROTOCOL", protocol)
+    plan = {
+        "scope": "BOUNDED_DEVELOPMENT_PILOT_NOT_FINAL_QA",
+        "protocol": {"metadata_authority_sha256": m.META_SHA},
+        "entries": [],
+        "max_received_body_bytes": 536870912,
+    }
+    (pilot / "plan.json").write_bytes(m.sec.json_bytes(plan))
+    (protocol / "parser-qa-policy.json").write_bytes(b"{}")
+    binding = {
+        "plan_sha256": m.sec.file_sha(pilot / "plan.json"),
+        "policy_sha256": m.sec.file_sha(protocol / "parser-qa-policy.json"),
+        "metadata_authority_sha256": m.META_SHA,
+    }
+    (pilot / "plan-binding.json").write_bytes(m.sec.json_bytes(binding))
+    assert m.read_plan()[0] == plan
+    if changed == "plan":
+        plan["entries"] = [{"url": "changed"}]
+        (pilot / "plan.json").write_bytes(m.sec.json_bytes(plan))
+    elif changed == "policy":
+        (protocol / "parser-qa-policy.json").write_bytes(b'{"changed":true}')
+    else:
+        binding["metadata_authority_sha256"] = "0" * 64
+        (pilot / "plan-binding.json").write_bytes(m.sec.json_bytes(binding))
+    with pytest.raises(ValueError, match="PILOT_PLAN_BINDING_MISMATCH"):
+        m.read_plan()

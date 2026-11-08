@@ -7,11 +7,11 @@
   "max_received_body_bytes": 536870912,
   "full_extraction_authorized": false,
   "files": {
-    "tools/corporate_events/parser_qa.py": "95bbc8c368e76b1e4cbc6784d20ca8a16b92be9d76465aa11774c8d779cb232f",
-    "tools/corporate_events/event_parsers.py": "5be0acb8abea59444f8adca5c2313552fad57c7e26ab15e3e84d8a93355af7be",
-    "tools/corporate_events/sec_document_client.py": "4f5d32e4a3b4a05ab98d0db42cb20e4e6c7d5837e01ab47d6cafb3b3f865346a",
+    "tools/corporate_events/parser_qa.py": "2b1976264babd03ce9dfa933dd855f31ddea2a4410f542899486a1ab5a5c7151",
+    "tools/corporate_events/event_parsers.py": "66373a39bd1f6dfaf1a99a0551cc54c108b8783eb21af9cfebf1f46ff1cd04c8",
+    "tools/corporate_events/sec_document_client.py": "2b7feea94c214fae5af3465f054ceb3a3ca63130800f79cc2ebbe72532b38aab",
     "tests/test_event_parsers.py": "f3c3cf8572f3f7c9c8a31ab4a20fa940d562cd91b7d18eaffec7192824684b0a",
-    "tests/test_parser_qa.py": "547e4d27f0295b542158d76d531d8f013e0f21acfa333814abe694bb4ad18dc1",
+    "tests/test_parser_qa.py": "943f9f26c86c2d1f653f8f6b21b150703619fd8111c7bfcc868a1c64ad9c40a7",
     "protocols/corporate-event-alpha-v1/parser-qa-policy.json": "31b9ffbb4840c8ce6b58dc01b8d8edb4bf932aa64fb1d6abc8b6d704533999ce"
   }
 }

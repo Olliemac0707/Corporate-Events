@@ -223,6 +223,13 @@ def plan_pilot(proof: dict[str, Any], aliases: dict[str, str]) -> dict[str, Any]
 def read_plan() -> tuple[dict[str, Any], str]:
     raw = (PILOT / "plan.json").read_bytes()
     plan = json.loads(raw)
+    binding = json.loads((PILOT / "plan-binding.json").read_bytes())
+    if (
+        binding["plan_sha256"] != sec.sha(raw)
+        or binding["policy_sha256"] != sec.file_sha(PROTOCOL / "parser-qa-policy.json")
+        or binding["metadata_authority_sha256"] != META_SHA
+    ):
+        raise ValueError("PILOT_PLAN_BINDING_MISMATCH")
     if (
         plan["scope"] != "BOUNDED_DEVELOPMENT_PILOT_NOT_FINAL_QA"
         or plan["protocol"]["metadata_authority_sha256"] != META_SHA
@@ -611,6 +618,7 @@ def parse_pilot(
     base.validate_schema(schema)
     cache = sec.Cache(PILOT)
     source_results, qa_rows, proposals = [], [], []
+    retained_states: Counter[tuple[str, str]] = Counter()
     seen_docs: set[str] = set()
     observed = sec.utc_now().isoformat()
     database_path = run / "development-events.sqlite3"
@@ -649,6 +657,7 @@ def parse_pilot(
                     "url": entry["url"],
                     "status": header["container_status"],
                     "documents": len(resolved),
+                    "unsupported_container_blocks": header.get("unsupported_container_blocks", []),
                     "sha256": record["sha256"],
                 }
             )
@@ -716,6 +725,7 @@ def parse_pilot(
                 }
                 sec.append_record(run / "sources.jsonl", document_record)
                 for row in parsed.get("observations", []):
+                    retained_states[row["family"], row["proposed_state"]] += 1
                     sec.append_record(
                         run / "observations.jsonl", {"source_id": doc.source_id, **row}
                     )
@@ -906,6 +916,12 @@ def parse_pilot(
         "source_results": source_results,
         "documents": len(seen_docs),
         "parser_candidates": len(proposals),
+        "retained_observations": sum(retained_states.values()),
+        "non_candidate_context_observations": sum(retained_states.values()) - len(proposals),
+        "all_observation_states": [
+            {"family": key[0], "state": key[1], "count": count}
+            for key, count in sorted(retained_states.items())
+        ],
         "candidates_by_family": dict(counts),
         "proposal_states": [
             {"family": key[0], "state": key[1], "count": count}

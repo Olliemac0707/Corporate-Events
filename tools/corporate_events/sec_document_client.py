@@ -132,6 +132,17 @@ class HttpsDocuments:
 
 
 def validate_payload(raw: bytes, url: str) -> None:
+    beginning = raw[:16384].lower()
+    submission_header = re.search(rb"(?im)^<sec-document>|^<sec-header>", beginning)
+    if not submission_header and (
+        b"your request originates from an undeclared automated tool" in beginning
+        or re.search(
+            rb"<title>[^<]*(?:request rate threshold|access denied|"
+            rb"undeclared automated)[^<]*</title>",
+            beginning,
+        )
+    ):
+        raise ValueError("SEC_BLOCKED_PAGE_STOP_REVIEW")
     if urlsplit(url).path == urlsplit(CATALOGUE).path:
         if b"<html" not in raw[:10000].lower() or b"specification" not in raw.lower():
             raise ValueError("TECHNICAL_CATALOGUE_STRUCTURE_INVALID")
@@ -310,6 +321,9 @@ class DocumentClient:
             try:
                 validate_payload(response.body, url)
             except ValueError as error:
+                if str(error) == "SEC_BLOCKED_PAGE_STOP_REVIEW":
+                    self.scheduler.block(str(error))
+                self.fail(url, str(error), attempt, response.status)
                 raise self.sec.AcquisitionError(str(error)) from error
             record = self.cache.store(url, response.body, content_type)
             self.scheduler.record_success(url)
