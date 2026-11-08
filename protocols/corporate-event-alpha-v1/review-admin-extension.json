@@ -1,0 +1,15 @@
+{
+  "version": "human-review-administration-v1",
+  "scope": "PHASE2C_FROZEN_DEVELOPMENT_HUMAN_REVIEW_ONLY",
+  "expected_sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "expected_records": 718,
+  "expected_qa_cells": 297,
+  "registered_parse_run": "development-parse-v2",
+  "parser_classifier_behavior_changes": false,
+  "network_allowed": false,
+  "full_extraction_authorized": false,
+  "files": {
+    "tools/corporate_events/review_admin.py": "a8fc095159293dd8028de74c839e44d25f1d3f6bcaf1c06aa63023118a70bceb",
+    "tests/test_review_admin.py": "a1e9647f2cd05c991b64f4dd1a61b200724f0e634d9d8545f8b16905c0ea33d9"
+  }
+}

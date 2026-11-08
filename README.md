@@ -93,3 +93,52 @@ Original SGML bytes, component hashes/ranges, documentary XML paths, source-role
 The frozen five-per-cell document-byte-hash QA rank is implemented without alteration. The first development selection is saved and reused across parser iterations. Blinded packets include short previews and original component bytes; source/control selection is independent of candidate filtering. Human decisions require actual reviewer IDs and append-only provenance. No human agreement, precision or recall is invented. Structural XML parsing is explicitly not XSD validation. Unknown schema, historical public time, dividend baseline and action-link cases remain unresolved. Full extraction remains closed pending a separately frozen final QA source frame/sample, official historical schema authority, evidence/chronology checks and actual independent reviews/adjudication under the predeclared operational criteria.
 
 Parser policy and implementation hashes are in protocols/corporate-event-alpha-v1/parser-qa-policy.json and parser-qa-extension.json. No full-corpus command or Phase-2 event-database tag is created by this milestone. Do not push.
+
+
+## Phase 2C: human development review
+
+The frozen development sample contains 718 records in 297 cells, with SHA256
+5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae.
+The parser/classifier remains frozen during the complete first human pass.
+The separate review_admin.py command only manages batches, forms, submitted
+human decisions, completion, concerns and descriptive review progress. It has
+no SEC or market networking capability and cannot read raw filing objects.
+
+Use python -I -S -B tools/corporate_events/review_admin.py with:
+
+- prepare --reviewer-id HUMAN_SUPPLIED_ID
+- validate --input LOCAL_FILENAME.json
+- record --input LOCAL_FILENAME.json
+- status
+
+All configuration and human review artifacts stay in the ignored private
+parser-qa-v1/human-review-v1 directory. The existing immutable packets and
+718-record selection are not modified. Batch membership is fixed by a stable
+control-first partition of the frozen selection's existing order, followed
+by consecutive groups of 25 (final 18). All 627 source controls must have
+valid human dispositions before any of the 91 candidate views unlock.
+The mixed boundary batch initially exposes only its two control records.
+Do not use the earlier mixed development packet index during this first pass.
+
+Open the private human-review-v1/review-index.html, review the linked source-only
+packets yourself, fill the blank form and export completed reviews. Save the
+JSON in human-review-v1/inbox. The administrative record command validates
+all submitted records before appending any substantive decision; it invokes
+the unchanged parser_qa.py record-review --run development-parse-v2 mechanism.
+Unknown fields, incorrect identities, unregistered evidence and invalid
+controlled labels are rejected without substantive repair. A human finding
+in a source control is permitted; controls are not assumed negative.
+
+Review terminal status and human-reported concern categories are administrative
+sidecars, not additions to the frozen event ontology or decision vocabulary.
+Completion receipts contain provenance/status only, with substantive decisions
+in the existing append-only registered history. Changed decisions explicitly
+supersede the latest record. Repeated imports are idempotent; an interrupted
+receipt can be recovered without duplicating a registered decision.
+
+No human decision or concern is inferred by the assistant. No parser/classifier
+fixes, sample redraws, replacements or new live filings are permitted during
+this task. First-pass acceptance metrics remain uncalculated until all 718
+records have valid human terminal dispositions. Missing concerns do not prove
+correctness, and this design does not establish population recall. Development
+QA never authorizes final QA, full extraction, Phase 3 or outcome analysis.
