@@ -9,10 +9,11 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from decimal import Decimal, InvalidOperation
+from functools import cached_property
 from html.parser import HTMLParser
 from typing import Any
 
-VERSION = "event-parsers-v1"
+VERSION = "event-parsers-v1.1"
 STUDY = "corporate-event-alpha-v1"
 FAMILIES = (
     "SHARE_REPURCHASE",
@@ -64,11 +65,11 @@ class Document:
     end: int
     raw: bytes
 
-    @property
+    @cached_property
     def sha256(self) -> str:
         return digest(self.raw)
 
-    @property
+    @cached_property
     def source_id(self) -> str:
         return stable(self.accession, self.filename, self.sha256)
 
@@ -217,12 +218,16 @@ def text_document(raw: bytes) -> tuple[str, str]:
     ), encoding
 
 
-def evidence(doc: Document, text: str, start: int, end: int) -> dict[str, Any]:
+def evidence(
+    doc: Document, text: str, start: int, end: int, *, derived_sha: str | None = None
+) -> dict[str, Any]:
     return {
-        "evidence_id": stable(doc.source_id, VERSION, start, end, digest(text.encode())),
+        "evidence_id": stable(
+            doc.source_id, VERSION, start, end, derived_sha or digest(text.encode())
+        ),
         "source_document_sha256": doc.sha256,
         "extractor_version": VERSION,
-        "derived_text_sha256": digest(text.encode()),
+        "derived_text_sha256": derived_sha or digest(text.encode()),
         "text_start": start,
         "text_end": end,
         "evidence_sha256": digest(text[start:end].encode()),
@@ -491,6 +496,7 @@ def named_date(text: str, action: str) -> str | None:
 
 def narrative(doc: Document, canonical_form: str, issuer_cik: str | None) -> dict[str, Any]:
     text, encoding = text_document(doc.raw)
+    text_sha256 = digest(text.encode())
     observations: list[dict[str, Any]] = []
     facts: dict[str, Any]
     issuer_routes = canonical_form in {"8-K", "8-K/A", "10-Q", "10-Q/A", "10-K", "10-K/A"}
@@ -558,7 +564,7 @@ def narrative(doc: Document, canonical_form: str, issuer_cik: str | None) -> dic
                 state = "ACTIVIST_INTENT_SUPPORTED"
             elif nonactivist and not affirmative and not reserved:
                 state = "NONACTIVIST_INITIAL_13D"
-        proof = evidence(doc, text, start, end)
+        proof = evidence(doc, text, start, end, derived_sha=text_sha256)
         facts = {
             "subject_issuer_cik": None,
             "filer_cik_from_index": issuer_cik,
@@ -586,7 +592,7 @@ def narrative(doc: Document, canonical_form: str, issuer_cik: str | None) -> dic
         )
     for start, end, paragraph in paragraphs(text):
         low = paragraph.lower()
-        proof = evidence(doc, text, start, end)
+        proof = evidence(doc, text, start, end, derived_sha=text_sha256)
         if issuer_routes and re.search(
             (
                 "(?:repurchas|buy[ -]?back).{0,50}(?:stock|shares"
@@ -809,7 +815,9 @@ def narrative(doc: Document, canonical_form: str, issuer_cik: str | None) -> dic
                         state,
                         f"dividend:{start}:{index + 1}",
                         facts,
-                        evidence(doc, text, start + match.start(), start + stop),
+                        evidence(
+                            doc, text, start + match.start(), start + stop, derived_sha=text_sha256
+                        ),
                     )
                 )
         if (issuer_routes or registration_routes) and re.search(
@@ -865,7 +873,7 @@ def narrative(doc: Document, canonical_form: str, issuer_cik: str | None) -> dic
     return {
         "status": "CONSERVATIVE_FACT_PROPOSALS_PENDING_REVIEW",
         "text": text,
-        "derived_text_sha256": digest(text.encode()),
+        "derived_text_sha256": text_sha256,
         "encoding": encoding,
         "schema_validation": "TEXT_SOURCE_NOT_AN_XML_SCHEMA_CLAIM",
         "observations": observations,

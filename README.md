@@ -36,7 +36,7 @@ Validate the frozen payload and the supported SEC-only boundary:
 
 ## Current phase
 
-The current Phase-2 milestone is the SEC acquisition/cache layer and the 2006–2024 metadata-only historical-index census. A real SEC_RESEARCH_CONTACT must be configured privately before networking. The user explicitly approved using the local Git author contact for this research identity; never infer a contact without approval or commit it. Filing-body extraction, event classification and parser/QA implementation have not begun.
+The SEC acquisition/cache layer and the 2006–2024 metadata-only historical-index census have passed validation. The current Phase-2 milestone is bounded parser development and blinded review tooling. A real SEC_RESEARCH_CONTACT must be configured privately before networking. The user explicitly approved using the local Git author contact for this research identity; never infer a contact without approval or commit it. The separately authorized development pilot permits up to 108 complete submissions and 512 MiB; final QA and full extraction remain gated.
 
 The unchanged frozen phase2.py entrypoint validates the protocol or initializes an empty schema and has no network capability. The separate sec_census.py entrypoint implements the restricted SEC metadata adapter described below. Its current local status and census evidence are kept in the ignored milestone reports.
 

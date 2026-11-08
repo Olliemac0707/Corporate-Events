@@ -513,3 +513,74 @@ def test_plan_or_policy_mutation_rejected_without_network(
         (pilot / "plan-binding.json").write_bytes(m.sec.json_bytes(binding))
     with pytest.raises(ValueError, match="PILOT_PLAN_BINDING_MISMATCH"):
         m.read_plan()
+
+
+def test_all_five_family_writers_preserve_frozen_schema_and_unresolved_time() -> None:
+    schema = (m.PROTOCOL / "event-schema.sql").read_text("utf-8")
+    cases = [
+        (
+            "8-K",
+            "BODY",
+            "8-K",
+            (
+                "<p>The board approved a new stock repurchase program of $100 million USD.</p>"
+                "<p>The board declared a special cash dividend of $2 USD per share.</p>"
+                "<p>The board plans to spin off the subsidiary through a distribution "
+                "to shareholders.</p>"
+            ),
+        ),
+        (
+            "SC 13D",
+            "BENEFICIAL_OWNERSHIP",
+            "INITIAL_13D",
+            (
+                "Item 4. Purpose of Transaction. They intend to nominate directors. "
+                "Item 5. Holdings."
+            ),
+        ),
+        (
+            "4",
+            "OWNERSHIP_XML",
+            "4",
+            (
+                "<ownershipDocument><schemaVersion>X0306</schemaVersion>"
+                "<issuer><issuerCik>123</issuerCik></issuer><nonDerivativeTable>"
+                "<nonDerivativeTransaction><securityTitle><value>Common Stock</value>"
+                "</securityTitle><transactionCoding><transactionCode>P</transactionCode>"
+                "</transactionCoding><transactionAmounts><transactionShares><value>1</value>"
+                "</transactionShares><transactionAcquiredDisposedCode><value>A</value>"
+                "</transactionAcquiredDisposedCode></transactionAmounts>"
+                "</nonDerivativeTransaction></nonDerivativeTable></ownershipDocument>"
+            ),
+        ),
+    ]
+    with sqlite3.connect(":memory:") as db:
+        db.executescript(schema)
+        for index, (form, kind, canonical, text) in enumerate(cases):
+            raw = text.encode()
+            doc = m.parsers.Document(ACC, f"fixture-{index}.txt", form, kind, "1", 0, len(raw), raw)
+            parsed = (
+                m.parsers.ownership(doc)
+                if canonical == "4"
+                else m.parsers.narrative(doc, canonical, "123")
+            )
+            entry = {
+                "canonical_form": canonical,
+                "cik_raw": "123",
+                "form": form,
+                "filing_date": "2024-11-04",
+            }
+            record = {"sha256": m.sec.sha(raw), "object_locator": "synthetic-only"}
+            m.persist_document(db, doc, entry, parsed, {}, record, "2024-11-05T00:00:00Z")
+        assert {row[0] for row in db.execute("SELECT family FROM events")} == set(
+            m.parsers.FAMILIES
+        )
+        assert db.execute("PRAGMA foreign_key_check").fetchall() == []
+        assert (
+            db.execute("SELECT count(*) FROM events WHERE disposition='QUALIFYING'").fetchone()[0]
+            == 0
+        )
+        assert (
+            db.execute("SELECT earlier_disclosure_search_status FROM spinoff_facts").fetchone()[0]
+            == "LEFT_CENSORED_HISTORY"
+        )

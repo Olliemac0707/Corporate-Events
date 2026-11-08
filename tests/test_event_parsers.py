@@ -429,3 +429,35 @@ def test_text_similarity_or_same_day_never_suffices_for_cluster_merge() -> None:
     left["explicit_same_action_evidence_id"] = "same-action-proof"
     assert p.cluster_relation(left, dict(left)) == "LINK"
     assert p.cluster_relation(left, {**left, "family": "DIVIDEND_POSITIVE_CHANGE"}) == "DO_NOT_LINK"
+
+
+def test_large_narrative_hash_work_is_linear_and_evidence_unchanged(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    neutral = "<p>" + "Synthetic documentary context. " * 100 + "</p>"
+    source = doc(
+        neutral * 1000
+        + (
+            "<p>The board approved a new stock repurchase program "
+            "of up to $100 million USD in open market transactions.</p>"
+        )
+    )
+    original_digest = p.digest
+    hashed_bytes = 0
+
+    def measured_digest(raw: bytes) -> str:
+        nonlocal hashed_bytes
+        hashed_bytes += len(raw)
+        return str(original_digest(raw))
+
+    monkeypatch.setattr(p, "digest", measured_digest)
+    result = p.narrative(source, "8-K", "123")
+    assert hashed_bytes < 6 * len(source.raw)
+    assert len(result["observations"]) == 1
+    proof = result["observations"][0]["evidence"]
+    text = result["text"]
+    assert proof["derived_text_sha256"] == original_digest(text.encode())
+    assert proof["evidence_sha256"] == original_digest(
+        text[proof["text_start"] : proof["text_end"]].encode()
+    )
+    assert source.sha256 == original_digest(source.raw)

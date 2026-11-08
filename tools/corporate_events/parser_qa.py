@@ -599,10 +599,18 @@ def persist_document(
         elif family == "SPINOFF_ANNOUNCEMENT":
             db.execute(
                 (
-                    "INSERT INTO spinoff_facts (event_id,state,parent"
-                    "_cik_raw,structure_from_sec) VALUES (?,?,?,?)"
+                    "INSERT INTO spinoff_facts (event_id,state,parent_cik_raw,"
+                    "structure_from_sec,intent_evidence_id,earlier_disclosure_search_status) "
+                    "VALUES (?,?,?,?,?,?)"
                 ),
-                (event_id, state, entry["cik_raw"], proof["locator"]),
+                (
+                    event_id,
+                    state,
+                    entry["cik_raw"],
+                    proof["locator"],
+                    evidence_id,
+                    facts["first_disclosure_status"],
+                ),
             )
         candidates.append({**observation, "event_id": event_id, "disclosure_id": doc_id})
     return candidates, doc_id
