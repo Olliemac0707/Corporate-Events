@@ -619,3 +619,38 @@ def test_blank_source_company_name_is_preserved_not_skipped_or_inferred(tmp_path
         )
         assert totals["raw_rows"] == totals["unique_rows"] == 3
         assert totals["registered_records"] == 1
+
+
+
+def test_redirect_cannot_substitute_another_registered_quarter(tmp_path: Path) -> None:
+    _, scheduler, snapshot = setup(tmp_path)
+    transport = FakeTransport(
+        response(302, location=URL.replace("/QTR1/", "/QTR2/")), response()
+    )
+    with scheduler, pytest.raises(module.AcquisitionError, match="SOURCE_IDENTITY_MISMATCH"):
+        client(tmp_path, snapshot, scheduler, transport).fetch(URL)
+    assert len(transport.calls) == 1
+    failures = [json.loads(line) for line in (snapshot / "failures.jsonl").read_text().splitlines()]
+    assert failures[-1]["reason"] == "REDIRECT_SOURCE_IDENTITY_MISMATCH"
+
+
+def test_canonical_redirect_preserves_source_kind_and_cache_key(tmp_path: Path) -> None:
+    _, scheduler, snapshot = setup(tmp_path)
+    canonical = URL.replace("www.sec.gov", "www.sec.gov:443")
+    transport = FakeTransport(response(302, location=canonical), response())
+    with scheduler:
+        c = client(tmp_path, snapshot, scheduler, transport)
+        raw, record = c.fetch(URL)
+        assert c.fetch(URL)[0] == raw
+        assert record["url"] == URL
+    assert [url for url, _ in transport.calls] == [URL, canonical]
+
+
+def test_cached_metadata_replay_works_after_network_deadline(tmp_path: Path) -> None:
+    clock, scheduler, snapshot = setup(tmp_path)
+    transport = FakeTransport(response())
+    with scheduler:
+        raw, record = client(tmp_path, snapshot, scheduler, transport).fetch(URL)
+        replay = client(tmp_path, snapshot, scheduler, transport, deadline=clock.now() - 100)
+        assert replay.fetch(URL) == (raw, record)
+    assert len(transport.calls) == 1

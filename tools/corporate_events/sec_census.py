@@ -682,12 +682,16 @@ class Client:
             else:
                 self.consecutive_429 = 0
             if response.status in {301, 302, 303, 307, 308}:
-                target = urljoin(target, response.headers.get("location", ""))
+                redirected = urljoin(target, response.headers.get("location", ""))
                 try:
-                    validate_url(target)
+                    validate_url(redirected)
                 except AcquisitionError:
                     self.fail(url, "OFF_REGISTRY_REDIRECT", attempt, response.status)
                     raise
+                if validate_url(redirected) != validate_url(url):
+                    self.fail(url, "REDIRECT_SOURCE_IDENTITY_MISMATCH", attempt, response.status)
+                    raise AcquisitionError("REDIRECT_SOURCE_IDENTITY_MISMATCH")
+                target = redirected
                 self.fail(url, "REGISTERED_REDIRECT", attempt, response.status)
                 continue
             if response.status in {408, 429, 500, 502, 503, 504}:
@@ -1023,6 +1027,7 @@ CHECKPOINT_FILES = frozenset({
 })
 COMPATIBLE_CHECKPOINT_CODE_SHAS = frozenset({
     "1f6f0bdf1eee1a8bdcf508cdfc5e3680c81546e4203cd9fa65f7f31cd3960dfc",
+    "4d157d2182b2923dd99843d17f0051d807a127da9d8d39a84a3e666de4219884",
     "a64dcc7eaa25213445ff220b8aa582d868261858bad03b216b484bf237afa98c",
 })
 
