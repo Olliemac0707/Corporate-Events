@@ -1,0 +1,17 @@
+{
+  "version": "parser-qa-development-v1",
+  "scope": "BOUNDED_DEVELOPMENT_PILOT_NOT_FINAL_QA",
+  "phase1d_manifest_sha256": "1461b12b2c2860564700868763bd4d9a8b9f94ab561ec8059dd9c1eadab464ff",
+  "metadata_authority_sha256": "2e00caafed8eb2ff3c5fd4410f1a8c592b6ac622640c1d4f2989783cb4237894",
+  "max_submissions": 108,
+  "max_received_body_bytes": 536870912,
+  "full_extraction_authorized": false,
+  "files": {
+    "tools/corporate_events/parser_qa.py": "95bbc8c368e76b1e4cbc6784d20ca8a16b92be9d76465aa11774c8d779cb232f",
+    "tools/corporate_events/event_parsers.py": "5be0acb8abea59444f8adca5c2313552fad57c7e26ab15e3e84d8a93355af7be",
+    "tools/corporate_events/sec_document_client.py": "4f5d32e4a3b4a05ab98d0db42cb20e4e6c7d5837e01ab47d6cafb3b3f865346a",
+    "tests/test_event_parsers.py": "f3c3cf8572f3f7c9c8a31ab4a20fa940d562cd91b7d18eaffec7192824684b0a",
+    "tests/test_parser_qa.py": "547e4d27f0295b542158d76d531d8f013e0f21acfa333814abe694bb4ad18dc1",
+    "protocols/corporate-event-alpha-v1/parser-qa-policy.json": "31b9ffbb4840c8ce6b58dc01b8d8edb4bf932aa64fb1d6abc8b6d704533999ce"
+  }
+}

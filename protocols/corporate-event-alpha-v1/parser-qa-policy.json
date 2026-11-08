@@ -1,0 +1,42 @@
+{
+  "version": "parser-qa-policy-v1",
+  "scope": "BOUNDED_DEVELOPMENT_PILOT_NOT_FINAL_QA",
+  "metadata_authority_sha256": "2e00caafed8eb2ff3c5fd4410f1a8c592b6ac622640c1d4f2989783cb4237894",
+  "max_submissions": 108,
+  "max_received_body_bytes": 536870912,
+  "max_response_bytes": 52428800,
+  "pilot_selection": "One minimum metadata-filename SHA256 rank per nonempty exact frozen alias/source-filing-era cell over the complete validated historical index census; controls selected before candidate filtering",
+  "pilot_rank_domain": "corporate-event-alpha-v1|parser-development-pilot-v1|era|form|accession|index_filename",
+  "eras": [
+    "2006-2012",
+    "2013-2022",
+    "2023-2024"
+  ],
+  "era_is_filing_schema_era_not_event_split": true,
+  "final_qa_rank_unchanged": "SHA256 UTF8(study_id|phase2-qa-v1|family|era|form|source_kind|accession|source_document_sha256); tie by stable source ID",
+  "final_qa_quota": 5,
+  "no_replacements": true,
+  "full_extraction_authorized": false,
+  "qualifying_certification": "No automatic certification from keywords, schema guesses, acceptance timestamps or filing dates",
+  "timing_policy": "Raw acceptance retained; normalization requires separately verified source-zone semantics; dissemination requires independent evidence; missing/conflicting evidence stays TIMESTAMP_UNRESOLVED",
+  "review_policy": "Actual reviewer IDs, source/input hashes, reason, evidence IDs, timestamps and append-only supersession; independent second review for disagreement; no simulated human review",
+  "schema_policy": "Version/root/namespace detected; structural parsing is not XSD validation. Unknown versions retained unresolved. Official historical schema authority and supported-feature validation required before final gate.",
+  "acceptance_criteria_before_final_qa": {
+    "critical_parser_or_blinding_defects": 0,
+    "evidence_hash_and_locator_integrity": 1.0,
+    "frozen_schema_integrity": 1.0,
+    "correct_timestamp_handling_including_unresolved": 1.0,
+    "manual_resolved_family_agreement_minimum": 0.95,
+    "dedup_agreement": 1.0,
+    "independent_review_and_adjudication_complete": true,
+    "timestamp_resolution_rate_is_descriptive_not_a_target": true,
+    "no_unmeasured_recall_or_empty_denominator_pass": true,
+    "full_frozen_qa_frame_and_sample_required": true,
+    "development_pilot_cannot_open_full_gate": true,
+    "resolved_positive_fact_proposal_precision_minimum_by_family": 0.9,
+    "precision_denominator": "Resolved positive factual-subtype proposals with independent gold labels; mandatory private/plan/unresolved candidates are not screened out to raise precision"
+  },
+  "raw_contact_in_outputs": false,
+  "market_data_allowed": false,
+  "prospective_access_allowed": false
+}
