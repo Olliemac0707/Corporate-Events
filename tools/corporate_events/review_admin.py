@@ -948,19 +948,37 @@ def write_status_report(value: dict[str, Any]) -> None:
 
 FORM_SCRIPT = r"""
 const config=JSON.parse(document.getElementById('config').textContent);
+const cards=[...document.querySelectorAll('.case')];
+const navigation=document.getElementById('record-navigation');
+let current=0;
+function showRecord(index){
+ current=index;
+ cards.forEach((card,position)=>{card.hidden=position!==current;});
+ document.getElementById('record-position').textContent=
+   'Record '+(current+1)+' of '+cards.length;
+ document.getElementById('previous-record').disabled=current===0;
+ document.getElementById('next-record').disabled=current===cards.length-1;
+}
+if(navigation && cards.length){
+ document.getElementById('previous-record').onclick=()=>showRecord(current-1);
+ document.getElementById('next-record').onclick=()=>showRecord(current+1);
+ navigation.hidden=false;
+ showRecord(0);
+}
 document.getElementById('export').onclick=()=>{
+ let index=0;
  try {
   const records=[];
-  for(const card of document.querySelectorAll('.case')){
+  const required={decision:'a decision',correct_state:'a controlled state',
+    presence:'whether family evidence is present',first_pass_status:'a review status',
+    reason:'a brief reason'};
+  for(const card of cards){
    const get=n=>card.querySelector('[name="'+n+'"]');
-   const populated=[...card.querySelectorAll('select,textarea')].some(x=>x.value!=='') ||
-     [...card.querySelectorAll('[name="concern"]')].some(x=>x.checked);
-   if(!get('attest').checked){
-    if(populated)throw Error('Confirm your review for '+card.dataset.id);continue;}
-   for(const name of ['decision','correct_state','presence','first_pass_status','reason'])
-    if(!get(name).value.trim())throw Error('Complete '+name+' for '+card.dataset.id);
-   const evidence=[...get('evidence').selectedOptions].map(x=>x.value);
-   if(!evidence.length)throw Error('Select source evidence for '+card.dataset.id);
+   if(!get('attest').checked){index++;continue;}
+   for(const [name,label] of Object.entries(required))
+    if(!get(name).value.trim())throw Error('Enter '+label+'.');
+   const evidence=[...get('evidence').selectedOptions].map(x=>x.value).filter(Boolean);
+   if(!evidence.length)throw Error('Select the evidence you used.');
    const categories=[...card.querySelectorAll('[name="concern"]')]
     .filter(x=>x.checked).map(x=>x.value);
    if(categories.length && !get('issue_description').value.trim())
@@ -977,6 +995,7 @@ document.getElementById('export').onclick=()=>{
       event_id:event,evidence_ids:evidence,supersedes_review_id:get('supersedes').value.trim()||null,
       scope:'DEVELOPMENT_FACT_REVIEW_ONLY',correct_state:get('correct_state').value,
       event_presence:get('presence').value==='UNKNOWN'?null:get('presence').value==='YES'}});
+   index++;
   }
   if(!records.length)throw Error('No completed human reviews to export.');
   const submission={version:'development-human-submission-v1',batch_id:config.batch_id,
@@ -986,9 +1005,11 @@ document.getElementById('export').onclick=()=>{
     {type:'application/json'}));
   link.download=config.batch_id+'-'+config.reviewer_id+'.json';link.click();
   document.getElementById('message').textContent='Exported '+records.length+
-   ' human reviews. Save the JSON in the private inbox, then run the record command. '+
-   'No local record has been appended by this page.';
- } catch(e){document.getElementById('message').textContent=e.message;}
+   ' reviews. Save the JSON in the review inbox.';
+ } catch(e){
+  if(navigation && index<cards.length)showRecord(index);
+  document.getElementById('message').textContent=e.message;
+ }
 };
 """
 
@@ -1040,7 +1061,10 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
                 evidence_options += sorted({x["evidence"]["evidence_id"] for x in proposals})
                 event_options = [x["event_id"] for x in proposals]
             choices = "".join(
-                '<option value="' + x + '">' + x + "</option>" for x in evidence_options
+                f'<option value="{evidence_id}">'
+                + ("Whole source" if evidence_id == case["source_evidence_id"] else evidence_id)
+                + "</option>"
+                for evidence_id in evidence_options
             )
             concern_options = "".join(
                 '<label><input type="checkbox" name="concern" value="' + x + '">' + x + "</label> "
@@ -1066,9 +1090,6 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
                 + "<p>"
                 + html.escape(case["era"] + " | " + case["form"] + " | " + case["source_kind"])
                 + "</p>"
-                + "<p>Sample record: <code>"
-                + identity
-                + "</code></p>"
                 + '<p><a target="_blank" rel="noopener" href="../../runs/'
                 + RUN_ID
                 + "/packets/"
@@ -1077,8 +1098,6 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
                 + '">Open '
                 + ("machine proposal view" if candidate else "source-only control view")
                 + "</a></p>"
-                + "<p>A source control is not assumed negative. Review source evidence yourself. "
-                "Acceptance, filing and printed dates do not certify dissemination.</p>"
                 + "<label>Human decision "
                 + select_control("decision", ["ACCEPTED", "REJECTED", "AMBIGUOUS"])
                 + "</label>"
@@ -1100,12 +1119,20 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
                     if candidate
                     else ""
                 )
-                + "<label>Evidence IDs (select at least one; whole-source evidence is available)"
-                + '<select multiple name="evidence">'
+                + "<label>Evidence used "
+                + (
+                    '<select multiple name="evidence">'
+                    if candidate
+                    else '<select name="evidence"><option value="">Choose evidence</option>'
+                )
                 + choices
                 + "</select></label>"
-                + '<label>Reason <textarea name="reason"></textarea></label>'
-                + "<fieldset><legend>Human-identified concerns</legend>"
+                + '<label>Brief reason <textarea name="reason"></textarea></label>'
+                + "<details><summary>Concerns and review details</summary>"
+                + "<p>Sample record <code>"
+                + identity
+                + "</code></p>"
+                + "<fieldset><legend>Concerns</legend>"
                 + concern_options
                 + "</fieldset>"
                 + "<label>Description for selected concerns <textarea"
@@ -1117,17 +1144,15 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
                 + '<label>Supersedes review ID <input name="supersedes" value="'
                 + supersedes
                 + '"></label>'
-                + '<label><input type="checkbox" name="attest">I pers'
-                "onally reviewed the source, labels, evidence and c"
-                "oncern selections. These are my human decisions.</"
-                "label>"
-                + "<p>Current administrative status: "
+                + "<p>Recorded status "
                 + html.escape(
                     active[identity]["review_status"]
                     if identity in active
                     else "PENDING_HUMAN_REVIEW"
                 )
-                + "</p></section>"
+                + "</p></details>"
+                + '<label><input type="checkbox" name="attest">'
+                + "I reviewed the source and confirm my decision.</label></section>"
             )
             cards.append(card)
         config_json = json.dumps(
@@ -1141,26 +1166,28 @@ def render_views(frame: dict[str, Any], config: dict[str, Any]) -> None:
             "m-action 'none'; base-uri 'none'\">"
             + "<title>Human development review "
             + batch_id
-            + "</title><style>body{max-width:1000px;margin:2rem a"
-            "uto;font:16px system-ui}section{border-top:3px sol"
-            "id #345;padding:2rem 0}label{display:block;margin:"
-            ".7rem 0}textarea{display:block;width:95%;min-heigh"
-            "t:5rem}select,input{max-width:95%}code{overflow-wr"
-            "ap:anywhere}button{padding:1rem}</style></head><bo"
-            "dy>"
+            + "</title><style>body{max-width:760px;margin:1.5rem auto;padding:0 1rem;"
+            "font:16px system-ui}h1,h2,p{margin:.6rem 0}nav{display:flex;gap:.6rem;"
+            "align-items:center;flex-wrap:wrap;padding:.5rem 0}nav[hidden]{display:none}"
+            "section{border-top:1px solid #9aa9b9;padding:.5rem 0}"
+            "label{display:block;margin:.5rem 0}textarea{display:block;width:98%;"
+            "min-height:3rem}select,input{max-width:100%}code{overflow-wrap:anywhere}"
+            "summary{cursor:pointer}button{padding:.45rem .7rem;font:inherit}"
+            "</style></head><body>"
             + "<h1>"
             + batch_id
             + " — human review</h1><p>Reviewer: "
             + html.escape(config["reviewer_id"])
             + "</p>"
-            + "<p>25-record deterministic batches; final remainde"
-            "r 18. Only available source-control records are sh"
-            "own before the global control barrier opens. Hidde"
-            "n candidate records are not linked or described.</"
-            "p>" + "<p>No decision is prefilled. Exported JSON is not "
-            "recorded until validated by the administrative com"
-            "mand.</p>" + "".join(cards) + '<button id="export">Export completed human reviews'
-            '</button><p id="message" role="status"></p>'
+            + "<p>Review the source, enter your decision and confirm it. "
+            "Export whenever you’re ready to submit your confirmed reviews.</p>"
+            + '<nav id="record-navigation" aria-label="Record navigation" hidden>'
+            '<button id="previous-record">Previous</button>'
+            '<span id="record-position" aria-live="polite"></span>'
+            '<button id="next-record">Next</button></nav>'
+            + '<button id="export">Export completed human reviews</button>'
+            '<p id="message" role="status"></p>'
+            + "".join(cards)
             + '<script type="application/json" id="config">'
             + config_json
             + "</script><script>"

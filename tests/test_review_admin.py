@@ -519,7 +519,7 @@ def test_ledger_tampering_is_not_counted_as_human_completion(
         m.history_state(frame, config)
 
 
-@pytest.mark.parametrize("mode", ["blank", "complete", "no_attestation", "no_evidence"])
+@pytest.mark.parametrize("mode", ["blank", "complete", "partial", "no_attestation", "no_evidence"])
 def test_offline_export_requires_explicit_human_decisions_and_attestation(
     tmp_path: Path,
     mode: str,
@@ -541,7 +541,7 @@ if(mode!=='blank'){
  fields.first_pass_status.value='REVIEWED_UNRESOLVED';
  fields.reason.value='Synthetic user-entered fixture only';
  fields.attest.checked=mode!=='no_attestation';
- fields.evidence.selectedOptions=mode==='no_evidence'?[]:[{value:'proof-fixture'}];
+ fields.evidence.selectedOptions=mode==='no_evidence'?[{value:''}]:[{value:'proof-fixture'}];
 }
 const card={dataset:{id:'case-fixture',source:'source-fixture',family:'SHARE_REPURCHASE',
                     role:'INDEPENDENT_SOURCE_CONTROL'},
@@ -551,7 +551,12 @@ const card={dataset:{id:'case-fixture',source:'source-fixture',family:'SHARE_REP
 const elements={config:{textContent:JSON.stringify({batch_id:'batch-001',
  reviewer_id:'SYNTHETIC_TEST_HUMAN'})},
  export:{},message:{textContent:''}};
-global.document={getElementById(id){return elements[id];},querySelectorAll(){return [card];},
+const draft={...card,dataset:{...card.dataset,id:'unconfirmed-draft'},
+ querySelector(selector){
+  return selector==='[name="attest"]'?{checked:false}:card.querySelector(selector);
+ }};
+global.document={getElementById(id){return elements[id];},
+ querySelectorAll(){return mode==='partial'?[draft,card]:[card];},
  createElement(){return {click(){clicked=true;}};}};
 global.Blob=class{constructor(parts){this.data=parts.join('');}};
 global.URL={createObjectURL(blob){captured=JSON.parse(blob.data);return 'blob:synthetic';}};
@@ -565,8 +570,11 @@ global.URL={createObjectURL(blob){captured=JSON.parse(blob.data);return 'blob:sy
     script.write_text(harness + m.FORM_SCRIPT + tail, encoding="utf-8")
     done = subprocess.run([node, str(script)], capture_output=True, text=True, check=True)
     result = json.loads(done.stdout)
-    if mode == "complete":
-        item = result["captured"]["records"][0]
+    if mode in {"complete", "partial"}:
+        records = result["captured"]["records"]
+        assert len(records) == 1
+        item = records[0]
+        assert item["sample_record_id"] == "case-fixture"
         assert result["clicked"] and item["human_attested"] is True
         assert item["review"]["event_presence"] is None
         assert item["review"]["correct_state"] == "UNRESOLVED"
