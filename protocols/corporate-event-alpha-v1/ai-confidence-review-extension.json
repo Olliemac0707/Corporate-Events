@@ -1,0 +1,11 @@
+{
+  "version": "ai-confidence-review-extension-v1",
+  "scope": "AI_ASSISTED_DEVELOPMENT_CONFIDENCE_ROUTING",
+  "sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "full_extraction_authorized": false,
+  "files": {
+    "tools/corporate_events/confidence_review.py": "3f38354fbdc4a514e9fb3b86b5e09551e54e74978f2d0bda38b56db8ecc7fd1d",
+    "tests/test_confidence_review.py": "cc6eeb618501a52c1249bdd382e52f9e9b5320751fcbdc0fce0579a255cdb98b",
+    "protocols/corporate-event-alpha-v1/ai-confidence-review-policy-v1.json": "ab7a57d0fbc1b80e0fe818926fdee3074ea2b1120b0bcd19ecafdf886b3e92b4"
+  }
+}

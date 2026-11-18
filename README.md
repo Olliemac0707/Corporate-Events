@@ -142,3 +142,31 @@ this task. First-pass acceptance metrics remain uncalculated until all 718
 records have valid human terminal dispositions. Missing concerns do not prove
 correctness, and this design does not establish population recall. Development
 QA never authorizes final QA, full extraction, Phase 3 or outcome analysis.
+
+## AI-assisted confidence review amendment
+
+The user approved AI-assisted development review with confidence-based manual
+routing. The fixed sample remains 718 records with its existing byte identity.
+The initial human-only Phase 2C workflow is retained as provenance.
+
+The new policy is ai-confidence-review-policy-v1.json. The provisional threshold
+is 90/100, using the minimum of classification confidence and evidence confidence.
+Scores below the threshold and all critical evidence/coverage issues enter the
+manual queue. Scores are uncalibrated operational measures. Empirical probability
+calibration and accuracy require human labels.
+
+Use python -I -S -B tools/corporate_events/confidence_review.py with prepare,
+record --input NAME.json, or status. AI assessment inputs are placed in the ignored
+private parser-qa-v1/ai-confidence-review-v1/inbox directory. Append-only AI
+assessments retain source/evidence hashes, rationales, essential checks, scores,
+routing reasons, code/policy identity and supersession. Human decisions continue
+through the registered human review mechanism.
+
+All source-control AI assessments precede candidate assessment recording.
+Unassessed records remain pending. Manual records are grouped by source for
+reading, with each original sample record retained. A suggested audit of up to
+10 high-score records is selected deterministically after the AI pass.
+
+Public-time authority stays a separate gate. The confidence workflow authorizes
+development triage. Full extraction, final QA, Phase 3 and parser changes require
+their later authorizations.

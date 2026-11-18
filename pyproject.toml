@@ -12,4 +12,4 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-files = ["tools/corporate_events/phase2.py", "tools/corporate_events/sec_census.py", "tests/test_corporate_event_phase2.py", "tests/test_sec_acquisition.py", "tools/corporate_events/event_parsers.py", "tools/corporate_events/sec_document_client.py", "tools/corporate_events/parser_qa.py", "tests/test_event_parsers.py", "tests/test_parser_qa.py", "tools/corporate_events/review_admin.py", "tests/test_review_admin.py"]
+files = ["tools/corporate_events/phase2.py", "tools/corporate_events/sec_census.py", "tests/test_corporate_event_phase2.py", "tests/test_sec_acquisition.py", "tools/corporate_events/event_parsers.py", "tools/corporate_events/sec_document_client.py", "tools/corporate_events/parser_qa.py", "tests/test_event_parsers.py", "tests/test_parser_qa.py", "tools/corporate_events/review_admin.py", "tests/test_review_admin.py", "tools/corporate_events/confidence_review.py", "tests/test_confidence_review.py"]
