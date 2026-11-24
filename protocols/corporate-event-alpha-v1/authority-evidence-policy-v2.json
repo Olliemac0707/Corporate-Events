@@ -1,0 +1,14 @@
+{
+  "version": "authority-evidence-policy-v2",
+  "scope": "Three metadata-selected RenaissanceRe periodic reports, development evidence only",
+  "selection": "All RNR 10-K/10-Q records in cached 2020Q4,2021Q1,Q2 indexes, selected before bodies",
+  "max_additional_complete_filings": 3,
+  "max_objects": 8,
+  "max_received_body_bytes": 67108864,
+  "per_response_cap_bytes": 16777215,
+  "v1_sealed_budget_not_reset": true,
+  "network_client": "Frozen sec_authority_client.py with shared scheduler, 0.5 second spacing, five-attempt cap and block controls",
+  "parser_changes_allowed": false,
+  "public_time_certified": false,
+  "independent_gold_added": 0
+}

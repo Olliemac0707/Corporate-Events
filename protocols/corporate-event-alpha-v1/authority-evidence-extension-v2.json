@@ -1,0 +1,10 @@
+{
+  "version": "authority-evidence-extension-v2",
+  "files": {
+    "tools/corporate_events/sec_authority_client.py": "79ca116ed484ee84f8c6c6891a38e5b3319cad84b1e5cc35b6d4b1fcbc8e7dab",
+    "tools/corporate_events/authority_evidence_v2.py": "8382b86651f9b5b316779394844cc172d571eb483c6b0206a60c2000b91fee43",
+    "tests/test_authority_evidence_v2.py": "5e154fbdb2bc91668c5ac1278cbb42b49fd07cff571457103dc4f76397cec956",
+    "protocols/corporate-event-alpha-v1/authority-evidence-policy-v2.json": "7bb9e89a6226414272ae2e3c93aadbcdb4bb3fb60d5106212d22629b4e91be7e"
+  },
+  "earlier_frozen_authorities_unchanged": true
+}

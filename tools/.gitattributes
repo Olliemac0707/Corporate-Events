@@ -1,0 +1,13 @@
+# Later parser and evidence versions have byte-hash registries.
+corporate_events/authority_evidence.py -text
+corporate_events/authority_evidence_v2.py -text
+corporate_events/demo.py -text
+corporate_events/event_parsers_v2.py -text
+corporate_events/event_parsers_v3.py -text
+corporate_events/event_parsers_v4.py -text
+corporate_events/infrastructure_audit.py -text
+corporate_events/parser_development_v2.py -text
+corporate_events/parser_development_v3.py -text
+corporate_events/parser_development_v4.py -text
+corporate_events/sec_archive_membership.py -text
+corporate_events/sec_authority_client.py -text

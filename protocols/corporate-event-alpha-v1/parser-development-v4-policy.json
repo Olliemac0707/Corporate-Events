@@ -1,0 +1,32 @@
+{
+  "version": "parser-development-v4",
+  "scope": "OFFLINE_DEVELOPMENT_REGRESSION_ON_EXISTING_FROZEN_SOURCES",
+  "authorization": "USER_AUTHORIZED_CORRECTIONS_AFTER_V3_FACTUAL_REVIEW",
+  "sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "sample_records": 718,
+  "sample_cells": 297,
+  "baseline_parser": "event-parsers-development-v3.3",
+  "candidate_parser": "event-parsers-development-v4.1",
+  "baseline_assessment_journal": "parser-qa-v1/ai-confidence-review-v1/ai-assessments.jsonl",
+  "network_allowed": false,
+  "market_data_allowed": false,
+  "new_filings_allowed": false,
+  "final_qa_authorized": false,
+  "full_extraction_authorized": false,
+  "phase3_authorized": false,
+  "baseline_overwrite_allowed": false,
+  "sample_redraw_allowed": false,
+  "confidence_policy": "Do not transfer or recalibrate baseline scores. New proposals require new independent review.",
+  "comparison_policy": "Development regression only; source/control/candidate identities and membership preserved. Proposal suppression is not measured precision and cannot establish recall.",
+  "uncertainty_policy": "Partial coverage, unsupported formats, historical schema/venue/plan authority, dividend baselines, first disclosure, public timing and final action identity remain unresolved without evidence.",
+  "ownership_policy": "Reuse frozen ownership parser; no expanded schema authority.",
+  "changes": [
+    "Exclude heading-only, cross-reference-only and non-operative financial spin evidence",
+    "Preserve merger-proxy and combined proxy/prospectus-information-statement genres",
+    "Attach tightly scoped same-paragraph program facts with separate evidence citations",
+    "Distinguish printed dateline announcement from approval and unresolved public time",
+    "Keep another-authorization subtype uncertain and documentary subtype disagreements explicit",
+    "Retain multi-actor dated and undated prior-announcement reference flags",
+    "Preserve explicit actor/action/object separation plans in mixed financial-context sentences"
+  ]
+}

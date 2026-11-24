@@ -1,0 +1,32 @@
+{
+  "version": "parser-development-v2",
+  "scope": "OFFLINE_DEVELOPMENT_REGRESSION_ON_EXISTING_FROZEN_SOURCES",
+  "authorization": "USER_GO_AHEAD_NEW_PARSER_DEVELOPMENT_AFTER_ALL718_INITIAL_DISPOSITIONS",
+  "sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "sample_records": 718,
+  "sample_cells": 297,
+  "baseline_parser": "event-parsers-v1.1",
+  "candidate_parser": "event-parsers-development-v2.4",
+  "baseline_assessment_journal": "parser-qa-v1/ai-confidence-review-v1/ai-assessments.jsonl",
+  "network_allowed": false,
+  "market_data_allowed": false,
+  "new_filings_allowed": false,
+  "final_qa_authorized": false,
+  "full_extraction_authorized": false,
+  "phase3_authorized": false,
+  "baseline_overwrite_allowed": false,
+  "sample_redraw_allowed": false,
+  "confidence_policy": "Do not transfer or recalibrate baseline scores. New proposals require new independent review.",
+  "comparison_policy": "Development regression only; source/control/candidate identities and membership preserved. Proposal suppression is not measured precision and cannot establish recall.",
+  "uncertainty_policy": "Partial coverage, unsupported formats, historical schema/venue/plan authority, dividend baselines, first disclosure, public timing and final action identity remain unresolved without evidence.",
+  "ownership_policy": "Reuse frozen ownership parser; no expanded schema authority.",
+  "changes": [
+    "Inert narrative rendering with structural context exclusion",
+    "Sentence evidence retains negation and adjacent declaration dates",
+    "Do not create independent Item4 events from supporting exhibits",
+    "Distinguish common shareholder dividend declarations from investment, preferred and employee contexts",
+    "Distinguish approvals, renewal uncertainty and actual repurchases",
+    "Preserve filer role without guessing transaction parent",
+    "Consolidate exact or specifically dated documentary repeats; cross-document links remain suggestions"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": "infrastructure-audit-v1",
+  "purpose": "Reproducible offline integrity and unresolved-requirement audit; cannot authorize any scientific gate",
+  "evidence_manifest_sha256": "9fc232215cc09e1a332f9992e5f617af3ec144ae7eb56cef9519a3b27a9b8f99",
+  "sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "sample_records": 718,
+  "sample_cells": 297,
+  "provisional_candidate_mentions": 69,
+  "network_allowed": false,
+  "market_data_allowed": false,
+  "gate_opening_allowed": false,
+  "source_and_reviewer_records_read_only": true,
+  "output_namespace": "phase2-private/infrastructure-audit-v1/offline-infrastructure-NNN",
+  "CLI": "python tools/corporate_events/infrastructure_audit.py --run-id offline-infrastructure-001",
+  "exit_codes": {
+    "0": "Infrastructure audit passed; research gates remain closed",
+    "2": "Audit failed closed; no PASS report emitted"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "baseline_sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "files": {
+    "protocols/corporate-event-alpha-v1/parser-development-v2-policy.json": "f1fe10359c37aedee1b7b342baa319467f8c6ea6fc9266b4cee49c5c6208cd13",
+    "tests/test_event_parsers_v2.py": "71b7f2322981b2d47b136533b9e273f81a66dfa2fd1e6c9cd5bef8e1ecceffd4",
+    "tests/test_parser_development_v2.py": "0ff8e69b98667147625240f093453333c25f2922ae35c00f29dfe22be2a25645",
+    "tools/corporate_events/event_parsers_v2.py": "61166421200b6a4592a67d47e0fc0fa6eb47bd07d82b701b7f487d103154182b",
+    "tools/corporate_events/parser_development_v2.py": "8c774330f998242b66d3ac5708c7550144b2a39cbf88d21c5e1a7a1034699625"
+  },
+  "full_extraction_authorized": false,
+  "parser_version": "event-parsers-development-v2.4",
+  "scope": "OFFLINE_DEVELOPMENT_REGRESSION_ONLY",
+  "version": "parser-development-v2"
+}

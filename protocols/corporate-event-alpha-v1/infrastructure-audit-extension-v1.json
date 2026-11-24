@@ -1,0 +1,9 @@
+{
+  "version": "infrastructure-audit-extension-v1",
+  "files": {
+    "tools/corporate_events/infrastructure_audit.py": "dcf5dadbea3d2c3c5bfd21d14dae16e20bc48603f2dc5099f593eed3e2bd3342",
+    "tests/test_infrastructure_audit.py": "195ecf171efd07b3172101f2beab342567b8e533cf6c0d36e9c07180020682a2",
+    "protocols/corporate-event-alpha-v1/infrastructure-audit-policy-v1.json": "4aa0be733fa0d12d9807cf5e7168aaaafb8a7516f029d2e390b0e6c052b618d0"
+  },
+  "development_revision": "Historical equivalent separator aliases with identical hashes coalesce; conflicting hashes still rejected; previous registries preserved"
+}

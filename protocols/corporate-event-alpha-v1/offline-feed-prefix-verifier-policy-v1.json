@@ -1,0 +1,12 @@
+{
+  "version": "offline-feed-prefix-verifier-v1",
+  "scope": "Replay only cached exact SEC Feed ranges; no network capability",
+  "max_compressed_bytes": 34603008,
+  "max_decoded_bytes": 268435456,
+  "exact_accession_match_required": true,
+  "tar_checksum_required": true,
+  "absence_inference_allowed": false,
+  "public_time_certified": false,
+  "market_data_allowed": false,
+  "parser_changes_allowed": false
+}

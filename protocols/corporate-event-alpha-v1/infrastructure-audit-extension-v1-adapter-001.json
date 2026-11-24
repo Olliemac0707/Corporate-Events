@@ -1,0 +1,9 @@
+{
+  "version": "infrastructure-audit-extension-v1",
+  "files": {
+    "tools/corporate_events/infrastructure_audit.py": "463d0508bcb40f9ce4f1d7937157f6828275e061174f3c9db2615c848966777c",
+    "tests/test_infrastructure_audit.py": "d638d10cbff4b731f61e5961ffbac4def487adb579e0fc8f01c638f05a78caed",
+    "protocols/corporate-event-alpha-v1/infrastructure-audit-policy-v1.json": "4aa0be733fa0d12d9807cf5e7168aaaafb8a7516f029d2e390b0e6c052b618d0"
+  },
+  "development_revision": "Legacy Windows snapshot adapter added after first live check failed closed; initial registry preserved"
+}

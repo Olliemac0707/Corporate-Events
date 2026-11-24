@@ -1,0 +1,12 @@
+{
+  "files": {
+    "protocols/corporate-event-alpha-v1/parser-development-v3-policy.json": "6560b8c84dbe7d666eb2b0471f990215121c400044d85dc34f5dc59be5f4798f",
+    "tests/test_event_parsers_v3.py": "f2e6a5f71818dc6288803a3d3dd3cdfd89aed82ef0d77fd223477c0014db5d7d",
+    "tests/test_parser_development_v3.py": "232e0c8ef76946cddc6b25071294d089208ff474407cb825774bdbc4b51f724c",
+    "tools/corporate_events/event_parsers_v3.py": "8856f6844cd0c04c278b009bfe160fcb3f15fca22c9bbf6b4930eaafd9dba9c3",
+    "tools/corporate_events/parser_development_v3.py": "b7eb400d8195a779dd91380864680b77a13b6794f7183ea69e1b28d8829a3627"
+  },
+  "parser_version": "event-parsers-development-v3.3",
+  "scope": "OFFLINE_STRUCTURAL_FACTUAL_DEVELOPMENT_ONLY",
+  "version": "parser-development-v3"
+}

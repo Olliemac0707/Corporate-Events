@@ -1,0 +1,8 @@
+{
+  "version": "offline-feed-prefix-verifier-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_archive_membership.py": "1ff1577ef886271b92a275f470e8547dad30f4cf9d0aec8473ca50af0b12219c",
+    "tests/test_sec_archive_membership.py": "4afd67b87ab455be638285658396ed3864816586f97f8b8da3e31ca32a76945b",
+    "protocols/corporate-event-alpha-v1/offline-feed-prefix-verifier-policy-v1.json": "770de438fd5a4fb8c7d493c20021c08e1feb3c9698807d49875973b3f7912a05"
+  }
+}

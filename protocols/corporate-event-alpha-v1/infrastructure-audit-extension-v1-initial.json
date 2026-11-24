@@ -1,0 +1,8 @@
+{
+  "version": "infrastructure-audit-extension-v1",
+  "files": {
+    "tools/corporate_events/infrastructure_audit.py": "92306f2290cbd040ff39d350aa15cf5265215538b7519555d248f71403266127",
+    "tests/test_infrastructure_audit.py": "57779f77b6c43cc3743e091fcad7a899bdeed625c600a59fe626e43703cd7bb0",
+    "protocols/corporate-event-alpha-v1/infrastructure-audit-policy-v1.json": "4aa0be733fa0d12d9807cf5e7168aaaafb8a7516f029d2e390b0e6c052b618d0"
+  }
+}

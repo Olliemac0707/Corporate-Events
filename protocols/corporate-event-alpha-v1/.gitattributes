@@ -1,0 +1,24 @@
+# Preserve the registered bytes of later development amendments.
+authority-evidence-extension-v1.json -text
+authority-evidence-extension-v2.json -text
+authority-evidence-policy-v1.json -text
+authority-evidence-policy-v2.json -text
+batch-001-confidence-rubric-v1.md -text
+batch-002-dividend-review-rubric-v1.md -text
+infrastructure-audit-extension-v1-adapter-001.json -text
+infrastructure-audit-extension-v1-initial.json -text
+infrastructure-audit-extension-v1.json -text
+infrastructure-audit-policy-v1.json -text
+offline-feed-prefix-verifier-extension-v1.json -text
+offline-feed-prefix-verifier-policy-v1.json -text
+parser-development-v2-extension.json -text
+parser-development-v2-policy.json -text
+parser-development-v2.md -text
+parser-development-v3-extension.json -text
+parser-development-v3-policy.json -text
+parser-development-v3.md -text
+parser-development-v4-extension.json -text
+parser-development-v4-policy.json -text
+parser-development-v4.md -text
+sample-guided-review-policy-v1.json -text
+sample-guided-review-policy-v2.json -text
