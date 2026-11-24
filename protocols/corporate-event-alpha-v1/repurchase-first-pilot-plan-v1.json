@@ -1,0 +1,41 @@
+{
+  "version": "repurchase-first-pilot-plan-v1",
+  "status": "REGISTERED_SEQUENCE_NOT_GATE_WAIVER",
+  "family": "SHARE_REPURCHASE",
+  "development_window": [
+    "2006-01-01",
+    "2015-12-31"
+  ],
+  "source_metadata_window_not_event_date": true,
+  "seed_mentions": 16,
+  "seed_components": 3,
+  "seed_accessions": 2,
+  "full_pilot_repurchase_mentions": 31,
+  "candidate_target_per_year": 8,
+  "independent_source_control_target_per_year": 2,
+  "new_complete_submission_cap": 100,
+  "received_body_bytes_cap": 536870912,
+  "metadata_diagnostic_request_cap": 12,
+  "discovery_query": "repurchase OR buyback OR \"buy back\"",
+  "forms": [
+    "8-K",
+    "8-K/A"
+  ],
+  "ranking": "SHA256(plan_identity|year|role|historical_index_filename)",
+  "source_adapter_status": "NOT_IMPLEMENTED_OR_LIVE_VALIDATED",
+  "body_acquisition_currently_authorized": false,
+  "all_prior_budgets_preserved": true,
+  "original_718_sample_changes": 0,
+  "independent_review_resource": "REVIEWER_NOT_YET_ASSIGNED",
+  "independent_packet_positive_cluster_cap": 30,
+  "independent_source_control_target": 20,
+  "replaces_full_programme_QA": false,
+  "public_timing_rules_unchanged": true,
+  "market_data_currently_authorized": false,
+  "returns_currently_authorized": false,
+  "regressions_currently_authorized": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false,
+  "execution_plan_sha256": "6720f50db92dc260486e6b7713feef512cc57133311c49c659f2ccb51d19bae5"
+}
