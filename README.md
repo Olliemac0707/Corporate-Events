@@ -36,10 +36,10 @@ Latest local development checkpoint, 2026-11-25:
 | Historical SEC index census | Completed: 76 quarters, 2006-2024 |
 | Original bounded development corpus | 76 complete submissions; supplemental authority evidence separate |
 | Frozen development QA frame | 718 records, 297 cells; membership preserved |
-| Current parser | event-parsers-development-v4.1 |
-| Provisional event mentions | 69; not 69 unique certified events |
+| Original pilot parser | event-parsers-development-v4.1 |
+| Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 834 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 927 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 short questions completed; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -63,7 +63,19 @@ All 100 fixed sources passed header/container checks and offline raw-cache repla
 
 The [aggregate acquisition checkpoint](protocols/corporate-event-alpha-v1/repurchase-acquisition-checkpoint-v1.json) records annual form counts, manifest fingerprints, software checks and firewall counters. Raw filings, contact configuration and request journals remain local. The active local entrypoint is repurchase_acquisition_v2.py with acquire and audit commands; audit is offline. Both require the original registered private artifacts. Completed acquisition reuses the hash-verified cache.
 
-This completes bounded source acquisition. Event classification has not started on these sources. The next stage is the bounded repurchase event ledger; independent factual QA and all full-extraction and market-data gates remain separate requirements.
+These sources now feed the bounded repurchase ledger below. Independent factual QA and all full-extraction and market-data gates remain separate requirements.
+
+## Bounded repurchase event ledger
+
+The first study asks whether new share-buyback announcements are followed by stock performance beyond general market moves. The current job is to establish which announcements actually occurred before joining prices.
+
+The fixed 100-submission sample now has an offline source-linked ledger: 745 passages, including 22 provisional authorization/increase candidates across 11 filings, 217 context passages, 200 provisional non-target contexts and 306 unresolved passages. These are passage counts, not distinct verified event counts. All 745 evidence records passed raw-source/derived-text offset and hash replay. The ledger retains approval dates, stated announcement dates and filing dates separately; public dissemination remains unresolved.
+
+All 599 source components are accounted for: 272 were processed as visible text, 326 non-text components remain in their original containers, and one had empty visible text. Binary/unparsed content remains a coverage limitation. A zero-keyword result does not establish that a source is a negative control. The two large contract exhibits and wrapped source lines were handled in versioned renderer corrections, preserving earlier snapshots and classification rules.
+
+The [aggregate ledger checkpoint](protocols/corporate-event-alpha-v1/bounded-repurchase-ledger-checkpoint-v1.json) contains counts, evidence fingerprints, remaining requirements and software checks. The private local ledger.html provides source quotes and links to complete extracted component text. It includes predictions and is not a blinded review packet. The active local entrypoint is bounded_repurchase_ledger_v3.py with build and validate commands; it requires the original private cache and preserved earlier snapshots.
+
+No event is yet certified for research use. Economic-action identity, duplicate resolution, issuer/security eligibility, programme scope, public timing and independent factual QA remain open. The original 718-record frame is unchanged. This ledger stage used zero network requests and left all 17 outcome-firewall counters at zero. No returns, regressions or backtests have been run.
 
 ## Route to first empirical results
 

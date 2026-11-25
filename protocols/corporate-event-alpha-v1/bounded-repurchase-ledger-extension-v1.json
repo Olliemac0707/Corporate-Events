@@ -1,0 +1,9 @@
+{
+  "version": "bounded-repurchase-ledger-extension-v1",
+  "files": {
+    "tools/corporate_events/bounded_repurchase_rules.py": "54bd5f1c7ba9bdfb896deb4f792e25da679d133c243d92a7bddbf0614f0b0ff6",
+    "tools/corporate_events/bounded_repurchase_ledger.py": "935c6789ccefc7967e4ae84520ec09a2ec7f190afb51b9ea4db6edfef563c8de",
+    "tests/test_bounded_repurchase_ledger.py": "8703df53b29ff96d9d08494eb40e3b0b75b587835b21782a604350c1d05048ce",
+    "protocols/corporate-event-alpha-v1/bounded-repurchase-ledger-policy-v1.json": "43b113899fbf4de1716681a105baa011378414cc0b6475ee1290d9627097a76c"
+  }
+}
