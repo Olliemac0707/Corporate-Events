@@ -1,0 +1,100 @@
+{
+  "version": "repurchase-acquisition-checkpoint-v1",
+  "date": "2026-11-25",
+  "status": "ALL_100_RAW_SUBMISSIONS_REPLAY_PASSED",
+  "frozen_source_manifest_sha256": "4a92feb81b8701950a662b419c4fb359fa2da780469e28a70055459076bb078b",
+  "acquired_source_manifest_sha256": "5014ffc3d51f479af445a5b79e729ae853ec6c27d3b7d387e37269c003acda9b",
+  "acquisition_audit_sha256": "58672f814048c6a41fb8046594f49a0ef2eff8d55e33e7f475199292b43b09a7",
+  "complete_submissions": 100,
+  "candidate_hit_sources": 80,
+  "source_controls": 20,
+  "form_counts": {
+    "8-K": 95,
+    "8-K/A": 5
+  },
+  "source_counts_by_year_form": {
+    "2006": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2007": {
+      "8-K": 10
+    },
+    "2008": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2009": {
+      "8-K": 10
+    },
+    "2010": {
+      "8-K": 10
+    },
+    "2011": {
+      "8-K": 10
+    },
+    "2012": {
+      "8-K": 10
+    },
+    "2013": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2014": {
+      "8-K": 10
+    },
+    "2015": {
+      "8-K": 8,
+      "8-K/A": 2
+    }
+  },
+  "source_identity_and_raw_cache_replay_passed": true,
+  "cached_body_bytes": 122298570,
+  "received_body_bytes_including_interrupted_responses": 122364106,
+  "interrupted_response_bytes": 65536,
+  "received_body_byte_cap": 536870912,
+  "HTTP_requests": 101,
+  "HTTP_request_cap": 500,
+  "response_counts": {
+    "200": 100,
+    "TRANSPORT_FAILURE": 1
+  },
+  "HTTP_403_responses": 0,
+  "HTTP_429_responses": 0,
+  "legacy_PEM_response_revalidated_from_cache_without_redownload": true,
+  "old_budgets_reset": false,
+  "source_selection_changed": false,
+  "original_718_sample_changes": 0,
+  "event_extraction_started": false,
+  "research_events_accepted": 0,
+  "independent_factual_QA_passed": false,
+  "controls_assumed_negative": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false,
+  "software_checks": {
+    "pytest_passed": 834,
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "mypy_source_files": 61
+  },
+  "firewall_counters": {
+    "BHAR": 0,
+    "CAR": 0,
+    "CCM_queries": 0,
+    "CRSP_observation_queries": 0,
+    "Compustat_financial_observation_queries": 0,
+    "Monte_Carlo": 0,
+    "abnormal_returns": 0,
+    "backtests": 0,
+    "bootstrap": 0,
+    "event_price_joins": 0,
+    "event_returns": 0,
+    "market_provider_queries": 0,
+    "optimizations": 0,
+    "portfolio_simulations": 0,
+    "prospective_accesses": 0,
+    "regressions": 0,
+    "stock_returns": 0
+  }
+}

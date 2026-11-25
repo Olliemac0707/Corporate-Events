@@ -1,0 +1,9 @@
+{
+  "version": "repurchase-acquisition-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_acquisition.py": "0e00e8aaae8cb137903630c27431e95874329c41cdef11b1989c1a50187a6303",
+    "tools/corporate_events/sec_document_client.py": "2b7feea94c214fae5af3465f054ceb3a3ca63130800f79cc2ebbe72532b38aab",
+    "tests/test_repurchase_acquisition.py": "9c135cf149e8fda0d96695ea1928d3f8791abe56a146c3dda693fea6a7c62623",
+    "protocols/corporate-event-alpha-v1/repurchase-acquisition-policy-v1.json": "e416925e65ca7cadcae0191b3842b20ebf5533440302b6aa96efb6b808b468c9"
+  }
+}

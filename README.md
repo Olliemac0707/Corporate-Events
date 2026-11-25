@@ -34,12 +34,12 @@ Latest local development checkpoint, 2026-11-25:
 | Milestone | Status |
 | --- | --- |
 | Historical SEC index census | Completed: 76 quarters, 2006-2024 |
-| Bounded development corpus | 76 complete submissions; supplemental authority evidence separate |
+| Original bounded development corpus | 76 complete submissions; supplemental authority evidence separate |
 | Frozen development QA frame | 718 records, 297 cells; membership preserved |
 | Current parser | event-parsers-development-v4.1 |
 | Provisional event mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 775 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 834 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 short questions completed; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -51,11 +51,19 @@ These counts describe private development artifacts. A fresh clone reproduces th
 
 The metadata-only adapter completed all 120 monthly partitions for 2006-2015 and replayed 1,889 immutable raw response pages. The query returned 182,703 document hits; these are not certified events.
 
-The private first-wave manifest fixes 100 unique complete-submission accessions: eight candidate hits and two independently selected source controls per year. Every selected source is reconciled against the historical SEC master index. Controls are not assumed negative. **No new filing bodies have been downloaded.** The original 718-record QA frame and all research gates remain unchanged.
+The private first-wave manifest fixes 100 unique complete-submission accessions: eight candidate hits and two independently selected source controls per year. Every selected source is reconciled against the historical SEC master index. Controls are not assumed negative. **All 100 selected submissions are now acquired and container-validated.** The original 718-record QA frame and all research gates remain unchanged.
 
 See the [aggregate discovery checkpoint](protocols/corporate-event-alpha-v1/repurchase-discovery-checkpoint-v1.json) for annual counts, budgets and the source-manifest fingerprint. Raw responses, the accession manifest, request logs and the contact value remain local.
 
 The active local entrypoint is sec_repurchase_discovery_v4.py, followed by the offline sec_discovery_audit_v2.py replay. These require the registered private index cache and original manifests. Earlier adapter versions are retained to reproduce recorded diagnostics; use the active entrypoint without restarting or resetting budgets. The adapter uses an observed backend route from the official SEC search site; this is not a claim of a stable, documented public API contract.
+
+## Bounded source acquisition
+
+All 100 fixed sources passed header/container checks and offline raw-cache replay: 80 candidate-hit submissions and 20 source controls, comprising 95 forms 8-K and five 8-K/A. Acquisition received 122,364,106 bytes (116.7 MiB) under the 512 MiB cap, across 101 requests. One interrupted response contributed 64 KiB to the byte ledger before a successful retry. No 403 or 429 responses occurred. The legacy SEC privacy-envelope format is retained and validated without discarding the original stopped attempt or resetting budgets.
+
+The [aggregate acquisition checkpoint](protocols/corporate-event-alpha-v1/repurchase-acquisition-checkpoint-v1.json) records annual form counts, manifest fingerprints, software checks and firewall counters. Raw filings, contact configuration and request journals remain local. The active local entrypoint is repurchase_acquisition_v2.py with acquire and audit commands; audit is offline. Both require the original registered private artifacts. Completed acquisition reuses the hash-verified cache.
+
+This completes bounded source acquisition. Event classification has not started on these sources. The next stage is the bounded repurchase event ledger; independent factual QA and all full-extraction and market-data gates remain separate requirements.
 
 ## Route to first empirical results
 
