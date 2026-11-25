@@ -11,3 +11,9 @@ corporate_events/parser_development_v3.py -text
 corporate_events/parser_development_v4.py -text
 corporate_events/sec_archive_membership.py -text
 corporate_events/sec_authority_client.py -text
+# Preserve every version used in the registered metadata-discovery receipts.
+corporate_events/sec_search_metadata_client*.py -text
+corporate_events/sec_search_bootstrap.py -text
+corporate_events/sec_search_export.py -text
+corporate_events/sec_repurchase_discovery*.py -text
+corporate_events/sec_discovery_audit.py -text

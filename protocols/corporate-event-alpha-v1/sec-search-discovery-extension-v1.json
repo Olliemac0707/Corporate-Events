@@ -1,0 +1,10 @@
+{
+  "version": "sec-search-discovery-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_search_metadata_client.py": "60516dc18da30c35a46d04be8878594bd89ad4992613f9f28e59c6d54f33420c",
+    "tools/corporate_events/sec_search_bootstrap.py": "60534739ab10306ba4cd4dbdd9dd04183f40f932656d42e085d32e8342908397",
+    "tests/test_sec_search_metadata_client.py": "29e2df52ec58e1a6539175fca0698648a420d8d56fcfe7de3231073332b5160a",
+    "tests/test_sec_search_bootstrap.py": "8694d607e6087cb14d844859e936554e7f035454fc7693be524e785eee63ad09",
+    "protocols/corporate-event-alpha-v1/sec-search-discovery-policy-v1.json": "3d437eff3c814a9d4878b9e635632819e9eb84dda3474338ad3cd9849526063e"
+  }
+}

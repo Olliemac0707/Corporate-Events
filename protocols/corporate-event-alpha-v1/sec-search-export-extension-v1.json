@@ -1,0 +1,9 @@
+{
+  "version": "sec-search-export-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_search_metadata_client_v2.py": "f87b66bb56fd40a54e0db24bbb5fcb623cfb6e307702f1b22e942f51c113a02e",
+    "tools/corporate_events/sec_search_export.py": "e5a580ab172eb98d1f410f9f4b06352694cd9431b76fff531a54031a75cfd1da",
+    "tests/test_sec_search_export.py": "a64676b2a26a8d9ab9f1f140de4774f7829be61c5bb4d05802891c14490fb976",
+    "protocols/corporate-event-alpha-v1/sec-search-export-policy-v1.json": "6f267edb29be19c11d3c52038a9e24287b4e2ee73d22b277c2d4113e2dce008b"
+  }
+}

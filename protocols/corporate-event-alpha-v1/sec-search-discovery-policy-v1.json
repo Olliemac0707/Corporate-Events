@@ -1,0 +1,33 @@
+{
+  "version": "sec-search-discovery-v1",
+  "scope": "Official-site search metadata discovery only; no filing bodies or market data",
+  "diagnostic_request_cap": 12,
+  "diagnostic_received_byte_cap": 33554432,
+  "per_response_byte_cap": 8388608,
+  "bootstrap_page": "https://www.sec.gov/edgar/search/",
+  "bootstrap_scripts": "Only same-origin scripts below /edgar/search/, selected from cached official page",
+  "search_backend_candidate": "https://efts.sec.gov/LATEST/search-index",
+  "backend_use_requires_official_script_provenance": true,
+  "public_API_support_contract_claimed": false,
+  "source_window": [
+    "2006-01-01",
+    "2015-12-31"
+  ],
+  "source_forms": [
+    "8-K",
+    "8-K/A"
+  ],
+  "discovery_query": "repurchase OR buyback OR \"buy back\"",
+  "search_completeness": "Detect total/relation/truncation and require complete metadata pools before claiming global hash ranking",
+  "global_shared_scheduler": true,
+  "five_attempts_per_URL_with_success_reset_only": true,
+  "HTTP403": "Block immediately, no browser/proxy/URL evasion",
+  "HTTP429": "Persistent Retry-After and two-consecutive stop",
+  "private_contact_values_logged": false,
+  "market_data_allowed": false,
+  "filing_body_downloads_allowed": false,
+  "original_718_sample_changes_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false
+}

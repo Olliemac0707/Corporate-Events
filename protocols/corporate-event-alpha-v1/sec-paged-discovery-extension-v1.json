@@ -1,0 +1,9 @@
+{
+  "version": "sec-paged-discovery-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_search_metadata_client_v3.py": "1fc61199458e19e3b7f6b3a76c6e1dbf029f990b86dac4109be937a28a0ae372",
+    "tools/corporate_events/sec_repurchase_discovery.py": "cc15708b5bcf3ea7f06e594bbc73fbb48c61820d3befa2fa7ee6be7bb5d08afc",
+    "tests/test_sec_repurchase_discovery.py": "4ac18638200a3f8c2275f7056329a1a7bf54d7597d2e421c6485b12267681ae2",
+    "protocols/corporate-event-alpha-v1/sec-paged-discovery-policy-v1.json": "ef2a74ea8749001b1c3de8b297c07df848a8535613be0dcd96c95adfc0dc6fbd"
+  }
+}

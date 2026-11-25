@@ -1,0 +1,56 @@
+{
+  "version": "sec-paged-discovery-v4",
+  "parent_plan_sha256": "09fb9c7857877bc67b1fb85b1a78ce3c66e8bb3ef15401a0d228eea5b4b6bc9d",
+  "route": "Exact GET endpoint observed in cached official SEC search script",
+  "validated_semantics": "Monthly 2006-2015 root_forms=8-K; index reconciliation enforces 8-K/8-K/A; no document-form filter",
+  "query": "repurchase OR buyback OR \"buy back\"",
+  "metadata_only": true,
+  "require_server_query_echo": true,
+  "require_doc_text_exclusion": true,
+  "require_exact_total_and_every_page": true,
+  "require_all_120_months": true,
+  "page_size": 100,
+  "page_window_exclusive_cap": 10000,
+  "diagnostic_lifetime_cap": 12,
+  "prior_bootstrap_requests": 2,
+  "prior_export_diagnostic_requests": 1,
+  "new_root_profile_diagnostic_request_cap": 1,
+  "new_metadata_crawl_request_cap": 3960,
+  "new_metadata_crawl_byte_cap": 266023277,
+  "metadata_per_response_cap": 2097152,
+  "budgets_are_distinct_and_no_old_budget_reset": true,
+  "crawl_budget_reason": "Relevance ordering overlapped at March 2006 page 200; preserve all 40 requests and bytes. Date-sort correction uses only the unspent portion of the original production cap, without resetting prior ledgers.",
+  "source_selection": "Original plan SHA, historical filename hash; two controls per year selected without keyword or parser filtering, then eight index-reconciled hit accessions excluding control accessions",
+  "controls_are_negative": false,
+  "CIK_role": "Historical index filer; issuer identity is not certified",
+  "filing_date_is_public_time": false,
+  "filing_body_downloads_allowed": false,
+  "market_data_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false,
+  "budget_namespace": "crawl-sorted-v1",
+  "old_crawl_budget_requests_already_spent": 40,
+  "old_diagnostic_budget_unchanged": true,
+  "old_crawl_budget_bytes_already_spent": 2412179,
+  "combined_production_request_cap": 4000,
+  "combined_production_byte_cap": 268435456,
+  "pagination": "Require server date sort with stable _id tie breaker. Ascending complete pass, reverse only if needed; exact unique total required. Preserve earlier failed sort-echo check and all budgets.",
+  "reused_months": "January/February 2006 already exact unique coverage; immutable prior raw pages and query preserved",
+  "old_crawl_budget_sha256": "934e9b363554596c6ca8e6a6861a9eacac0ec6e0b06ad648c2786e7ca6cffa19",
+  "sort_authority_script_sha256": "479d1e5b4d90935477b5f80b50d59ed6b779d98ee7c6707e18ba1e3e7abe3353",
+  "observed_server_sort": [
+    {
+      "file_date": {
+        "order": "asc"
+      }
+    },
+    {
+      "_id": {
+        "order": "asc"
+      }
+    }
+  ],
+  "sorted_diagnostic_requests_already_spent": 1,
+  "sorted_probe_reused_from_immutable_cache": true
+}

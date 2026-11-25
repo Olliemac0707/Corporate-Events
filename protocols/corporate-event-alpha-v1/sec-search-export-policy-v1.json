@@ -1,0 +1,21 @@
+{
+  "version": "sec-search-export-v1",
+  "route_proof": "Cached official search page and edgar_full_text_search.js verify the production efts.sec.gov endpoint, GET method and export mode.",
+  "method": "GET",
+  "params": "Exactly registered repurchase query, 8-K/8-K/A, one calendar year 2006-2015, from=0,size=10000,narrow=export",
+  "official_export_cap": 10000,
+  "require_exact_total_and_all_returned_hits": true,
+  "bootstrap_plus_exports_request_cap": 12,
+  "bootstrap_requests_already_spent": 2,
+  "additional_export_request_cap": 10,
+  "separate_export_byte_cap": 134217728,
+  "per_export_response_cap": 16777216,
+  "old_diagnostic_budget_reset": false,
+  "scope": "Metadata-only; highlights/snippets never used for selection; no complete submissions or exhibits downloaded",
+  "file_date_is_public_time": false,
+  "search_CIKs_are_issuer_identity": false,
+  "market_data_allowed": false,
+  "full_extraction_authorized": false,
+  "phase3_authorized": false,
+  "on_truncation": "Stop; do not claim a globally ranked candidate pool or ready manifest"
+}

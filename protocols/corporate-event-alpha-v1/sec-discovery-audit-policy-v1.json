@@ -1,0 +1,21 @@
+{
+  "version": "sec-discovery-audit-v1",
+  "mode": "OFFLINE_ONLY",
+  "require_all_120_months": true,
+  "require_raw_cache_sha256_verification": true,
+  "require_exact_query_boolean_semantics": true,
+  "require_replayed_unique_hits_equal_exact_total": true,
+  "require_replayed_metadata_equal_month_records": true,
+  "require_100_unique_accessions_with_8_candidates_and_2_controls_per_year": true,
+  "require_offline_historical_index_selection_reproduction": true,
+  "require_all_predecessor_code_registry_hashes": true,
+  "require_bounded_manifest_binding": true,
+  "original_frozen_sample_changes": 0,
+  "query_hits_are_certified_events": false,
+  "controls_are_assumed_negative": false,
+  "filing_bodies_allowed": false,
+  "market_data_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false
+}
