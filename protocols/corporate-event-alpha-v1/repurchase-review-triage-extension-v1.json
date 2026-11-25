@@ -1,0 +1,9 @@
+{
+  "version": "repurchase-review-triage-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_review_triage.py": "f417d9b36bce8c7cfe6f56b28c2e849eeb99b6759dc90d43694a65993edbdeb9",
+    "tests/test_repurchase_review_triage.py": "ce9cb1ab2224d56d9cabe091d06299ec811b0bc607912822713dd138428ff9a5",
+    "protocols/corporate-event-alpha-v1/repurchase-review-triage-policy-v1.json": "1b073a58d57efbda4a11966fef29fe1977aac607306df6e942469c6d7ac75ef4",
+    "protocols/corporate-event-alpha-v1/repurchase-review-prioritisation-amendment-v1.json": "8d5d6d368dcbb0fabf9c200629028746fd198010bcb74b3e2d3d031698f22137"
+  }
+}

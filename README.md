@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-25:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 947 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 974 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 short questions completed; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -86,6 +86,18 @@ Five current releases have cited common-share and open-market scope. One current
 The [aggregate context checkpoint](protocols/corporate-event-alpha-v1/repurchase-context-checkpoint-v1.json) binds the output and software checks. The private actions.html view includes all 14 records and 40 cited evidence spans. Approval, announcement, effective and filing dates remain distinct, including partial dates. Amounts are retained as stated; no implied aggregate capacity or currency code is invented. Source claims and original container bytes passed replay checks.
 
 Independent factual QA, first-public dissemination timing and historical security eligibility remain open. Research-qualifying events remain zero. The original 718-record frame is unchanged, no new filings or market data were requested, and all 17 outcome-firewall counters remain zero. The active local entrypoint is repurchase_context_resolution.py; it requires the registered private proposals and original cache. Earlier ledgers are preserved.
+
+## Risk-based review triage
+
+An offline interpretation-risk score now prioritises review across all 100 bounded filings, 745 ledger passages and 14 action records. Warning reasons include parser/context disagreement, confusing contract execution with authorization, equal capacities belonging to distinct actions, grouped passages and competing date roles. Scores are 0–100 risk points, not measured error probabilities. The registered development threshold is 35; repeated passages do not inflate a filing's score.
+
+Seven filings cross the threshold. The frozen first review wave contains ten filing packets: six priority cases, two randomly selected lower-risk discovery hits and two randomly selected fixed controls. One priority filing remains in the backlog. Grouping related passages by filing reduces repeated reading. Lower-risk and control audits check for errors the rules may miss; this targeted batch does not estimate population accuracy.
+
+The [aggregate triage checkpoint](protocols/corporate-event-alpha-v1/repurchase-review-triage-checkpoint-v1.json) records counts, source replay and software checks. The [review-routing amendment](protocols/corporate-event-alpha-v1/repurchase-review-prioritisation-amendment-v1.json) changes the initial diagnostic workload without waiving acceptance requirements. The [frozen scoring policy](protocols/corporate-event-alpha-v1/repurchase-review-triage-policy-v1.json) records weights, threshold, sampling seed and limitations. The active local entrypoint is repurchase_review_triage.py with build and validate commands; private registered inputs are required.
+
+Private source-only-review.html packets contain source excerpts and working local links to complete context, with scores and proposed labels withheld. The separate operator-queue.html shows selection reasons. All ten selected original containers, their 29 components and 18 excerpt offsets passed replay. Independent decisions remain zero. Missing source evidence stays a separate follow-up task, and low scores do not automatically accept cases. Calibration and an acceptance design still require independent labels and evaluation separate from development. This stage made zero acquisition requests and all 17 outcome-firewall counters remain zero.
+
+The design draws on [selective classification](https://www.jmlr.org/papers/v24/21-0048.html), [sample-efficient evaluation](https://proceedings.mlr.press/v139/kossen21a.html) and [probability calibration](https://proceedings.mlr.press/v70/guo17a.html). These motivate the review design; the handcrafted score has no demonstrated statistical guarantee.
 
 ## Route to first empirical results
 

@@ -1,0 +1,57 @@
+{
+  "version": "repurchase-review-triage-v1",
+  "authorization": "USER_AUTHORIZED_RISK_BASED_INITIAL_REVIEW_2026_11_25",
+  "scope": "Frozen 14 action records, all 745 ledger passages and the fixed 100-source frame; offline prioritisation only",
+  "source_context_manifest_sha256": "165f5d64120c00f53964626b5a95ae225e4c7e4f42e1705f3cf4ed77d2d7ae4b",
+  "source_ledger_manifest_sha256": "e16e3c77d10d87a1c6978d1e188bc624d489b30477b22acde68e1bbc09413c18",
+  "score_kind": "UNCALIBRATED_ORDINAL_INTERPRETATION_RISK_POINTS_NOT_CORRECTNESS_PROBABILITY",
+  "development_exposure": "Existing cases and error patterns were seen during development; this is not held-out validation",
+  "priority_threshold": 35,
+  "weights": {
+    "PARSER_CONTEXT_SUBTYPE_DISAGREEMENT": 45,
+    "CONTRACT_EXECUTION_VERSUS_AUTHORIZATION": 45,
+    "EQUAL_CAPACITY_DISTINCT_ACTION_IDENTITY": 35,
+    "MULTIPLE_PASSAGES_GROUPED": 10,
+    "MULTIPLE_DATED_FACTS_IN_ACTION_PASSAGE": 25,
+    "UNRESOLVED_OPERATIVE_COMMON_SHARE_APPROVAL": 45
+  },
+  "aggregation": "Maximum within correlated dimensions, sum across dimensions capped at 100; filing priority is the maximum, not a sum of repeated passages",
+  "shared_blockers": "Independent QA, first-public timing and security eligibility remain separate global gates; missing evidence is not treated as an erroneous interpretation",
+  "hard_integrity_failures": "Stop on source/hash/policy identity failures; do not convert corruption into a low-confidence score",
+  "first_wave_priority_filing_cap": 6,
+  "first_wave_lower_risk_audit_cap": 2,
+  "first_wave_control_audit_cap": 2,
+  "maximum_first_wave_filing_packets": 10,
+  "audit_seed": "2db1b049eee3031e5be01cd4d2aa8a945cd132cf54cb34406bd71241b6a42b1d",
+  "audit_sampling": "Recorded random seed with independent hash ranks; without replacement within below-threshold discovery-hit and fixed-control strata",
+  "priority_backlog": "Flagged but unselected filings stay withheld in backlog; no automatic acceptance",
+  "review_blinding": "Separate source-only packets with no proposed labels, scores or sampling strata; operator queue retained separately",
+  "reviewer": null,
+  "independent_labels": 0,
+  "calibration_status": "NOT_EVALUATED_NO_INDEPENDENT_LABELS",
+  "calibration_requirements": "Freeze scoring before independent labels; keep calibration/development feedback separate from untouched evaluation; evaluate audited lower-risk cases and controls as well as priority cases",
+  "accuracy_estimation": "No accuracy, selective-risk, precision, recall or calibration guarantee from this initial batch; targeted selection is not a population accuracy estimate",
+  "automatic_acceptance": false,
+  "original_718_sample_changes": 0,
+  "original_acceptance_gate_waived": false,
+  "network_allowed": false,
+  "market_data_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false,
+  "method_references": [
+    {
+      "title": "Optimal Strategies for Reject Option Classifiers",
+      "url": "https://www.jmlr.org/papers/v24/21-0048.html"
+    },
+    {
+      "title": "Active Testing: Sample-Efficient Model Evaluation",
+      "url": "https://proceedings.mlr.press/v139/kossen21a.html"
+    },
+    {
+      "title": "On Calibration of Modern Neural Networks",
+      "url": "https://proceedings.mlr.press/v70/guo17a.html"
+    }
+  ],
+  "reference_scope": "Conceptual motivation for selective review and calibration; no claim that the handcrafted score inherits theoretical guarantees"
+}
