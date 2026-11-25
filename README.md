@@ -29,7 +29,7 @@ GitHub Actions runs the checks on Windows/Python 3.12. Tests use synthetic input
 
 ## Research status
 
-Latest local development checkpoint, 2026-11-24:
+Latest local development checkpoint, 2026-11-25:
 
 | Milestone | Status |
 | --- | --- |
@@ -39,13 +39,23 @@ Latest local development checkpoint, 2026-11-24:
 | Current parser | event-parsers-development-v4.1 |
 | Provisional event mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 588 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 775 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 short questions completed; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
 | Full extraction / final QA / market-data phases | Closed pending registered requirements and authorization |
 
 These counts describe private development artifacts. A fresh clone reproduces the software checks and synthetic demo, not corpus counts. A software test pass does not establish predictive value.
+
+## Bounded repurchase discovery
+
+The metadata-only adapter completed all 120 monthly partitions for 2006-2015 and replayed 1,889 immutable raw response pages. The query returned 182,703 document hits; these are not certified events.
+
+The private first-wave manifest fixes 100 unique complete-submission accessions: eight candidate hits and two independently selected source controls per year. Every selected source is reconciled against the historical SEC master index. Controls are not assumed negative. **No new filing bodies have been downloaded.** The original 718-record QA frame and all research gates remain unchanged.
+
+See the [aggregate discovery checkpoint](protocols/corporate-event-alpha-v1/repurchase-discovery-checkpoint-v1.json) for annual counts, budgets and the source-manifest fingerprint. Raw responses, the accession manifest, request logs and the contact value remain local.
+
+The active local entrypoint is sec_repurchase_discovery_v4.py, followed by the offline sec_discovery_audit_v2.py replay. These require the registered private index cache and original manifests. Earlier adapter versions are retained to reproduce recorded diagnostics; use the active entrypoint without restarting or resetting budgets. The adapter uses an observed backend route from the official SEC search site; this is not a claim of a stable, documented public API contract.
 
 ## Route to first empirical results
 

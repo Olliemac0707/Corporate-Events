@@ -1,0 +1,167 @@
+{
+  "version": "repurchase-discovery-checkpoint-v1",
+  "date": "2026-11-25",
+  "status": "RAW_METADATA_REPLAY_AND_SOURCE_SELECTION_PASSED",
+  "implementation_commit": "657fc18dc296a2c5ddda4d90672a00b2fe83c147",
+  "source_manifest_sha256": "4a92feb81b8701950a662b419c4fb359fa2da780469e28a70055459076bb078b",
+  "metadata_months": 120,
+  "search_document_hits": 182703,
+  "raw_metadata_pages_replayed": 1889,
+  "counts_by_year": {
+    "2006": {
+      "historical_8K_paths": 111206,
+      "index_reconciled_candidate_accessions": 15168,
+      "search_document_hits": 22222,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2007": {
+      "historical_8K_paths": 105680,
+      "index_reconciled_candidate_accessions": 15253,
+      "search_document_hits": 22855,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2008": {
+      "historical_8K_paths": 94330,
+      "index_reconciled_candidate_accessions": 13085,
+      "search_document_hits": 18004,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2009": {
+      "historical_8K_paths": 84951,
+      "index_reconciled_candidate_accessions": 11530,
+      "search_document_hits": 15653,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2010": {
+      "historical_8K_paths": 83229,
+      "index_reconciled_candidate_accessions": 11482,
+      "search_document_hits": 15428,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2011": {
+      "historical_8K_paths": 82689,
+      "index_reconciled_candidate_accessions": 12242,
+      "search_document_hits": 17095,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2012": {
+      "historical_8K_paths": 80124,
+      "index_reconciled_candidate_accessions": 12478,
+      "search_document_hits": 17474,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2013": {
+      "historical_8K_paths": 79173,
+      "index_reconciled_candidate_accessions": 12596,
+      "search_document_hits": 17698,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2014": {
+      "historical_8K_paths": 79543,
+      "index_reconciled_candidate_accessions": 12836,
+      "search_document_hits": 17878,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    },
+    "2015": {
+      "historical_8K_paths": 78687,
+      "index_reconciled_candidate_accessions": 13148,
+      "search_document_hits": 18396,
+      "selected_candidates": 8,
+      "selected_controls": 2
+    }
+  },
+  "selected_candidate_hits": 80,
+  "selected_independent_source_controls": 20,
+  "selected_unique_accessions": 100,
+  "selected_forms": {
+    "8-K": 95,
+    "8-K/A": 5
+  },
+  "search_accessions_not_index_reconciled": 0,
+  "production_requests": 1949,
+  "production_request_cap": 4000,
+  "production_received_bytes": 123866184,
+  "production_byte_cap": 268435456,
+  "diagnostic_requests": 5,
+  "diagnostic_request_cap": 12,
+  "all_recorded_http_status_counts": {
+    "200": 1896,
+    "500": 58
+  },
+  "attempts_without_http_response": 0,
+  "old_budgets_reset": false,
+  "private_sec_contact": "VALID_VALUE_NOT_PUBLISHED",
+  "new_filing_bodies_downloaded": 0,
+  "query_hits_are_certified_events": false,
+  "controls_are_assumed_negative": false,
+  "original_718_sample_changes": 0,
+  "independent_factual_qa_passed": false,
+  "body_acquisition_authorized_by_this_checkpoint": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false,
+  "firewall_counters": {
+    "BHAR": 0,
+    "CAR": 0,
+    "CCM_queries": 0,
+    "CRSP_observation_queries": 0,
+    "Compustat_financial_observation_queries": 0,
+    "Monte_Carlo": 0,
+    "abnormal_returns": 0,
+    "backtests": 0,
+    "bootstrap": 0,
+    "event_price_joins": 0,
+    "event_returns": 0,
+    "market_provider_queries": 0,
+    "optimizations": 0,
+    "portfolio_simulations": 0,
+    "prospective_accesses": 0,
+    "regressions": 0,
+    "stock_returns": 0
+  },
+  "selected_sources_by_year_and_form": {
+    "2006": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2007": {
+      "8-K": 10
+    },
+    "2008": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2009": {
+      "8-K": 10
+    },
+    "2010": {
+      "8-K": 10
+    },
+    "2011": {
+      "8-K": 10
+    },
+    "2012": {
+      "8-K": 10
+    },
+    "2013": {
+      "8-K": 9,
+      "8-K/A": 1
+    },
+    "2014": {
+      "8-K": 10
+    },
+    "2015": {
+      "8-K": 8,
+      "8-K/A": 2
+    }
+  }
+}
