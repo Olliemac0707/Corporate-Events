@@ -16,4 +16,4 @@ corporate_events/sec_search_metadata_client*.py -text
 corporate_events/sec_search_bootstrap.py -text
 corporate_events/sec_search_export.py -text
 corporate_events/sec_repurchase_discovery*.py -text
-corporate_events/sec_discovery_audit.py -text
+corporate_events/sec_discovery_audit*.py -text

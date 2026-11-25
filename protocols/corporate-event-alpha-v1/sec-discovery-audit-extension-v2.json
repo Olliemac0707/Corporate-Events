@@ -1,0 +1,8 @@
+{
+  "version": "sec-discovery-audit-extension-v2",
+  "files": {
+    "tools/corporate_events/sec_discovery_audit_v2.py": "2e673355822a6b40565fe5cc8e75fd0607f144fbff19b8f0fb9a6f650f5b718b",
+    "tests/test_sec_discovery_audit_v2.py": "ebc16c93992b05e76493e3ef861825e94970f0225164a00bc833443df18fc4a0",
+    "protocols/corporate-event-alpha-v1/sec-discovery-audit-policy-v2.json": "febfcfc88d64912ae17f894ceb72070f472ab0f32cdd42840b610f0b7272a66b"
+  }
+}
