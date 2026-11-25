@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-25:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 927 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 947 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 short questions completed; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -76,6 +76,16 @@ All 599 source components are accounted for: 272 were processed as visible text,
 The [aggregate ledger checkpoint](protocols/corporate-event-alpha-v1/bounded-repurchase-ledger-checkpoint-v1.json) contains counts, evidence fingerprints, remaining requirements and software checks. The private local ledger.html provides source quotes and links to complete extracted component text. It includes predictions and is not a blinded review packet. The active local entrypoint is bounded_repurchase_ledger_v3.py with build and validate commands; it requires the original private cache and preserved earlier snapshots.
 
 No event is yet certified for research use. Economic-action identity, duplicate resolution, issuer/security eligibility, programme scope, public timing and independent factual QA remain open. The original 718-record frame is unchanged. This ledger stage used zero network requests and left all 17 outcome-firewall counters at zero. No returns, regressions or backtests have been run.
+
+## Repurchase action context
+
+The 22 shortlisted passages are now linked to 12 development action groups using the filing/exhibit relationships and programme references. Two distinct older actions found in the related context are retained separately, giving 14 source-context action records across the same 11 filings. Equal amounts do not merge different programmes, and an original authorization stays separate from a later increase.
+
+Five current releases have cited common-share and open-market scope. One current increase has unresolved open-market permission. Seven older action references retain unresolved original-disclosure evidence, and one accelerated-repurchase execution/derivative-contract case is outside the initial authorization scope. These are development source-context findings, not independently certified research events or an exhaustive result for all 745 source passages.
+
+The [aggregate context checkpoint](protocols/corporate-event-alpha-v1/repurchase-context-checkpoint-v1.json) binds the output and software checks. The private actions.html view includes all 14 records and 40 cited evidence spans. Approval, announcement, effective and filing dates remain distinct, including partial dates. Amounts are retained as stated; no implied aggregate capacity or currency code is invented. Source claims and original container bytes passed replay checks.
+
+Independent factual QA, first-public dissemination timing and historical security eligibility remain open. Research-qualifying events remain zero. The original 718-record frame is unchanged, no new filings or market data were requested, and all 17 outcome-firewall counters remain zero. The active local entrypoint is repurchase_context_resolution.py; it requires the registered private proposals and original cache. Earlier ledgers are preserved.
 
 ## Route to first empirical results
 

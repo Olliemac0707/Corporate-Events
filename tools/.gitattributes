@@ -19,3 +19,4 @@ corporate_events/sec_repurchase_discovery*.py -text
 corporate_events/sec_discovery_audit*.py -text
 corporate_events/repurchase_acquisition*.py -text
 corporate_events/bounded_repurchase*.py -text
+corporate_events/repurchase_context_resolution.py -text

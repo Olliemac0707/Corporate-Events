@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-context-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_context_resolution.py": "5c815f8d96f87418fa772db3d7c243cd44ced35c9fb594d7215965a6847b2c01",
+    "tests/test_repurchase_context_resolution.py": "d433f8688d2aa3bb76d5096ecbe04deb15c6b6637d6ecc2eff8db1755267ddee",
+    "protocols/corporate-event-alpha-v1/repurchase-context-policy-v1.json": "8cbba7f17c3df2c0cb8c091a1e8a686599155ff3bae5297d41bd0d40f0cacb81"
+  }
+}
