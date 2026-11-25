@@ -1,6 +1,6 @@
 # Batch 002 dividend-source review rubric
 
-Version: batch-002-dividend-review-rubric-v1. Applies only to frozen controls 26–50 (batch-002), assessed before batch scoring. Existing ai-confidence-review-policy-v1 and its cutoff of 90 remain unchanged.
+Version: batch-002-dividend-review-rubric-v1. Applies only to frozen controls 26–50 (batch-002), assessed before batch scoring. Existing development-confidence-review-policy-v2 and its cutoff of 90 remain unchanged.
 
 These are component-level documentary judgments. A certification, contract payment, option-valuation dividend assumption, taxonomy label, script or stylesheet is not automatically a shareholder dividend declaration. Filing form alone does not exclude a dividend action in a periodic report or amendment; read the supplied component.
 

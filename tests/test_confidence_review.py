@@ -1,4 +1,4 @@
-"""Synthetic regressions for confidence-based AI development review routing."""
+"""Synthetic regressions for confidence-based AUTOMATED development review routing."""
 
 from __future__ import annotations
 
@@ -34,8 +34,8 @@ def fixture() -> tuple[dict[str, Any], dict[str, Any], bytes, dict[str, Any]]:
     }
     item = {
         "sample_record_id": "case1",
-        "reviewer_kind": "AI",
-        "reviewer_id": policy["ai_reviewer_id"],
+        "reviewer_kind": "AUTOMATED",
+        "reviewer_id": policy["automated_reviewer_id"],
         "model_id": None,
         "finding": "Synthetic assessment fixture",
         "classification_state": "NEW_AUTHORIZATION",
@@ -55,7 +55,7 @@ def fixture() -> tuple[dict[str, Any], dict[str, Any], bytes, dict[str, Any]]:
 
 
 @pytest.mark.parametrize(
-    "score,route", [(89, "MANUAL_REVIEW_REQUIRED"), (90, "AI_REVIEWED_DEVELOPMENT")]
+    "score,route", [(89, "MANUAL_REVIEW_REQUIRED"), (90, "AUTOMATED_REVIEWED_DEVELOPMENT")]
 )
 def test_threshold_boundary(score: int, route: str) -> None:
     policy, case, source, item = fixture()
@@ -159,7 +159,7 @@ def synthetic_store(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     policy, case, source, item = fixture()
-    monkeypatch.setattr(m, "OUTPUT", tmp_path / "ai-review")
+    monkeypatch.setattr(m, "OUTPUT", tmp_path / "automated-review")
     monkeypatch.setattr(m, "RUN", tmp_path / "original-run")
     frame = {
         "sample_sha256": m.admin.EXPECTED_SHA,
@@ -168,7 +168,7 @@ def synthetic_store(
         "records": [case],
     }
     m.exclusive(m.OUTPUT / "frame.json", frame)
-    m.workflow.sec.write_new(m.OUTPUT / "ai-assessments.jsonl", b"")
+    m.workflow.sec.write_new(m.OUTPUT / "automated-assessments.jsonl", b"")
     m.workflow.sec.write_new(m.RUN / "documents" / (m.digest(source) + ".txt"), source)
     m.exclusive(
         m.RUN / "run-manifest.json",
@@ -178,20 +178,20 @@ def synthetic_store(
     return frame, {"code_commit": "synthetic", "confidence_code_hashes": {}}, item
 
 
-def test_recording_is_idempotent_and_never_counts_ai_as_human(
+def test_recording_is_idempotent_and_never_counts_automated_as_human(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     frame, proof, _ = synthetic_store(tmp_path, monkeypatch)
     m.record("synthetic.json", frame, proof)
-    before = (m.OUTPUT / "ai-assessments.jsonl").read_bytes()
+    before = (m.OUTPUT / "automated-assessments.jsonl").read_bytes()
     assert (
         m.record("synthetic.json", frame, proof)["status"]
-        == "IDENTICAL_AI_ASSESSMENT_ALREADY_RECORDED"
+        == "IDENTICAL_AUTOMATED_ASSESSMENT_ALREADY_RECORDED"
     )
-    assert (m.OUTPUT / "ai-assessments.jsonl").read_bytes() == before
+    assert (m.OUTPUT / "automated-assessments.jsonl").read_bytes() == before
     result = m.status(frame)
-    assert result["ai_assessed"] == 1 and result["human_review_records"] == 0
+    assert result["automated_assessed"] == 1 and result["human_review_records"] == 0
     assert result["human_accuracy"] == "NOT_MEASURED"
     assert not result["full_extraction_authorized"]
 
@@ -202,11 +202,11 @@ def test_unassessed_cases_are_pending_without_invented_confidence(
 ) -> None:
     frame, _, _ = synthetic_store(tmp_path, monkeypatch)
     result = m.status(frame)
-    assert result["ai_review_pending"] == 1 and result["ai_assessed"] == 0
+    assert result["automated_review_pending"] == 1 and result["automated_assessed"] == 0
     assert result["manual_review_records"] == result["above_threshold_clear"] == 0
 
 
-def test_candidate_assessment_requires_prior_ai_control_assessments(
+def test_candidate_assessment_requires_prior_automated_control_assessments(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -217,7 +217,7 @@ def test_candidate_assessment_requires_prior_ai_control_assessments(
     m.exclusive(m.OUTPUT / "inbox/candidate.json", item)
     with pytest.raises(ValueError, match="CONTROL_FIRST"):
         m.record("candidate.json", frame, proof)
-    assert (m.OUTPUT / "ai-assessments.jsonl").read_bytes() == b""
+    assert (m.OUTPUT / "automated-assessments.jsonl").read_bytes() == b""
 
 
 def test_supersession_preserves_prior_assessment(
@@ -226,20 +226,20 @@ def test_supersession_preserves_prior_assessment(
 ) -> None:
     frame, proof, item = synthetic_store(tmp_path, monkeypatch)
     first = m.record("synthetic.json", frame, proof)
-    before = (m.OUTPUT / "ai-assessments.jsonl").read_bytes()
+    before = (m.OUTPUT / "automated-assessments.jsonl").read_bytes()
     item["confidence"]["classification"] = 75
     item["supersedes_assessment_id"] = first["assessment_id"]
     m.exclusive(m.OUTPUT / "inbox/correction.json", item)
     m.record("correction.json", frame, proof)
-    assert (m.OUTPUT / "ai-assessments.jsonl").read_bytes().startswith(before)
+    assert (m.OUTPUT / "automated-assessments.jsonl").read_bytes().startswith(before)
     result = m.status(frame)
-    assert result["ai_assessed"] == 1 and result["manual_review_records"] == 1
+    assert result["automated_assessed"] == 1 and result["manual_review_records"] == 1
 
 
 def test_journal_tampering_is_rejected(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     frame, proof, _ = synthetic_store(tmp_path, monkeypatch)
     m.record("synthetic.json", frame, proof)
-    path = m.OUTPUT / "ai-assessments.jsonl"
+    path = m.OUTPUT / "automated-assessments.jsonl"
     item = json.loads(path.read_bytes())
     item["routing"]["overall_score"] = 100
     path.write_bytes(m.canonical(item))
@@ -282,4 +282,4 @@ def test_pending_controls_follow_the_fixed_review_order(
     m.exclusive(m.OUTPUT / "inbox/second.json", item)
     with pytest.raises(ValueError, match="FROZEN_REVIEW_ORDER"):
         m.record("second.json", frame, proof)
-    assert (m.OUTPUT / "ai-assessments.jsonl").read_bytes() == b""
+    assert (m.OUTPUT / "automated-assessments.jsonl").read_bytes() == b""

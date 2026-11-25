@@ -1,6 +1,6 @@
 # Batch 001 evidence-based confidence rubric
 
-Version: batch-001-confidence-rubric-v1. Routing policy remains ai-confidence-review-policy-v1, cutoff 90. This rubric was written after the 25 source findings were saved, before assigning the batch scores. It refines score anchors without changing the frozen event definition or threshold.
+Version: batch-001-confidence-rubric-v1. Routing policy remains development-confidence-review-policy-v2, cutoff 90. This rubric was written after the 25 source findings were saved, before assigning the batch scores. It refines score anchors without changing the frozen event definition or threshold.
 
 Scope: the first 25 frozen source-control records, all ACTIVIST_13D. These are component-level judgments; four supporting components represent two disclosure bundles, not four independent events. No evidence for the other four event families is supplied by this batch.
 
@@ -31,6 +31,6 @@ Hard overrides: unresolved material facts, conflicting decisive evidence, missin
 
 ## Audit and refinement
 
-All judgments are explicitly AI assessments in a separate append-only journal. One earlier provisional assessment is superseded with its history retained. Human decisions remain separately identified. No human accuracy, precision, recall or probability calibration is claimed. The 90 cutoff is operational and was not fitted to these 25 outcomes. Validate a later rubric against genuinely independent human labels and audit high-score cases before claiming measured reliability. Preserve the policy version and prior records when changing the threshold.
+All judgments are explicitly AUTOMATED assessments in a separate append-only journal. One earlier provisional assessment is superseded with its history retained. Human decisions remain separately identified. No human accuracy, precision, recall or probability calibration is claimed. The 90 cutoff is operational and was not fitted to these 25 outcomes. Validate a later rubric against genuinely independent human labels and audit high-score cases before claiming measured reliability. Preserve the policy version and prior records when changing the threshold.
 
 The assessed batch has 24 fully reviewed components and one targeted long-contract review. Remaining development records stay pending. These findings do not open final QA, full extraction or outcome research.

@@ -1,9 +1,9 @@
 {
-  "version": "ai-confidence-review-policy-v1",
-  "scope": "AI_ASSISTED_DEVELOPMENT_REVIEW_AND_MANUAL_EXCEPTION_ROUTING",
+  "version": "development-confidence-review-policy-v2",
+  "scope": "AUTOMATED_DEVELOPMENT_REVIEW_AND_MANUAL_EXCEPTION_ROUTING",
   "authorization": {
-    "source": "User approved replacing the Phase 2C manual-only development pass with AI-assisted review, then requested confidence-based manual routing.",
-    "ai_review_authorized": true,
+    "source": "User approved replacing the Phase 2C manual-only development pass with automated review, then requested confidence-based manual routing.",
+    "automated_review_authorized": true,
     "mandatory_human_review_of_every_development_record_replaced": true,
     "parser_changes_authorized": false
   },
@@ -11,7 +11,7 @@
   "sample_records": 718,
   "sample_cells": 297,
   "parse_run": "development-parse-v2",
-  "ai_reviewer_id": "CODEX_AI_DEVELOPMENT_V1",
+  "automated_reviewer_id": "AUTOMATED_DEVELOPMENT_V2",
   "human_reviewer_configuration": "Existing private human-review-v1/reviewer-config.json",
   "routing": {
     "manual_below": 90,
@@ -20,11 +20,11 @@
     "calibration": "UNCALIBRATED_OPERATIONAL_SCORE",
     "score_probability_interpretation": "Empirical probability calibration requires human-labelled observations.",
     "threshold_change": "Create a new policy version and preserve earlier routing records.",
-    "unassessed_status": "AI_REVIEW_PENDING",
+    "unassessed_status": "AUTOMATED_REVIEW_PENDING",
     "critical_issues": "Route to manual review regardless of numeric scores.",
-    "above_threshold_route": "AI_REVIEWED_DEVELOPMENT",
+    "above_threshold_route": "AUTOMATED_REVIEWED_DEVELOPMENT",
     "optional_high_score_spot_checks": 10,
-    "spot_check_rule": "Lowest SHA256 of policy hash plus fixed sample record ID among above-threshold cases, selected after the AI pass; suggested audit queue.",
+    "spot_check_rule": "Lowest SHA256 of policy hash plus fixed sample record ID among above-threshold cases, selected after the AUTOMATED pass; suggested audit queue.",
     "manual_queue_order": "Frozen controls-first batch order",
     "duplicate_sources": "Group source links for usability and retain every selected record."
   },
@@ -98,7 +98,7 @@
   "coverage_policy": "FULL_SOURCE_REVIEWED requires actual review of the entire supplied component. Partial review routes to manual verification.",
   "evidence_policy": "At least one nonempty original-byte span, with exact byte offsets and SHA256, must support the finding. Whole-source citations are permitted for an expressly justified full-source negative finding.",
   "source_controls_first": true,
-  "candidate_access": "All 627 AI source-control assessments must be appended before candidate assessment recording.",
+  "candidate_access": "All 627 AUTOMATED source-control assessments must be appended before candidate assessment recording.",
   "human_verification_mode": "Assisted verification of flagged findings with source evidence; report any independent blinded validation separately.",
   "timing": {
     "status": "TIMESTAMP_UNRESOLVED",
@@ -106,9 +106,9 @@
     "routing_effect": "Track separately from document-fact confidence. Public-time authority remains a phase gate.",
     "inference_from_acceptance_or_filing_date": false
   },
-  "provenance": "Append-only AI journal with AI identity, source/citation hashes, rubric, policy/code identity and supersession. Human decisions use the registered human recording mechanism.",
+  "provenance": "Append-only AUTOMATED journal with AUTOMATED identity, source/citation hashes, rubric, policy/code identity and supersession. Human decisions use the registered human recording mechanism.",
   "manual_decisions_supplied_by_human": true,
-  "metrics": "Report AI coverage and routing counts. Human accuracy, precision, recall and calibration require actual supporting labels.",
+  "metrics": "Report AUTOMATED coverage and routing counts. Human accuracy, precision, recall and calibration require actual supporting labels.",
   "full_extraction_authorized": false,
   "final_qa_authorized": false,
   "phase3_authorized": false,
@@ -125,5 +125,5 @@
     "DISCRETION_UNRESOLVED",
     "SECURITY_CLASS_UNRESOLVED"
   ],
-  "ai_review_order": "Use the existing frozen controls-first batch sequence. Append an assessment for each pending record before advancing; supersessions preserve earlier versions."
+  "automated_review_order": "Use the existing frozen controls-first batch sequence. Append an assessment for each pending record before advancing; supersessions preserve earlier versions."
 }

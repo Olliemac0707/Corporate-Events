@@ -1,0 +1,11 @@
+{
+  "version": "development-confidence-review-extension-v2",
+  "scope": "AUTOMATED_DEVELOPMENT_CONFIDENCE_ROUTING",
+  "sample_sha256": "5da0f6c6061ebea6ac08e57e598e670636d634dd7b1dc158767fba135be073ae",
+  "full_extraction_authorized": false,
+  "files": {
+    "tools/corporate_events/confidence_review.py": "38d61ed11fd50841b200512ca615946452839895630c59e334b953e22d31c386",
+    "tests/test_confidence_review.py": "eeab3ce4e8de07a5c7d2528abdda180abf7f826352c1e75cc141366c7bebe286",
+    "protocols/corporate-event-alpha-v1/development-confidence-review-policy-v2.json": "1237cbda77e679befff7b7722f704e857eb2f16246b7f9843dd484c0fed857ff"
+  }
+}

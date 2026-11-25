@@ -1,6 +1,6 @@
 # Corporate Event Alpha: parser development v2
 
-The user authorized a separate parser-improvement phase after the initial 718-record AI disposition pass. This development branch preserves the Phase-1D protocol, original parser extension, frozen sample, original packets, confidence history and all three human excerpt decisions.
+The user authorized a separate parser-improvement phase after the initial 718-record AUTOMATED disposition pass. This development branch preserves the Phase-1D protocol, original parser extension, frozen sample, original packets, confidence history and all three human excerpt decisions.
 
 This version adds two modules and their tests. It runs offline on the same frozen 718 records in 297 cells. It never redraws a sample, replaces difficult sources, acquires filings, queries market data, or calculates outcomes. The registered v1 parser remains available unchanged.
 

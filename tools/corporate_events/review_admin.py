@@ -196,14 +196,14 @@ def batches(qa: dict[str, Any]) -> list[dict[str, Any]]:
 
 def valid_reviewer(value: str) -> bool:
     return bool(re.fullmatch(r"[A-Za-z][A-Za-z0-9_.-]{2,63}", value)) and value.lower() not in {
-        "ai",
-        "codex",
+        "automated",
+        "service_account",
         "automation",
         "parser",
         "model",
         "system",
         "assistant",
-        "gpt",
+        "bot",
     }
 
 

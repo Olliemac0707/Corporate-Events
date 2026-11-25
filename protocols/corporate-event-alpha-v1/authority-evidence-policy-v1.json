@@ -12,7 +12,7 @@
   "HTTP403_stop_no_evasion": true,
   "frozen_sample_records": 718,
   "frozen_sample_cells": 297,
-  "new_independent_gold_from_AI": false,
+  "new_independent_gold_from_AUTOMATED": false,
   "market_data_allowed": false,
   "full_extraction_authorized": false,
   "final_qa_authorized": false,

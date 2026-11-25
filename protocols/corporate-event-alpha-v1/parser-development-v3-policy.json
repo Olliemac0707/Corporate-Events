@@ -7,7 +7,7 @@
   "sample_cells": 297,
   "baseline_parser": "event-parsers-development-v2.4",
   "candidate_parser": "event-parsers-development-v3.3",
-  "baseline_assessment_journal": "parser-qa-v1/ai-confidence-review-v1/ai-assessments.jsonl",
+  "baseline_assessment_journal": "parser-qa-v1/automated-confidence-review-v2/automated-assessments.jsonl",
   "network_allowed": false,
   "market_data_allowed": false,
   "new_filings_allowed": false,

@@ -88,7 +88,9 @@ def test_batches_stably_partition_original_frame_and_keep_all_records() -> None:
     assert m.batches({"selected": selected}) == result
 
 
-@pytest.mark.parametrize("name", ["AI", "Codex", "system", "automation", "parser", "model", ""])
+@pytest.mark.parametrize(
+    "name", ["AUTOMATED", "service_account", "system", "automation", "parser", "model", ""]
+)
 def test_nonhuman_or_unset_reviewer_is_rejected(name: str) -> None:
     assert not m.valid_reviewer(name)
 

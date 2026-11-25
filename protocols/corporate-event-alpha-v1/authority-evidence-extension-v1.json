@@ -4,6 +4,6 @@
     "tools/corporate_events/sec_authority_client.py": "79ca116ed484ee84f8c6c6891a38e5b3319cad84b1e5cc35b6d4b1fcbc8e7dab",
     "tools/corporate_events/authority_evidence.py": "9a53694dc57e27decfa38c177a81a9b9fe90de8b7c71deadb9cb0dbc5f37e2bf",
     "tests/test_authority_evidence.py": "de65bc83bcc69fef1cf7c5e9048fb8a9f91a717a14891ffb23646cb55e5d162a",
-    "protocols/corporate-event-alpha-v1/authority-evidence-policy-v1.json": "29e02ff09e85434d18529eb49068ccc54d44472267010db84bdeaf53a90f718e"
+    "protocols/corporate-event-alpha-v1/authority-evidence-policy-v1.json": "87091b33eb77beb9a6f2a68118c58f9bf631dd1d1196b36e594c3475c343ea4a"
   }
 }

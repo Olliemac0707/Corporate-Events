@@ -1,4 +1,4 @@
-"""Confidence routing for explicitly identified AI development assessments."""
+"""Confidence routing for explicitly identified AUTOMATED development assessments."""
 
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parents[2]
 PROTOCOL = ROOT / "protocols/corporate-event-alpha-v1"
 PILOT = ROOT / "reports/corporate-event-alpha-v1/phase2-private/parser-qa-v1"
 RUN = PILOT / "runs/development-parse-v2"
-OUTPUT = PILOT / "ai-confidence-review-v1"
-POLICY_FILE = "protocols/corporate-event-alpha-v1/ai-confidence-review-policy-v1.json"
+OUTPUT = PILOT / "automated-confidence-review-v2"
+POLICY_FILE = "protocols/corporate-event-alpha-v1/development-confidence-review-policy-v2.json"
 REGISTERED = (
     "tools/corporate_events/confidence_review.py",
     "tests/test_confidence_review.py",
@@ -65,7 +65,7 @@ def exclusive(path: Path, value: object) -> None:
 def preflight() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     qa = dict(admin.verify_frozen())
     proof = dict(workflow.preflight())
-    extension = read(PROTOCOL / "ai-confidence-review-extension.json")
+    extension = read(PROTOCOL / "development-confidence-review-extension-v2.json")
     require(set(extension["files"]) == set(REGISTERED), "CONFIDENCE_EXTENSION_SCOPE_INVALID")
     for name, expected in extension["files"].items():
         require(workflow.sec.file_sha(ROOT / name) == expected, "CONFIDENCE_CODE_HASH_MISMATCH")
@@ -83,7 +83,7 @@ def preflight() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
         and policy["sample_records"] == 718
         and policy["sample_cells"] == 297
         and policy["parse_run"] == "development-parse-v2"
-        and policy["authorization"]["ai_review_authorized"] is True,
+        and policy["authorization"]["automated_review_authorized"] is True,
         "CONFIDENCE_POLICY_IDENTITY_INVALID",
     )
     require(
@@ -128,8 +128,8 @@ def prepare(qa: dict[str, Any], policy: dict[str, Any], proof: dict[str, Any]) -
     }
     exclusive(OUTPUT / "frame.json", frame)
     (OUTPUT / "inbox").mkdir(exist_ok=True)
-    if not (OUTPUT / "ai-assessments.jsonl").exists():
-        workflow.sec.write_new(OUTPUT / "ai-assessments.jsonl", b"")
+    if not (OUTPUT / "automated-assessments.jsonl").exists():
+        workflow.sec.write_new(OUTPUT / "automated-assessments.jsonl", b"")
     return frame
 
 
@@ -159,13 +159,16 @@ def validate_and_route(
     require(set(item) == expected, "ASSESSMENT_FIELDS_INVALID")
     require(item["sample_record_id"] == case["sample_record_id"], "ASSESSMENT_SAMPLE_ID_INVALID")
     require(
-        item["reviewer_kind"] == "AI" and item["reviewer_id"] == policy["ai_reviewer_id"],
-        "EXPLICIT_AI_IDENTITY_REQUIRED",
+        item["reviewer_kind"] == "AUTOMATED"
+        and item["reviewer_id"] == policy["automated_reviewer_id"],
+        "EXPLICIT_AUTOMATED_IDENTITY_REQUIRED",
     )
     require(item["model_id"] is None or isinstance(item["model_id"], str), "MODEL_ID_INVALID")
     require(digest(source) == case["source_document_sha256"], "ORIGINAL_SOURCE_HASH_MISMATCH")
     for name in ("finding", "rationale"):
-        require(isinstance(item[name], str) and bool(item[name].strip()), "AI_RATIONALE_REQUIRED")
+        require(
+            isinstance(item[name], str) and bool(item[name].strip()), "AUTOMATED_RATIONALE_REQUIRED"
+        )
     state = item["classification_state"]
     require(isinstance(state, str) and state in vocabulary[case["family"]], "FAMILY_STATE_INVALID")
     confidence = item["confidence"]
@@ -244,7 +247,7 @@ def validate_and_route(
     return {
         "overall_score": overall,
         "threshold": policy["routing"]["manual_below"],
-        "route": "MANUAL_REVIEW_REQUIRED" if reasons else "AI_REVIEWED_DEVELOPMENT",
+        "route": "MANUAL_REVIEW_REQUIRED" if reasons else "AUTOMATED_REVIEWED_DEVELOPMENT",
         "manual_reasons": sorted(reasons),
         "classification_confidence": confidence["classification"],
         "evidence_confidence": confidence["evidence"],
@@ -255,7 +258,7 @@ def validate_and_route(
 
 
 def history(frame: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
-    path = OUTPUT / "ai-assessments.jsonl"
+    path = OUTPUT / "automated-assessments.jsonl"
     rows = [json.loads(line) for line in path.read_bytes().splitlines()]
     cases = {row["sample_record_id"]: row for row in frame["records"]}
     latest: dict[str, dict[str, Any]] = {}
@@ -265,30 +268,30 @@ def history(frame: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, dict
         identifier = payload.pop("assessment_id")
         require(
             identifier == digest(canonical(payload)) and row["previous_assessment_id"] == previous,
-            "AI_ASSESSMENT_CHAIN_INVALID",
+            "AUTOMATED_ASSESSMENT_CHAIN_INVALID",
         )
         require(
             row["sample_record_id"] in cases and row["policy_sha256"] == frame["policy_sha256"],
-            "AI_ASSESSMENT_FRAME_INVALID",
+            "AUTOMATED_ASSESSMENT_FRAME_INVALID",
         )
         item = row["assessment"]
         case = cases[row["sample_record_id"]]
         require(
             item["sample_record_id"] == case["sample_record_id"]
-            and item["reviewer_kind"] == "AI"
-            and item["reviewer_id"] == frame["policy"]["ai_reviewer_id"]
+            and item["reviewer_kind"] == "AUTOMATED"
+            and item["reviewer_id"] == frame["policy"]["automated_reviewer_id"]
             and row["source_document_sha256"] == case["source_document_sha256"],
-            "AI_ASSESSMENT_IDENTITY_INVALID",
+            "AUTOMATED_ASSESSMENT_IDENTITY_INVALID",
         )
         require(
             digest((OUTPUT / "inputs" / (row["input_sha256"] + ".json")).read_bytes())
             == row["input_sha256"],
-            "AI_ASSESSMENT_INPUT_CHANGED",
+            "AUTOMATED_ASSESSMENT_INPUT_CHANGED",
         )
         old = latest.get(row["sample_record_id"])
         require(
             item["supersedes_assessment_id"] == (old["assessment_id"] if old else None),
-            "AI_SUPERSESSION_MUST_REFERENCE_LATEST",
+            "AUTOMATED_SUPERSESSION_MUST_REFERENCE_LATEST",
         )
         latest[row["sample_record_id"]] = row
         previous = identifier
@@ -315,7 +318,7 @@ def record(name: str, frame: dict[str, Any], proof: dict[str, Any]) -> dict[str,
                 for row in frame["records"]
                 if row["role"] == "INDEPENDENT_SOURCE_CONTROL"
             ),
-            "AI_CONTROL_FIRST_BARRIER_CLOSED",
+            "AUTOMATED_CONTROL_FIRST_BARRIER_CLOSED",
         )
     if case["sample_record_id"] not in latest:
         first_pending = next(
@@ -323,7 +326,7 @@ def record(name: str, frame: dict[str, Any], proof: dict[str, Any]) -> dict[str,
         )
         require(
             case["sample_record_id"] == first_pending["sample_record_id"],
-            "AI_FROZEN_REVIEW_ORDER_REQUIRED",
+            "AUTOMATED_FROZEN_REVIEW_ORDER_REQUIRED",
         )
     source = (RUN / "documents" / (case["source_document_sha256"] + ".txt")).read_bytes()
     manifest = read(RUN / "run-manifest.json")
@@ -336,10 +339,10 @@ def record(name: str, frame: dict[str, Any], proof: dict[str, Any]) -> dict[str,
     input_sha = digest(canonical(item))
     old = latest.get(case["sample_record_id"])
     if old and old["input_sha256"] == input_sha:
-        return {"status": "IDENTICAL_AI_ASSESSMENT_ALREADY_RECORDED", **old["routing"]}
+        return {"status": "IDENTICAL_AUTOMATED_ASSESSMENT_ALREADY_RECORDED", **old["routing"]}
     require(
         item["supersedes_assessment_id"] == (old["assessment_id"] if old else None),
-        "AI_SUPERSESSION_MUST_REFERENCE_LATEST",
+        "AUTOMATED_SUPERSESSION_MUST_REFERENCE_LATEST",
     )
     exclusive(OUTPUT / "inputs" / (input_sha + ".json"), item)
     value = {
@@ -358,8 +361,12 @@ def record(name: str, frame: dict[str, Any], proof: dict[str, Any]) -> dict[str,
         "previous_assessment_id": rows[-1]["assessment_id"] if rows else None,
     }
     value["assessment_id"] = digest(canonical(value))
-    workflow.sec.append_record(OUTPUT / "ai-assessments.jsonl", value)
-    return {"status": "AI_ASSESSMENT_APPENDED", "assessment_id": value["assessment_id"], **result}
+    workflow.sec.append_record(OUTPUT / "automated-assessments.jsonl", value)
+    return {
+        "status": "AUTOMATED_ASSESSMENT_APPENDED",
+        "assessment_id": value["assessment_id"],
+        **result,
+    }
 
 
 def status(frame: dict[str, Any]) -> dict[str, Any]:
@@ -370,7 +377,11 @@ def status(frame: dict[str, Any]) -> dict[str, Any]:
         if row["sample_record_id"] in latest
         and latest[row["sample_record_id"]]["routing"]["route"] == "MANUAL_REVIEW_REQUIRED"
     ]
-    high = [row for row in latest.values() if row["routing"]["route"] == "AI_REVIEWED_DEVELOPMENT"]
+    high = [
+        row
+        for row in latest.values()
+        if row["routing"]["route"] == "AUTOMATED_REVIEWED_DEVELOPMENT"
+    ]
     pending = [
         row["sample_record_id"] for row in frame["records"] if row["sample_record_id"] not in latest
     ]
@@ -393,18 +404,18 @@ def status(frame: dict[str, Any]) -> dict[str, Any]:
         family_count = counts.setdefault(case["family"], Counter())
         family_count["expected"] += 1
         row = latest.get(case["sample_record_id"])
-        family_count[row["routing"]["route"] if row else "AI_REVIEW_PENDING"] += 1
+        family_count[row["routing"]["route"] if row else "AUTOMATED_REVIEW_PENDING"] += 1
     result = {
-        "status": "AI_REVIEW_IN_PROGRESS"
+        "status": "AUTOMATED_REVIEW_IN_PROGRESS"
         if pending
-        else "AI_PASS_COMPLETE_MANUAL_VERIFICATION_PENDING",
+        else "AUTOMATED_PASS_COMPLETE_MANUAL_VERIFICATION_PENDING",
         "sample_sha256": frame["sample_sha256"],
         "policy_sha256": frame["policy_sha256"],
         "sample_records": len(frame["records"]),
         "threshold": frame["policy"]["routing"]["manual_below"],
         "score_calibration": "UNCALIBRATED_OPERATIONAL_SCORE",
-        "ai_assessed": len(latest),
-        "ai_review_pending": len(pending),
+        "automated_assessed": len(latest),
+        "automated_review_pending": len(pending),
         "above_threshold_clear": len(high),
         "manual_review_records": len(manual),
         "manual_review_unique_sources": len({row["source_id"] for row in manual}),
@@ -476,15 +487,15 @@ def status(frame: dict[str, Any]) -> dict[str, Any]:
         + str(len(groups))
         + " sources. "
         + str(len(pending))
-        + " records await AI assessment.</p><p>Read the source and send your "
-        "finding and reason in the chat. The displayed finding was generated by AI.</p>"
+        + " records await AUTOMATED assessment.</p><p>Read the source and send your "
+        "finding and reason in the chat. The displayed finding was generated by AUTOMATED.</p>"
         + "".join(cards)
     )
     (OUTPUT / "manual-review.html").write_text(page, encoding="utf-8", newline="\n")
     lines = [
         "# Confidence-based development review",
         "",
-        f"AI-assessed {len(latest)} / {len(frame['records'])}. Pending {len(pending)}.",
+        f"AUTOMATED-assessed {len(latest)} / {len(frame['records'])}. Pending {len(pending)}.",
         f"Manual verification {len(manual)} records across {len(groups)} sources.",
         f"Above threshold with resolved checks {len(high)}.",
         "",
@@ -494,23 +505,23 @@ def status(frame: dict[str, Any]) -> dict[str, Any]:
         "",
         "Scores are reviewer-assigned operational measures. Human-labelled calibration "
         "and accuracy measurement are pending. The optional high-score audit list is "
-        "selected after the AI pass.",
+        "selected after the AUTOMATED pass.",
         "",
         "Public dissemination timing is tracked separately as unresolved. "
         "Full extraction, final QA and Phase 3 require their registered later gates.",
         "",
-        "Source-only AI assessments precede candidate assessment recording. "
-        "AI findings are in ai-assessments.jsonl. Human decisions use the registered "
+        "Source-only AUTOMATED assessments precede candidate assessment recording. "
+        "AUTOMATED findings are in automated-assessments.jsonl. Human decisions use the registered "
         "human recording mechanism.",
         "",
-        "| Family | Expected | AI reviewed | Manual queue | Pending |",
+        "| Family | Expected | AUTOMATED reviewed | Manual queue | Pending |",
         "|---|---:|---:|---:|---:|",
     ]
     for family, count in counts.items():
         lines.append(
             f"| {family} | {count['expected']} | "
-            f"{count['AI_REVIEWED_DEVELOPMENT']} | {count['MANUAL_REVIEW_REQUIRED']} | "
-            f"{count['AI_REVIEW_PENDING']} |"
+            f"{count['AUTOMATED_REVIEWED_DEVELOPMENT']} | {count['MANUAL_REVIEW_REQUIRED']} | "
+            f"{count['AUTOMATED_REVIEW_PENDING']} |"
         )
     lines += ["", "All outcome-firewall counters are zero.", ""]
     (OUTPUT / "report.md").write_text("\n".join(lines), encoding="utf-8", newline="\n")
@@ -543,8 +554,8 @@ def main() -> int:
             json.dumps(
                 {
                     **result,
-                    "ai_assessed": progress["ai_assessed"],
-                    "ai_review_pending": progress["ai_review_pending"],
+                    "automated_assessed": progress["automated_assessed"],
+                    "automated_review_pending": progress["automated_review_pending"],
                     "manual_review_records": progress["manual_review_records"],
                     "above_threshold_clear": progress["above_threshold_clear"],
                     "full_extraction_authorized": False,

@@ -126,7 +126,7 @@ def unchanged_snapshot() -> dict[str, str]:
         review.RUN / "run-manifest.json",
         review.RUN / "fact-review-history.jsonl",
         review.admin.ADMIN / "completion-ledger.jsonl",
-        review.OUTPUT / "ai-assessments.jsonl",
+        review.OUTPUT / "automated-assessments.jsonl",
         review.OUTPUT / "frame.json",
         review.OUTPUT / "all-records-initial-pass-validation.json",
     ]
@@ -138,7 +138,7 @@ def unchanged_snapshot() -> dict[str, str]:
             ROOT / "tools/corporate_events/event_parsers_v2.py",
             ROOT / "tools/corporate_events/parser_development_v2.py",
             v2 / "runs/offline-development-v2-005/run-manifest.json",
-            v2 / "focused-factual-qa-v1/ai-factual-assessments.jsonl",
+            v2 / "focused-factual-qa-v1/automated-factual-assessments.jsonl",
             v2 / "focused-factual-qa-v1/qa-summary.json",
             v2 / "current-project-status.json",
         ]
@@ -167,8 +167,8 @@ def run(run_id: str) -> dict[str, Any]:
             raise ValueError("V3_CODE_HASH_MISMATCH:" + name)
     baseline_validation = review.read(review.OUTPUT / "all-records-initial-pass-validation.json")
     if (
-        baseline_validation["active_ai_assessments"] != 718
-        or baseline_validation["ai_pending"] != 0
+        baseline_validation["active_automated_assessments"] != 718
+        or baseline_validation["automated_pending"] != 0
         or baseline_validation["status"] != "PASS_WITH_REVIEW_LIMITATIONS"
     ):
         raise ValueError("V3_BASELINE_INITIAL_PASS_NOT_COMPLETE")
@@ -337,10 +337,10 @@ def run(run_id: str) -> dict[str, Any]:
                 "v3_states": dict(Counter(p["proposed_state"] for p in new)),
                 "v3_review_status": "PENDING_INDEPENDENT_REVIEW",
                 "empty_v3_means": "NO_V3_PROPOSAL_NOT_A_NO_EVENT_GOLD_LABEL",
-                "baseline_ai_disposition": latest[case["sample_record_id"]]["assessment"][
+                "baseline_automated_disposition": latest[case["sample_record_id"]]["assessment"][
                     "classification_state"
                 ],
-                "baseline_ai_is_independent_gold": False,
+                "baseline_automated_is_independent_gold": False,
             }
         )
     write("record-comparison.json", {"sample_records": 718, "records": comparisons})

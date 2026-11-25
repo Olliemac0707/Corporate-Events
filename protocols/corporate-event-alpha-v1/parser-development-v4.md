@@ -1,6 +1,6 @@
 # Corporate Event Alpha: contextual parser development v4
 
-The user authorized correction of the v3.3 factual-review issues. V4 is a separate implementation and replay runner. The frozen Phase-1D protocol, v1/v2/v3 code, 718-record sample in 297 cells, prior AI reviews, original three human decisions and five newer human excerpt answers remain unchanged.
+The user authorized correction of the v3.3 factual-review issues. V4 is a separate implementation and replay runner. The frozen Phase-1D protocol, v1/v2/v3 code, 718-record sample in 297 cells, prior AUTOMATED reviews, original three human decisions and five newer human excerpt answers remain unchanged.
 
 ## Corrections and boundaries
 

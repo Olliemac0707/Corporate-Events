@@ -4,9 +4,9 @@
   "scope": "OFFLINE_CONTEXTUAL_CORRECTION_DEVELOPMENT_ONLY",
   "files": {
     "tools/corporate_events/event_parsers_v4.py": "31a05786e213f584ff3b45dfa26ea17ff44f4de1eafb14a9b5079da4f181ea21",
-    "tools/corporate_events/parser_development_v4.py": "ceef6bdb9e93fc358f663b0302a352baad13133c5ad561e5b9dd53ab00ff8adf",
+    "tools/corporate_events/parser_development_v4.py": "833e015021df71038303bc760d2b01f4f3641922da6bd9b50c871da6c16c07bd",
     "tests/test_event_parsers_v4.py": "3372e3c87df8b8c940eb889ac3d6d56cf72a8dafd38b10dc66022beb43842663",
     "tests/test_parser_development_v4.py": "2f5192c0c7526c51f3bb650e09c458e4ef72c8020b461ba4b7fdac22b9a7e188",
-    "protocols/corporate-event-alpha-v1/parser-development-v4-policy.json": "f7e2e15ee8e2b43d8b4d1377da0a825d6636291335210dd06ccc93f6f2081ccc"
+    "protocols/corporate-event-alpha-v1/parser-development-v4-policy.json": "3cd2a8e1435cb7bae268b6f4b4e65db2db790509dac0b868b9771752c8c22d99"
   }
 }

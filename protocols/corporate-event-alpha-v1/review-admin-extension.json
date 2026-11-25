@@ -9,7 +9,7 @@
   "network_allowed": false,
   "full_extraction_authorized": false,
   "files": {
-    "tools/corporate_events/review_admin.py": "666d23718609e5c59b2d8806dbaeb3610bb0a89284c043c13991e1c10b07c310",
-    "tests/test_review_admin.py": "f24dd720a12156ae0db1d8fcb6530337e06a9a2c42caddbd042cdb0e8bcb668d"
+    "tools/corporate_events/review_admin.py": "c71691a80ad42cad0ea4ada1ad677e96b10aa103930ae0d165e456021b58655a",
+    "tests/test_review_admin.py": "955c947a209b80fcac0b4b130bb6fa236efe0beaa46db40476a6bffe82d601f8"
   }
 }

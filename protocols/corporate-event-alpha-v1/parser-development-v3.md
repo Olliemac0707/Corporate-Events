@@ -1,6 +1,6 @@
 # Corporate Event Alpha: structural parser development v3
 
-The user resumed offline factual corrections after the v2 focused development review. This separate version preserves the frozen Phase-1D identity, the original 718 records in 297 cells, cached sources, prior parser versions, AI review journals and the three human excerpt decisions.
+The user resumed offline factual corrections after the v2 focused development review. This separate version preserves the frozen Phase-1D identity, the original 718 records in 297 cells, cached sources, prior parser versions, AUTOMATED review journals and the three human excerpt decisions.
 
 The scope is local development only. No acquisition, network calls, market data, outcome calculations, sample replacement, final QA or full extraction are authorized by this extension.
 
@@ -26,7 +26,7 @@ python -X utf8 -I -S -B tools/corporate_events/parser_development_v3.py --run-id
 
 Always use an unused run ID. The runner verifies the frozen baseline, previous version hashes, sample membership, source/container bytes and registered extension before processing. It installs the existing SEC-only filesystem/import firewall and a no-network audit hook. It verifies evidence spans and original baseline hashes, then writes a manifest. Existing run directories cannot be overwritten.
 
-The validated run ID and software results are recorded separately in the ignored private v3 checkpoint, together with source-derived regression checks and a five-item human development packet. The packet embeds source excerpts and hides AI answers. Previous v2 pause status remains a historical snapshot; v3 has its own current status.
+The validated run ID and software results are recorded separately in the ignored private v3 checkpoint, together with source-derived regression checks and a five-item human development packet. The packet embeds source excerpts and hides AUTOMATED answers. Previous v2 pause status remains a historical snapshot; v3 has its own current status.
 
 ## Meaning and limits
 

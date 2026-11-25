@@ -1,0 +1,180 @@
+{
+  "version": "publication-terminology-migration-v1",
+  "date": "2026-11-25",
+  "authorization": "USER_REQUESTED_NEUTRAL_PUBLIC_TERMINOLOGY",
+  "previous_source_commit": "3b0255d819be07d550f3c6e26d57b86b893ee0c1",
+  "scope": "Current publication terminology, assessment namespace and corresponding byte-hash registries; original protocol payload and tag unchanged",
+  "historical_replay": "Use the previous source commit with its original private journals. Original records and prior hashes have not been rewritten. The renamed assessment namespace is separate and does not relabel prior decisions.",
+  "assessment_provenance": "Automated assessments remain distinct from human decisions. No human decisions or independent labels have been added.",
+  "research_gate_changes": 0,
+  "outcome_queries_or_calculations": 0,
+  "files": [
+    {
+      "path": "README.md",
+      "previous_sha256": "346d7c6a22d18a528fd3067f2c715ddf0a1c6676abbaf9d3d68d4b05dba28820",
+      "previous_git_blob": "c96b729774404fc7df4186cc4c10d6602c31b1e8",
+      "current_sha256": "54dae38f6758596cb087f9a543e36a54f6f84aeacb6c454e08ea727c13fdd9f4"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/authority-evidence-extension-v1.json",
+      "previous_sha256": "c499cd472c314f3a60683d00aa238e174fa8ae529bb5c21be80ae9d3e6420e3f",
+      "previous_git_blob": "d07be194ecabf03a1768efb00a4173fef61e9b85",
+      "current_sha256": "a053b8131479c30ca65df65830b9786382106e2bba5dc8fb4aae57ec63e6a61d"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/authority-evidence-policy-v1.json",
+      "previous_sha256": "29e02ff09e85434d18529eb49068ccc54d44472267010db84bdeaf53a90f718e",
+      "previous_git_blob": "4044c9039b1b480d5aab6899df62a59e7965e3e0",
+      "current_sha256": "87091b33eb77beb9a6f2a68118c58f9bf631dd1d1196b36e594c3475c343ea4a"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/batch-001-confidence-rubric-v1.md",
+      "previous_sha256": "2d7f8cce7d665e0e3836f6fd48f2ef51777d5200a666da312c9e71275313f686",
+      "previous_git_blob": "cf4ca303ec1e1244d24e12730eceeb72b4a21d6d",
+      "current_sha256": "292cfc9977d3947d79a87b647d14d28166ae553a29be9c8c07a2ef656258d899"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/batch-002-dividend-review-rubric-v1.md",
+      "previous_sha256": "f91514760a7c969d8ef89d87e544135bf637fd489307ae918314068be1e83d42",
+      "previous_git_blob": "8ddd49b95f5563cf4437e76d3dab6b488b16d07e",
+      "current_sha256": "3247d3e3bd54b5ba831e2927e5a8bdd99b4b6201bf3a5b7e83ed29c6247d6442"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/development-confidence-review-extension-v2.json",
+      "previous_sha256": "57f2a803901ce9b4ef1be521c0db3d02bf65f235c341ab52be9083e2dc6b5ec9",
+      "previous_git_blob": "5aa350cf1ca120e095fcb5f2e18ab81b1a593d6c",
+      "current_sha256": "64c5f2cc0292c5a0b36fcf9e703e89c6789f72f6d8c032e6277e3352897669f0"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/development-confidence-review-policy-v2.json",
+      "previous_sha256": "ab7a57d0fbc1b80e0fe818926fdee3074ea2b1120b0bcd19ecafdf886b3e92b4",
+      "previous_git_blob": "69b4864412e1f4acc6b6ef0ffcf98a99dc4e8015",
+      "current_sha256": "1237cbda77e679befff7b7722f704e857eb2f16246b7f9843dd484c0fed857ff"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v2-extension.json",
+      "previous_sha256": "ee51c473fb6b92dcaf4eaf47dd6d1b33242a03e0ffce9a72b827400450714904",
+      "previous_git_blob": "a5c7c86b33e793fab9a0b1e0c1b75ade5b2fddc6",
+      "current_sha256": "aa7c58f050b3ad4007e46f07762f19b30bec5a76f39ac5e5912d4255e472f9b1"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v2-policy.json",
+      "previous_sha256": "f1fe10359c37aedee1b7b342baa319467f8c6ea6fc9266b4cee49c5c6208cd13",
+      "previous_git_blob": "17c2efe205a8373876c37c829a57dcf9434d8070",
+      "current_sha256": "ce5c0edf9e4a02614d46c5e444542db318853d8cb2fdd13f2b6b39f8861f35e6"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v2.md",
+      "previous_sha256": "69e582d014ebfa73e3f9474be4aeda7e9b28eeba10b468f767ed0df39a9ca8b1",
+      "previous_git_blob": "29abb90b618398c901b7d36bac4e65f6ef048dd0",
+      "current_sha256": "f8e075eed7fd85793e8542fc900cb824120192e70f174fe77e5841edde0b3601"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v3-extension.json",
+      "previous_sha256": "c1c48f50e86f71c46e5ce38aaa564a0758a8744efda3dea91e9bb9e644ed1fa9",
+      "previous_git_blob": "3b07fdfd5f8385bea67f64065ea9ed765983f071",
+      "current_sha256": "f8ab8c636f037bcf699d5417291bc6ed47a9d16c3c212e8e28cb867580672011"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v3-policy.json",
+      "previous_sha256": "6560b8c84dbe7d666eb2b0471f990215121c400044d85dc34f5dc59be5f4798f",
+      "previous_git_blob": "757fce3bea6890db5bc9f5191e1c441d22184b5f",
+      "current_sha256": "4fde013714cdc0a741ed38a0d731e847d0802e926dc58de8408187775667a927"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v3.md",
+      "previous_sha256": "bc2c8e725deee25b31f78d941400fdce38f54b26729abfc67d11995aebaa118f",
+      "previous_git_blob": "2a6da96bbbf7af56842d58fa5ca4ad008e2162ba",
+      "current_sha256": "f1564a5456d3936f9d5eabf652c7723d5b66418070c06a6906190806000b24d2"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v4-extension.json",
+      "previous_sha256": "42abcdae56ac4832fbe0fe2497dc5d3566bb1266e5419e72c392729043a8da05",
+      "previous_git_blob": "37b2e35a3637553aa1180ed7575ca2f4bd3b6b23",
+      "current_sha256": "bc5d2e4faa11c70443cb15349e563fa0edb1fff383e16a7b0ede6b5d3f9b75a7"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v4-policy.json",
+      "previous_sha256": "f7e2e15ee8e2b43d8b4d1377da0a825d6636291335210dd06ccc93f6f2081ccc",
+      "previous_git_blob": "091fc426f928153e8933b9304f1dbbcffd4fd2a3",
+      "current_sha256": "3cd2a8e1435cb7bae268b6f4b4e65db2db790509dac0b868b9771752c8c22d99"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/parser-development-v4.md",
+      "previous_sha256": "dfab761f7eae9883ca1b06453e3282184ef39275d313d518d5d1c75d2ce3567c",
+      "previous_git_blob": "0a0fe30ddf8ba97121bd229cb5f75d0bcd0a6003",
+      "current_sha256": "2d3894ce61b75343a78c12ca62df73a6858531df9eeed727d053b42639b2baa5"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/review-admin-extension.json",
+      "previous_sha256": "846530bbb7185ab8a77555e39590f3c7c3c28e769cc978a1abbdc5c83cfea83c",
+      "previous_git_blob": "f03eaebf6a3c8c255b39a52ec6a687cdd138b5bd",
+      "current_sha256": "fec88b3e5ce23e6797405ba0e95a591479faf08967fb988a085b5a13a061c675"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/sample-guided-review-policy-v1.json",
+      "previous_sha256": "272ac3f2a8b0c84e4f8d3b9c3307b1134c47914b1a1100ff72b26dfc440ee2b8",
+      "previous_git_blob": "1591a9accb3eb499a02d14a3a82bf2fca905e8fc",
+      "current_sha256": "ef0b5d77496f22d528ebc133e9ba6192d70a672d5689998b55da6933bb573881"
+    },
+    {
+      "path": "protocols/corporate-event-alpha-v1/sample-guided-review-policy-v2.json",
+      "previous_sha256": "3f6872719605a036c3be8486371d287911a8fe5502b59860dcd12e920d5593dc",
+      "previous_git_blob": "087063be779ce6c7dc6cf17d0233db1dccb8c212",
+      "current_sha256": "32fe546f30cad014b2c5ba72a3f8031ed3440dd12363f70e953f9132c1acf5e6"
+    },
+    {
+      "path": "tests/test_confidence_review.py",
+      "previous_sha256": "cc6eeb618501a52c1249bdd382e52f9e9b5320751fcbdc0fce0579a255cdb98b",
+      "previous_git_blob": "8293f6d2d7057810f2f5c13c0615ffb9154e4f19",
+      "current_sha256": "eeab3ce4e8de07a5c7d2528abdda180abf7f826352c1e75cc141366c7bebe286"
+    },
+    {
+      "path": "tests/test_review_admin.py",
+      "previous_sha256": "f24dd720a12156ae0db1d8fcb6530337e06a9a2c42caddbd042cdb0e8bcb668d",
+      "previous_git_blob": "3ce435dd5f284bde126ed2b71d3842e95d0bc343",
+      "current_sha256": "955c947a209b80fcac0b4b130bb6fa236efe0beaa46db40476a6bffe82d601f8"
+    },
+    {
+      "path": "tools/corporate_events/confidence_review.py",
+      "previous_sha256": "3f38354fbdc4a514e9fb3b86b5e09551e54e74978f2d0bda38b56db8ecc7fd1d",
+      "previous_git_blob": "ee0d254a498f1fa6920ea14e3fbe6cd366ecd1db",
+      "current_sha256": "38d61ed11fd50841b200512ca615946452839895630c59e334b953e22d31c386"
+    },
+    {
+      "path": "tools/corporate_events/parser_development_v2.py",
+      "previous_sha256": "8c774330f998242b66d3ac5708c7550144b2a39cbf88d21c5e1a7a1034699625",
+      "previous_git_blob": "737458e1121e2a24fe10b5d85244f76a622629ae",
+      "current_sha256": "a6e86612bcf2598d0a3145c363ba3fd28a9ee62db22f705b33055eb6cdf2cea3"
+    },
+    {
+      "path": "tools/corporate_events/parser_development_v3.py",
+      "previous_sha256": "b7eb400d8195a779dd91380864680b77a13b6794f7183ea69e1b28d8829a3627",
+      "previous_git_blob": "72c89d5e0c59b560a8365ce07cc271574b14062c",
+      "current_sha256": "3b535924852e43127d6a034bc890daf173af768c816e7650172186c407bf3d83"
+    },
+    {
+      "path": "tools/corporate_events/parser_development_v4.py",
+      "previous_sha256": "ceef6bdb9e93fc358f663b0302a352baad13133c5ad561e5b9dd53ab00ff8adf",
+      "previous_git_blob": "95749dac948b7e2162201768082ec5b14d588241",
+      "current_sha256": "833e015021df71038303bc760d2b01f4f3641922da6bd9b50c871da6c16c07bd"
+    },
+    {
+      "path": "tools/corporate_events/review_admin.py",
+      "previous_sha256": "666d23718609e5c59b2d8806dbaeb3610bb0a89284c043c13991e1c10b07c310",
+      "previous_git_blob": "17009ea8e4f569c819601cf322969c242c2ea0bc",
+      "current_sha256": "c71691a80ad42cad0ea4ada1ad677e96b10aa103930ae0d165e456021b58655a"
+    }
+  ],
+  "current_public_file_wording_scan": "PASS_ZERO_MATCHES",
+  "validation": {
+    "pytest_passed": 974,
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "original_protocol": "VALID",
+    "frozen_triage_output_replay": "PASS",
+    "original_sample_changes": 0,
+    "independent_labels_added": 0,
+    "all_17_outcome_firewall_counters": 0
+  }
+}
