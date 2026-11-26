@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-25:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,003 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,038 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -126,6 +126,18 @@ The [aggregate source-audit checkpoint](protocols/corporate-event-alpha-v1/repur
 The [outcome-blind model draft](protocols/corporate-event-alpha-v1/repurchase-model-design-draft-v1.json) retains the original 21-session event study as primary and proposes a later secondary regression comparing increases with new authorizations. It is a draft, not registered analysis or permission to fit a model. Dependence, inference and multiplicity choices must be resolved before outcomes; event-date clustering can distort naive event-study tests. [Kolari and Pynnonen (2010)](https://doi.org/10.1093/rfs/hhq072).
 
 The immediate dependencies are an independent full-source reviewer and accession-specific timing evidence. A prospective timing worklist identifies the five current-release candidates across four candidate archive-date URLs, with no requests sent and no claim that those routes or date semantics are validated. Applicable event QA must precede separately authorized Phase-3 historical identity/economics/calendar/rights work. The final model and analysis authorization must then precede outcome access. Model-eligible rows currently remain zero; no new owner teaching batch is queued.
+
+## Bounded timing diagnostics
+
+The subsequently authorized timing stage implemented and registered an exact-plan client, passed offline fault tests and an in-firewall synthetic transport check, and completed the four approved archive-prefix requests. All four returned valid HTTP 206 responses with matching Content-Range/Content-Length. Exactly 4,194,304 bytes (4 MiB) were received. No automatic retries, redirects, unbounded/full-GET fallbacks or prior-budget resets occurred. Earlier stage snapshots remain historical records.
+
+All five target accessions remain unlocated in the downloaded prefixes. Across the four archives, 95 distinct member headers were inspected; separate target scans of the same prefix do not add distinct physical headers. A prefix miss does not prove archive absence. Header membership alone would still require the registered dissemination-day/time semantic authority. Verified public times and model-eligible rows therefore remain zero.
+
+The [diagnostic checkpoint](protocols/corporate-event-alpha-v1/sec-timing-diagnostics-checkpoint-v1.json) records HTTP statuses, prefix hashes, byte counts, archive-size metadata and preserved budgets. The complete archives are reported by the server to total about 821 MiB; those complete archives were not downloaded. The approved four requests and 4 MiB are fully spent. Further acquisition requires a separately registered exact-source/budget plan and explicit authorization; no continuation or reset is automatic.
+
+The active entrypoint is sec_timing_diagnostics.py. Its validate command is offline, acquire enforces durable per-URL/request/byte limits under the original global scheduler, and audit replays cached prefixes without networking. A used or interrupted namespace cannot silently start a new budget. Runtime authorization and contact remain private. The client version was committed before live use; offline audit verified all four cached responses and all ten pinned prior budget files. Original source, QA and outcome gates are unchanged.
+
+The private repurchase-study-status-v5.html report adds the per-archive results. Independent full-source review is still unassigned, and accession-specific public-time evidence remains unresolved. No market observations, prices, returns or regressions were accessed or calculated; all 17 outcome-firewall counters remain zero.
 
 ## Route to first empirical results
 
