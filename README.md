@@ -149,6 +149,8 @@ The [cached official-specification review](protocols/corporate-event-alpha-v1/se
 
 The retained live entrypoint is sec_feed_directory.py; its registered stop behavior is unchanged. The new sec_feed_listing_replay.py entrypoint is offline-only and rejects all networking. Its synthetic tests cover source/quarter mismatches, duplicate JSON keys, unsafe paths and conflicting item links. The private repurchase-study-status-v7.html report records this milestone. Further acquisition needs an exact bounded evidence plan; no additional scope is granted by the replay or route assessment.
 
+The next registered client, sec_two_archive_ranges.py, is limited to the first two candidate archives. It can reuse the preserved prefixes and request at most eight additional ranges, each at most 50 MiB, with a combined maximum of 365,284,503 bytes. The client requires the prior archive version, preserves the existing five-attempt-per-URL limit and stops on any changed response or failure. Its separate offline inspection checks compressed-stream integrity and exact target membership; the archive day remains unresolved without documentary semantic authority. The other three candidate filings are outside this client scope.
+
 Code publication is separate from scientific certification.
 
 1. Resolve event evidence: action identity, dividend comparators, issuer/reporting roles, separation structures and information timing. Preserve unresolved cases.

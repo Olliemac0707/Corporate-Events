@@ -1,0 +1,8 @@
+{
+  "version": "sec-two-archive-ranges-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_two_archive_ranges.py": "ceac7e2d7b1bb544eacd5504dc66abb0e90527751a0b992f57e1ef6dc522ee5b",
+    "tests/test_sec_two_archive_ranges.py": "5646423c47b6c6aaae9a53381b1aa807a4142c32ad5177118825c27123308571",
+    "protocols/corporate-event-alpha-v1/sec-two-archive-ranges-policy-v1.json": "1afe2b4fd20756da2d422b872ec73ed72c7a0c393b1344eab73b59aec2d4250d"
+  }
+}
