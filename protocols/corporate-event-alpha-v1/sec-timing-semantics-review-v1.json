@@ -1,0 +1,49 @@
+{
+  "version": "sec-timing-semantics-review-v1",
+  "date": "2026-11-26",
+  "mode": "CACHED_OFFICIAL_DOCUMENTS_ONLY",
+  "new_HTTP_requests": 0,
+  "sources": [
+    {
+      "url": "https://www.sec.gov/info/edgar/pdsdissemspec910.pdf",
+      "sha256": "57f5be8b896d7176512921c32d47ec6eec81211d2753bdffbefc41cf33da9514",
+      "PDF_pages_text_checked": [
+        4,
+        5,
+        7,
+        24
+      ]
+    },
+    {
+      "url": "https://www.sec.gov/files/info/edgar/specifications/pds-dissemination-spec030314.pdf",
+      "sha256": "9e4e92134a24365d06ab56f474d9d3f761b7b331847d50f1aef8aa7c7d79d3bd",
+      "PDF_pages_text_and_render_checked": [
+        5,
+        9,
+        31
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "DAILY_AUDIT_POTENTIAL_AUTHORITY",
+      "evidence": "2014 PDF page 5 and historical PDF page 5 describe the final daily transmission as an ASCII list of submissions disseminated since 06:00 that day.",
+      "inference": "An authentic, complete daily audit with an exact target entry may support dissemination-day evidence once its provenance and applicable day semantics are verified.",
+      "limitation": "No target daily audit file is cached; public web availability is unknown. The specification does not equate Feed .nc.tar.gz date labels to this audit."
+    },
+    {
+      "id": "ACCEPTANCE_BUILD_NOT_PUBLIC_TIMESTAMP",
+      "evidence": "2014 PDF page 9 distinguishes acceptance and build fields and labels their time fields EST.",
+      "limitation": "This control-block definition does not establish the website SGML acceptance field timezone and daylight-saving mapping, or make acceptance equal public availability."
+    },
+    {
+      "id": "CORRECTION_TIMESTAMP_SCOPE",
+      "evidence": "2014 PDF page 31 scopes the TIMESTAMP definition to post-acceptance corrections.",
+      "limitation": "Cannot use a correction time as the initial dissemination time of an original live filing."
+    }
+  ],
+  "next_step": "Prospective bounded directory discovery; do not follow entries automatically.",
+  "public_times_certified": 0,
+  "new_independent_gold_labels": 0,
+  "scientific_gates_changed": false
+}

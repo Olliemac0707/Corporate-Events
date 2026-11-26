@@ -29,7 +29,7 @@ GitHub Actions runs the checks on Windows/Python 3.12. Tests use synthetic input
 
 ## Research status
 
-Latest local development checkpoint, 2026-11-25:
+Latest local development checkpoint, 2026-11-26:
 
 | Milestone | Status |
 | --- | --- |
@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-25:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,038 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,084 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -140,6 +140,12 @@ The active entrypoint is sec_timing_diagnostics.py. Its validate command is offl
 The private repurchase-study-status-v5.html report adds the per-archive results. Independent full-source review is still unassigned, and accession-specific public-time evidence remains unresolved. No market observations, prices, returns or regressions were accessed or calculated; all 17 outcome-firewall counters remain zero.
 
 ## Route to first empirical results
+
+The next timing client is prepared for **directory discovery only**, pending fresh explicit acquisition authorization. Its [prospective policy](protocols/corporate-event-alpha-v1/sec-feed-directory-policy-v1.json) permits four exact SEC Feed quarter index.json requests, at most 512 KiB each and 2 MiB total, with no retries, redirects, fallback routes or automatic downloads of listed files. The earlier archive-prefix budget stays sealed. Routes are unverified; any unavailable route or invalid response stops the batch.
+
+The [cached official-specification review](protocols/corporate-event-alpha-v1/sec-timing-semantics-review-v1.json) identifies daily dissemination audit files as a possible compact evidence source. The actual target audit files have not been found. Directory names and modification dates cannot establish accession membership or public timing. Acceptance/build fields and correction timestamps do not resolve the current original-disclosure clock requirements.
+
+The new local entrypoint is sec_feed_directory.py. The validate command checks the frozen protocol, registered code, preserved budgets and private contact offline. The acquire command requires a new private approval receipt bound to the registered scope before reading contact configuration or opening a connection. Raw listings remain local in a separate immutable cache. This stage cannot open event QA, market data or model gates.
 
 Code publication is separate from scientific certification.
 

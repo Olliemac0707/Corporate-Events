@@ -1,0 +1,8 @@
+{
+  "version": "sec-feed-directory-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_feed_directory.py": "627355c202286b780fb1ed0e2f4d8b996b5e11a0e2ceb8583994df92516a73c5",
+    "tests/test_sec_feed_directory.py": "79eb608acd16cecbbcc7b6154d9c39722c2b4bdf052706fbc29e3da62ec44ce9",
+    "protocols/corporate-event-alpha-v1/sec-feed-directory-policy-v1.json": "1056c15c9cc257f6f776623460aa136ed0398c0280d5e7ca09a45ce24e7e1182"
+  }
+}
