@@ -1,0 +1,8 @@
+{
+  "version": "sec-feed-listing-replay-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_feed_listing_replay.py": "398dfa24a06c0c53850a2314b5bd79c4cbcb0b7e57055c13111d69c73124c1a4",
+    "tests/test_sec_feed_listing_replay.py": "35511d37f325e135c7b9244f9ac2e8e1c8cd9418ef2d2d1b5b6b51d718d1fc5f",
+    "protocols/corporate-event-alpha-v1/sec-feed-listing-replay-policy-v1.json": "53bbe73fd0c94142ff48ddc8b4a29dabe353427fdf378063c9c5f07c6772f06a"
+  }
+}

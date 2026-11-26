@@ -25,3 +25,4 @@ corporate_events/repurchase_review_progress.py -text
 corporate_events/repurchase_source_audit.py -text
 corporate_events/sec_timing_diagnostics.py -text
 corporate_events/sec_feed_directory.py -text
+corporate_events/sec_feed_listing_replay.py -text

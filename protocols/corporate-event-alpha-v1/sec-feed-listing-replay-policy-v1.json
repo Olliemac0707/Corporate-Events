@@ -1,0 +1,24 @@
+{
+  "version": "sec-feed-listing-replay-v1",
+  "mode": "OFFLINE_ONLY",
+  "purpose": "Validate one cached 2007 Q3 response after the frozen live client rejected its exact Feed-relative label.",
+  "allowed_normalization": "Exact full source URL directory label, with optional trailing slash, or exact Feed/YYYY/QTRn/ suffix. No case folding, path traversal, arbitrary URL normalization, cross-quarter inference or href following.",
+  "private_inputs": {
+    "repurchase-feed-directory-v1/completion-receipt.json": "22f501476dcec71cd8c84d68d0e59bead067151aff77480c28029025cbd1b7ca",
+    "repurchase-feed-directory-v1/object-versions.jsonl": "96ea992cb52fff02618a60cb6d7a84d404169bf13cf8549888087ec0a1a17847",
+    "repurchase-feed-directory-v1/objects/sha256/f4/f4fc2f12b816df8775b8b00fb2c456bae5818c0aa560145c351a8084167cd934": "f4fc2f12b816df8775b8b00fb2c456bae5818c0aa560145c351a8084167cd934",
+    "repurchase-feed-directory-v1/state.json": "2d7f700b7fbb1482e574e2a6eaf9ce11c030884b76a12ff4d74499b0fa1e6aa2",
+    "repurchase-feed-directory-v1/summary.json": "ee6b771627c279750f30bced9fcad1c209776e8410806561baf9122581870f9f",
+    "repurchase-feed-directory-v1/output-manifest.json": "308c3b066d3f4afd0a8bcc63c9244e60b9c78de3ac5f040b6060e3f126da5fbc",
+    "feed-directory-authorization-v1.json": "6b77d3110da44bc6be3af70d976262a300dddd2863079b91fc7e843fc04536a9"
+  },
+  "network_requests_allowed": 0,
+  "original_live_client_modified": false,
+  "original_stopped_ledger_modified": false,
+  "unused_requests_resumed": false,
+  "historical_day_or_timestamp_certification_allowed": false,
+  "whole_SEC_negative_conclusions_allowed": false,
+  "market_data_allowed": false,
+  "regressions_allowed": false,
+  "original_718_sample_changes": 0
+}

@@ -1,0 +1,34 @@
+{
+  "version": "sec-timing-route-assessment-v2",
+  "mode": "OUTCOME_BLIND_OFFLINE_ASSESSMENT",
+  "new_network_requests_during_assessment": 0,
+  "cached_official_source": {
+    "url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+    "sha256": "57789e394d3b6192a72f08a9e6d5e3c23f3bc2c5d0b7d0ea29c620d4b7ccd173",
+    "sections": [
+      "Business hours and dissemination",
+      "Using the EDGAR index files",
+      "Feed and oldloads directories"
+    ]
+  },
+  "official_source_findings": [
+    "SEC describes Feed archives organized by filing day and daily indexes updated at night. Some late submissions are disseminated the next business day and appear in that business day index.",
+    "The documentation supplies useful directory context, but does not itself provide an exact target accession membership observation or original first-public timestamp."
+  ],
+  "observed_listing_findings": "One complete 2007 Q3 JSON listing contains 63 archive names and no compact audit/membership filename. No inference is made about other quarters or unlisted resources.",
+  "frozen_protocol_constraints": {
+    "index_filing_date_is_day_proof": false,
+    "acceptance_plus_900_is_dissemination_proof": false,
+    "required": "Accession-specific public-time/day evidence with applicable semantic authority and source/version provenance."
+  },
+  "decision": "Do not automatically spend the three unattempted directory requests or substitute daily index filing-date rows for the missing clock evidence.",
+  "next_evidence_design_requirements": [
+    "Assess an authentic target daily audit entry or exact archive member evidence, together with documentary dissemination-day meaning.",
+    "If larger archive acquisition is proposed, register exact representation, range, aggregate byte/request caps, target-only scanning, integrity checks and stop behavior before seeking approval.",
+    "Keep historical reference actions, security eligibility, independent factual QA and final analysis authorization as separate requirements."
+  ],
+  "new_acquisition_authorized": false,
+  "scientific_gates_relaxed": false,
+  "public_times_certified": 0,
+  "regressions_run": 0
+}

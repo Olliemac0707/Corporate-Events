@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-26:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,084 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,102 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -141,11 +141,13 @@ The private repurchase-study-status-v5.html report adds the per-archive results.
 
 ## Route to first empirical results
 
-The next timing client is prepared for **directory discovery only**, pending fresh explicit acquisition authorization. Its [prospective policy](protocols/corporate-event-alpha-v1/sec-feed-directory-policy-v1.json) permits four exact SEC Feed quarter index.json requests, at most 512 KiB each and 2 MiB total, with no retries, redirects, fallback routes or automatic downloads of listed files. The earlier archive-prefix budget stays sealed. Routes are unverified; any unavailable route or invalid response stops the batch.
+The authorized directory probe received one complete HTTP 200 JSON response (8,508 bytes), then stopped because SEC used the relative label Feed/2007/QTR3/ where the frozen client expected a full directory path. The original client, raw cache and stopped ledger are preserved. The other three quarter requests were not made, and the stopped batch does not automatically resume. The earlier archive-prefix budget stays sealed.
 
-The [cached official-specification review](protocols/corporate-event-alpha-v1/sec-timing-semantics-review-v1.json) identifies daily dissemination audit files as a possible compact evidence source. The actual target audit files have not been found. Directory names and modification dates cannot establish accession membership or public timing. Acceptance/build fields and correction timestamps do not resolve the current original-disclosure clock requirements.
+A separately registered offline decoder accepts only the exact full or Feed-relative directory identity tied to the source URL. It validated 63 listed names, all daily compressed archives, with no additional HTTP requests. The selected 20070802 archive is listed, but target accession membership remains unproven. No compact audit or membership file is listed in this one response; this is not an absence claim for other quarters or SEC resources. The [validation checkpoint](protocols/corporate-event-alpha-v1/sec-feed-directory-validation-checkpoint-v1.json) binds the live and replay manifests, stop record, counters and software checks.
 
-The new local entrypoint is sec_feed_directory.py. The validate command checks the frozen protocol, registered code, preserved budgets and private contact offline. The acquire command requires a new private approval receipt bound to the registered scope before reading contact configuration or opening a connection. Raw listings remain local in a separate immutable cache. This stage cannot open event QA, market data or model gates.
+The [cached official-specification review](protocols/corporate-event-alpha-v1/sec-timing-semantics-review-v1.json) identifies daily dissemination audit files as a possible compact evidence source. The actual target audit files have not been found. The [updated route assessment](protocols/corporate-event-alpha-v1/sec-timing-route-assessment-v2.json) also reviews already cached SEC access guidance. Directory names, modification dates and daily-index filing-date fields cannot substitute for the accession-specific dissemination evidence required by the frozen protocol. No public clocks or model rows are certified.
+
+The retained live entrypoint is sec_feed_directory.py; its registered stop behavior is unchanged. The new sec_feed_listing_replay.py entrypoint is offline-only and rejects all networking. Its synthetic tests cover source/quarter mismatches, duplicate JSON keys, unsafe paths and conflicting item links. The private repurchase-study-status-v7.html report records this milestone. Further acquisition needs an exact bounded evidence plan; no additional scope is granted by the replay or route assessment.
 
 Code publication is separate from scientific certification.
 
