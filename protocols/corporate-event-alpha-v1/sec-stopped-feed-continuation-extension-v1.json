@@ -1,0 +1,8 @@
+{
+  "version": "sec-stopped-feed-continuation-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_stopped_feed_continuation.py": "24bba729d0d327072c862002ad757516d3edd520a9c5f553c1fbeb865ff68e30",
+    "tests/test_sec_stopped_feed_continuation.py": "fc39ade432cb1537ce963e481fea7f0cfa6eee0d57c636a7c98658eaa5365b61",
+    "protocols/corporate-event-alpha-v1/sec-stopped-feed-continuation-policy-v1.json": "df9d2f3ad31a01693ad75e4b57f45ff2fd9497f21990c0ce00502c4cd9764dab"
+  }
+}

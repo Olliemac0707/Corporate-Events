@@ -1,0 +1,29 @@
+{
+  "version": "sec-stopped-feed-continuation-preparation-checkpoint-v1",
+  "date": "2026-11-26",
+  "status": "OFFLINE_READY_AWAITING_EXPLICIT_CONTINUATION",
+  "reason_for_approval": "The prior registered search forbade automatic restart after a failed transfer.",
+  "request_cap": 1,
+  "new_body_byte_cap": 52428800,
+  "range_start": 155189248,
+  "range_end": 207618047,
+  "remaining_archive_bytes_after_success": 4790318,
+  "prior_URL_attempts": 4,
+  "maximum_URL_attempts": 5,
+  "existing_fragment_reused": true,
+  "new_HTTP_requests": 0,
+  "authorization_created": false,
+  "unapproved_acquire": "DENIED_BEFORE_CONTACT_AND_CONNECTION",
+  "in_firewall_synthetic_transport": "PASS_ZERO_REAL_HTTP",
+  "prior_budgets_reset": 0,
+  "public_times_certified": 0,
+  "market_data_accessed": false,
+  "regressions_run": 0,
+  "original_718_sample_changes": 0,
+  "registry_sha256": "10f504c08853783cd2c51b23dfa4ee542490b1f1d4f682226f3f02a8de464d90",
+  "software_checks": {
+    "pytest": "1177 passed",
+    "Ruff": "PASS",
+    "mypy": "PASS_94_SOURCE_FILES"
+  }
+}

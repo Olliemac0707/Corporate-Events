@@ -1,0 +1,78 @@
+{
+  "version": "sec-partial-feed-search-checkpoint-v1",
+  "date": "2026-11-26",
+  "client_commit_before_use": "775f1a44cecf8167c28a56e42529fcb78e6f8985",
+  "original_status": "STOPPED",
+  "stop_reason": "PARTIAL_SEARCH_TRUNCATED_OR_OVERSIZE_READ",
+  "HTTP_attempts": 5,
+  "HTTP_statuses": [
+    206,
+    206,
+    206,
+    206,
+    206
+  ],
+  "received_body_bytes": 258998272,
+  "maximum_approved_bytes": 419430400,
+  "incomplete_response_bytes": 49283072,
+  "partial_response_preserved_and_replayed_offline": true,
+  "new_target_accessions_in_complete_ranges": 1,
+  "new_target_accessions_in_interrupted_fragment": 1,
+  "new_target_accessions_located": 2,
+  "remaining_target_accessions_unlocated_in_prefix": 1,
+  "prefix_miss_proves_absence": false,
+  "full_gzip_checksums_verified": false,
+  "target_tar_checksums_and_internal_accessions_verified": true,
+  "new_component_comparison": [
+    {
+      "source_documents": 5,
+      "archive_documents": 5,
+      "matched_after_lf_normalization": 5
+    },
+    {
+      "source_documents": 2,
+      "archive_documents": 2,
+      "matched_after_lf_normalization": 2
+    }
+  ],
+  "total_five_candidate_members_located": 4,
+  "public_times_certified": 0,
+  "first_public_announcements_verified": 0,
+  "independent_full_source_reviews": 0,
+  "model_eligible_rows": 0,
+  "unrelated_filing_bodies_extracted": 0,
+  "automatic_retries": 0,
+  "prior_budget_resets": 0,
+  "original_718_sample_changes": 0,
+  "market_data_accessed": false,
+  "regressions_run": 0,
+  "firewall_counters": {
+    "BHAR": 0,
+    "CAR": 0,
+    "CCM_queries": 0,
+    "CRSP_observation_queries": 0,
+    "Compustat_financial_observation_queries": 0,
+    "Monte_Carlo": 0,
+    "abnormal_returns": 0,
+    "backtests": 0,
+    "bootstrap": 0,
+    "event_price_joins": 0,
+    "event_returns": 0,
+    "market_provider_queries": 0,
+    "optimizations": 0,
+    "portfolio_simulations": 0,
+    "prospective_accesses": 0,
+    "regressions": 0,
+    "stock_returns": 0
+  },
+  "search_manifest_sha256": "768ad9ba166ea554a1d2b4cd8d183f72a50a895b3d00408187b6f662cb17baf5",
+  "fragment_replay_manifest_sha256": "4210705f44707ebd138285b275324ab6c30b5da12038fa2ce523e01e7cbb8968",
+  "software_checks": {
+    "pytest": "1170 passed",
+    "Ruff": "PASS",
+    "mypy": "PASS_92_SOURCE_FILES"
+  },
+  "phase3_authorized": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false
+}
