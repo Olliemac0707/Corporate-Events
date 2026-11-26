@@ -1,0 +1,32 @@
+{
+  "version": "sec-two-archive-content-check-v1",
+  "scope": "Offline target-only document-component comparison between previously cached SEC filing containers and two exact archive members.",
+  "private_inputs": {
+    "two-archive-ranges-v1/output-manifest.json": "807022c0cce9af238530caa12b5f2387741e7cdf927a3c6a1bd2fca49d17291b",
+    "two-archive-ranges-v1/completion-receipt.json": "568d7aa1db56ec31ca3ea689bee276ed5471ba5089d9fd7712cf3d30ad3d6a0d",
+    "two-archive-ranges-v1/objects/sha256/5e/5e78cb4744a569880b8193c0399040f01f3354083c8c1d8c92f05882fa0138a3": "5e78cb4744a569880b8193c0399040f01f3354083c8c1d8c92f05882fa0138a3",
+    "two-archive-ranges-v1/objects/sha256/64/6438cdce65764915dc20ae98ed38a3062411fc92a14a83a3e5180ef56eb239f3": "6438cdce65764915dc20ae98ed38a3062411fc92a14a83a3e5180ef56eb239f3",
+    "two-archive-ranges-v1/objects/sha256/66/660b2e4bf82372ce4c8bce6f3bbff563c634c4c648158a88cbf7611b5a3ec8d4": "660b2e4bf82372ce4c8bce6f3bbff563c634c4c648158a88cbf7611b5a3ec8d4",
+    "two-archive-ranges-v1/objects/sha256/67/6722097f905f327b9b35c2d2bbac51e53973d4038f136f180df3b191c3839114": "6722097f905f327b9b35c2d2bbac51e53973d4038f136f180df3b191c3839114",
+    "two-archive-ranges-v1/objects/sha256/94/94b8bec10e7c69e737cb2c5f62fae831c401c8c4a4728bbbe012ce1f753f15ae": "94b8bec10e7c69e737cb2c5f62fae831c401c8c4a4728bbbe012ce1f753f15ae",
+    "two-archive-ranges-v1/objects/sha256/d0/d0455df21149acdbdeecd53cd8faf67e6a7fa0e8b744375feae64a6b0166dace": "d0455df21149acdbdeecd53cd8faf67e6a7fa0e8b744375feae64a6b0166dace",
+    "two-archive-ranges-v1/objects/sha256/df/df0aa9b38ef48058c0f6fcd2a995a3e1da504c002eafa0e2b604592c15caba4a": "df0aa9b38ef48058c0f6fcd2a995a3e1da504c002eafa0e2b604592c15caba4a",
+    "two-archive-ranges-v1/objects/sha256/ff/ff953cf4bc4daa688e23ab82f79adf3febaf23792ce1f1efc43212cd04442faa": "ff953cf4bc4daa688e23ab82f79adf3febaf23792ce1f1efc43212cd04442faa",
+    "two-archive-ranges-v1/state.json": "5b5e1452b54f29e98a0bdc86b2f2ed20c985455aecc361038b56e57e9837d1a8",
+    "two-archive-ranges-v1/summary.json": "3fbb2d6ba6c1e7590e1f13f6ee9c577fc721309eea8338208b84bf9cd87e291d",
+    "two-archive-inspection-v1/output-manifest.json": "2c0dd535de6f652304a214018ac5d2c4ee3a6f415152dce87ae9329352c80a62",
+    "two-archive-inspection-v1/archives/7dbf9b00840665c961e3851b8e93fd5005d44e0e5b9f6dc5d25751169a9d318c.gz": "7dbf9b00840665c961e3851b8e93fd5005d44e0e5b9f6dc5d25751169a9d318c",
+    "two-archive-inspection-v1/archives/e6831d4c76fbf44b5c14b4644fd80c3fa5a450dfe7b00bcae02737048a9a70cd.gz": "e6831d4c76fbf44b5c14b4644fd80c3fa5a450dfe7b00bcae02737048a9a70cd",
+    "two-archive-inspection-v1/receipt.json": "b5d1829bea3d97aa2cc41c64e81f639de87c31986e4ca895f7f4c682ac87e91f",
+    "two-archive-inspection-v1/summary.json": "ca1bab5a0a58651c585fa4bc5e0f4825684c163024795a8897384c02089b2b7a",
+    "two-archive-ranges-plan-v1.json": "e50a3fb075a1d3e603cda93303546aec8f777b683769a7eb7b79ce0cb2df554f",
+    "two-archive-ranges-authorization-v1.json": "f2d8aa5fbcd051a12a4397fcba650afc0c1bfb9da15e9c767edd426e77661a27"
+  },
+  "network_requests_allowed": 0,
+  "component_normalization": "CRLF to LF and removal of one delimiter-adjacent line break at each boundary; preserve component order and all remaining bytes.",
+  "additional_linebreak_comparison": "Diagnostic only; never promotes a mismatch to an exact match.",
+  "nonmatching_components": "Retain as unresolved for review; no automatic reclassification or timing certification.",
+  "market_data_allowed": false,
+  "regressions_allowed": false,
+  "original_718_sample_changes": 0
+}

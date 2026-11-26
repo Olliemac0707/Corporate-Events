@@ -1,0 +1,87 @@
+{
+  "version": "sec-two-archive-evidence-checkpoint-v1",
+  "date": "2026-11-26",
+  "acquisition_client_commit_before_use": "7fb5018aedfe1fb00623f46b688f0ca4597bb960",
+  "acquisition_status": "RANGES_COMPLETE_PENDING_OFFLINE_VALIDATION",
+  "HTTP_attempts": 8,
+  "HTTP_statuses": [
+    206,
+    206,
+    206,
+    206,
+    206,
+    206,
+    206,
+    206
+  ],
+  "new_received_body_bytes": 365284503,
+  "per_response_limit_bytes": 52428800,
+  "total_byte_cap": 365284503,
+  "prior_budget_resets": 0,
+  "original_718_sample_changes": 0,
+  "whole_archives_reconstructed": 2,
+  "gzip_checksums_verified": 2,
+  "target_accessions_found": 2,
+  "exact_raw_filing_byte_matches": 0,
+  "component_comparison": [
+    {
+      "source_documents": 2,
+      "archive_documents": 2,
+      "matched_after_lf_normalization": 2
+    },
+    {
+      "source_documents": 3,
+      "archive_documents": 3,
+      "matched_after_lf_normalization": 2,
+      "unmatched_components": 1
+    }
+  ],
+  "normalization": "CRLF to LF plus one delimiter-adjacent line break at each boundary",
+  "unmatched_component_status": "REQUIRES_REVIEW",
+  "archive_member_name_inventory": {
+    "headers_checked": 6381,
+    "audit_like_filenames_found": 0,
+    "scope": "Two reconstructed archives only; no inference about other archives."
+  },
+  "archive_header_inventory_sha256": "2d1e4bd1f89c8d8297eab67cd26f27f8109bce83243c4ffedbdc0351d08e86a9",
+  "archive_day_semantics_certified": false,
+  "public_times_certified": 0,
+  "first_public_announcements_verified": 0,
+  "independent_full_source_reviews": 0,
+  "model_eligible_rows": 0,
+  "unrelated_filing_bodies_extracted": 0,
+  "market_data_accessed": false,
+  "regressions_run": 0,
+  "firewall_counters": {
+    "BHAR": 0,
+    "CAR": 0,
+    "CCM_queries": 0,
+    "CRSP_observation_queries": 0,
+    "Compustat_financial_observation_queries": 0,
+    "Monte_Carlo": 0,
+    "abnormal_returns": 0,
+    "backtests": 0,
+    "bootstrap": 0,
+    "event_price_joins": 0,
+    "event_returns": 0,
+    "market_provider_queries": 0,
+    "optimizations": 0,
+    "portfolio_simulations": 0,
+    "prospective_accesses": 0,
+    "regressions": 0,
+    "stock_returns": 0
+  },
+  "prior_range_manifest_sha256": "807022c0cce9af238530caa12b5f2387741e7cdf927a3c6a1bd2fca49d17291b",
+  "inspection_manifest_sha256": "2c0dd535de6f652304a214018ac5d2c4ee3a6f415152dce87ae9329352c80a62",
+  "content_comparison_manifest_sha256": "85e6f50d527ca386c4cef7dbada43a4be6a86f6ae3cdcd4eaedc7146d48dfae0",
+  "software_checks": {
+    "pytest": "1142 passed",
+    "Ruff": "PASS",
+    "mypy": "PASS_88_SOURCE_FILES"
+  },
+  "remaining_targets": 3,
+  "remaining_targets_limit": "Two source archives require more range requests than the remaining per-URL attempt allowance; seek compact official evidence or separately review a protocol change.",
+  "phase3_authorized": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false
+}

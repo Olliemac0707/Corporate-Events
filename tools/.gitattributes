@@ -27,3 +27,4 @@ corporate_events/sec_timing_diagnostics.py -text
 corporate_events/sec_feed_directory.py -text
 corporate_events/sec_feed_listing_replay.py -text
 corporate_events/sec_two_archive_ranges.py -text
+corporate_events/sec_two_archive_content_check.py -text

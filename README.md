@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-26:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,102 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,142 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -150,6 +150,10 @@ The [cached official-specification review](protocols/corporate-event-alpha-v1/se
 The retained live entrypoint is sec_feed_directory.py; its registered stop behavior is unchanged. The new sec_feed_listing_replay.py entrypoint is offline-only and rejects all networking. Its synthetic tests cover source/quarter mismatches, duplicate JSON keys, unsafe paths and conflicting item links. The private repurchase-study-status-v7.html report records this milestone. Further acquisition needs an exact bounded evidence plan; no additional scope is granted by the replay or route assessment.
 
 The next registered client, sec_two_archive_ranges.py, is limited to the first two candidate archives. It can reuse the preserved prefixes and request at most eight additional ranges, each at most 50 MiB, with a combined maximum of 365,284,503 bytes. The client requires the prior archive version, preserves the existing five-attempt-per-URL limit and stops on any changed response or failure. Its separate offline inspection checks compressed-stream integrity and exact target membership; the archive day remains unresolved without documentary semantic authority. The other three candidate filings are outside this client scope.
+
+The authorized run completed all eight ranges, receiving 365,284,503 bytes. Offline inspection reconstructed both archives, verified their gzip checksums and found both target accessions. Both archived submissions have different raw container bytes from the previously cached complete submissions. After line-ending and delimiter normalization, the first filing's two components match; two of the second filing's three components match, while one remains flagged for review. A header-name inventory found no daily-audit filename inside these two archives, with no conclusion about other archives. See the [aggregate evidence checkpoint](protocols/corporate-event-alpha-v1/sec-two-archive-evidence-checkpoint-v1.json).
+
+Archive membership does not by itself certify the day of dissemination or establish the earliest public announcement. Both public clocks remain unresolved, and no research events or model rows are certified. The offline sec_two_archive_content_check.py entrypoint compares source-linked component hashes without networking or altering the earlier records. The private repurchase-study-status-v8.html report links the completed validation milestone. The remaining three candidates require another evidence route or prospective review of the existing request limits.
 
 Code publication is separate from scientific certification.
 

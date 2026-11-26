@@ -1,0 +1,8 @@
+{
+  "version": "sec-two-archive-content-check-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_two_archive_content_check.py": "dee9822517cc8242d10e01902a8d1b1cc7a278b388ea40ddcbaceb569c259add",
+    "tests/test_sec_two_archive_content_check.py": "6c806b7b28800be40940a2114bad032177e2071dc58350ceb95da4cc5fc69f3b",
+    "protocols/corporate-event-alpha-v1/sec-two-archive-content-check-policy-v1.json": "449c864fbf6147b5a98028759775acb86888591fa775f3a537e464cfa477a2f4"
+  }
+}
