@@ -1,0 +1,27 @@
+{
+  "version": "sec-mothers-span-replay-checkpoint-v1",
+  "date": "2026-11-26",
+  "mode": "OFFLINE_POST_COMPARISON_DIAGNOSTIC",
+  "scope": "Nine pre-existing action-support and capacity evidence records from one 2008 filing; no whole-filing factual certification.",
+  "archived_target_accession_confirmed": true,
+  "archive_sha256": "7dbf9b00840665c961e3851b8e93fd5005d44e0e5b9f6dc5d25751169a9d318c",
+  "source_filing_sha256": "50ff7282663c5a76f04a2077ccced075b89b126e8d01282f1ef27e9d23a9a64c",
+  "existing_evidence_records_checked": 9,
+  "source_quote_offsets_and_hashes_verified": true,
+  "exact_quotes_present_in_archive_render": 9,
+  "rendered_component_comparison": [
+    false,
+    true,
+    true
+  ],
+  "original_raw_component_mismatch_preserved": true,
+  "private_span_replay_sha256": "9c90f4c3f0d467515125b985ac22fcd27f66cfcc5b33f496938148931fe5750b",
+  "private_replay_script_sha256": "ddb8fce8f97c5b841465379f3d2ca00800e9671543e03924d845f8420acb7e85",
+  "private_visible_comparison_sha256": "e98414263941c6dcb1877a14e456dff946d6dc3de41c1bc6d93e6e5981aa7558",
+  "network_requests": 0,
+  "independent_full_source_review": false,
+  "public_times_certified": 0,
+  "original_718_sample_changes": 0,
+  "market_data_accessed": false,
+  "regressions_run": 0
+}

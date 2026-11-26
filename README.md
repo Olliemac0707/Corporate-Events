@@ -155,6 +155,8 @@ The authorized run completed all eight ranges, receiving 365,284,503 bytes. Offl
 
 Archive membership does not by itself certify the day of dissemination or establish the earliest public announcement. Both public clocks remain unresolved, and no research events or model rows are certified. The offline sec_two_archive_content_check.py entrypoint compares source-linked component hashes without networking or altering the earlier records. The private repurchase-study-status-v8.html report links the completed validation milestone. The remaining three candidates require another evidence route or prospective review of the existing request limits.
 
+A subsequent [offline passage replay](protocols/corporate-event-alpha-v1/sec-mothers-span-replay-checkpoint-v1.json) checked the nine previously recorded action-support and capacity passages for the 2008 filing. All nine appear in the archive rendering. The first component's rendered text still differs, while both exhibits render identically. This targeted comparison preserves the mismatch and does not establish full-source factual accuracy or public timing.
+
 Code publication is separate from scientific certification.
 
 1. Resolve event evidence: action identity, dividend comparators, issuer/reporting roles, separation structures and information timing. Preserve unresolved cases.
