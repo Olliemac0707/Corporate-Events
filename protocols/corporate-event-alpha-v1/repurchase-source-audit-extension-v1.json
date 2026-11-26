@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-source-audit-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_source_audit.py": "905f4c080e3d07ac968f669902665e9ddd7e15d56431d36550e613842c74292e",
+    "tests/test_repurchase_source_audit.py": "10328b0accadb6bce3376353816ec9a979207811b9506b6eb07c3bcf82ece5be",
+    "protocols/corporate-event-alpha-v1/repurchase-source-audit-policy-v1.json": "80d9944b031d5e6879524fc4e0d4ef01f5fd67f71512b16c9e5ab7d6f8195584"
+  }
+}

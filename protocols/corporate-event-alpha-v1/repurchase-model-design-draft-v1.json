@@ -1,0 +1,60 @@
+{
+  "version": "repurchase-model-design-draft-v1",
+  "status": "OUTCOME_BLIND_DRAFT_NOT_REGISTERED_FOR_EXECUTION",
+  "created_date": "2026-11-26",
+  "parent_execution_plan_sha256": "6720f50db92dc260486e6b7713feef512cc57133311c49c659f2ccb51d19bae5",
+  "authorization_scope": "Prepare a reviewable future model design only. This does not authorize observations, mappings, returns, model fitting or statistical tests.",
+  "primary_analysis": {
+    "status": "EXISTING_FROZEN_INTENT_RETAINED",
+    "family": "SHARE_REPURCHASE",
+    "development_window": [
+      "2006-01-01",
+      "2015-12-31"
+    ],
+    "horizon_sessions": 21,
+    "measure": "Original market-adjusted post-entry measure from aligned open-to-open total-economic increments; exact economics and entry/calendar authority remain Phase-3 requirements.",
+    "outcomes_computed": false
+  },
+  "secondary_regression_candidate": {
+    "status": "DRAFT_REQUIRES_PROSPECTIVE_REGISTRATION_AND_ANALYSIS_AUTHORIZATION",
+    "formula": "CAR21_i = beta_0 + beta_1 * authorization_increase_i + epsilon_i",
+    "outcome": "Only the subsequently authorized registered 21-session outcome; currently unavailable and not calculated.",
+    "predictor": "1 for source-validated AUTHORIZATION_INCREASE; 0 for source-validated NEW_AUTHORIZATION. Unresolved, ASR-only and non-target records cannot be coerced into either category.",
+    "estimand": "Exploratory conditional association among the eventually eligible sampled events; no causal or validated-alpha claim.",
+    "extra_covariates": [],
+    "capacity_caution": "Do not pool dollar, share-count and percentage authorizations into a single unvalidated size feature; currencies and historical baselines remain separate.",
+    "fit_performed": false
+  },
+  "pre_execution_requirements": [
+    "Applicable full-source factual QA and adjudication",
+    "Accession-specific registered public-time evidence and classification availability",
+    "Explicit Phase-3 authorization, licensed historical security/economics authority, calendar and permissions",
+    "Prospective final formula, estimand, dependence/overlap inference, multiplicity allocation and inclusion/missingness rules",
+    "Explicit outcome-analysis authorization before obtaining or fitting the response"
+  ],
+  "inference": {
+    "status": "UNRESOLVED_MUST_BE_FIXED_BEFORE_OUTCOME_ACCESS",
+    "issuer_repetition_and_date_clustering": "Audit on an accepted event roster before outcomes; no naive independence assumption is registered.",
+    "method_reference": {
+      "title": "Event Study Testing with Cross-sectional Correlation of Abnormal Returns",
+      "authors": "Kolari and Pynnonen",
+      "year": 2010,
+      "url": "https://doi.org/10.1093/rfs/hhq072"
+    },
+    "reference_scope": "Motivates resolving cross-sectional dependence; no test or standard-error method is selected or run here."
+  },
+  "multiplicity": {
+    "original_total_fwer": "0.05",
+    "original_family_budget": "0.01",
+    "secondary_regression_allocation": "UNRESOLVED; no additional automatic testing budget"
+  },
+  "sample_limitations": [
+    "Targeted 100-source development feasibility sample, not an exhaustive event census",
+    "Five current-release candidates have source-supported scope but zero are certified for economic analysis",
+    "Development-exposed owner excerpt answers are not independent gold labels or population accuracy"
+  ],
+  "market_data_accessed": false,
+  "returns_computed": false,
+  "regressions_run": 0,
+  "execution_authorized": false
+}

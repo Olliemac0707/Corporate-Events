@@ -22,3 +22,4 @@ corporate_events/bounded_repurchase*.py -text
 corporate_events/repurchase_context_resolution.py -text
 corporate_events/repurchase_review_triage.py -text
 corporate_events/repurchase_review_progress.py -text
+corporate_events/repurchase_source_audit.py -text

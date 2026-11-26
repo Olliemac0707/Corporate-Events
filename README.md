@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-25:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 987 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,003 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -112,6 +112,20 @@ The [eight-response checkpoint](protocols/corporate-event-alpha-v1/repurchase-re
 The [aggregate feedback checkpoint](protocols/corporate-event-alpha-v1/repurchase-review-progress-checkpoint-v1.json) records denominators, output identities and checks. The [registered progress policy](protocols/corporate-event-alpha-v1/repurchase-review-progress-policy-v1.json) makes clear that this is post-review accounting, without retuning original weights or treating owner feedback as independent gold. The active local entrypoint is repurchase_review_progress.py with build and validate commands. Its private progress.html shows original versus remaining points, and candidate-readiness.json retains all 14 action records and their open requirements.
 
 The private repurchase-study-status-v3.html report presents the five current-release candidates with supporting source scope, their stated capacities and dates, plus links to the evidence and the completed short-question frame. Earlier reports and append-only receipts are preserved. Review prompts retained the original source membership and showed sources without predictions or expected answers. Source/control audits, applicable independent full-source QA, historical security eligibility and first-public timing remain open; Smith & Wesson open-market permission also remains unresolved. Independent gold labels and research-qualifying events remain zero; calibrated correctness probabilities are unestablished. This stage used no acquisition requests or market data; all 17 outcome-firewall counters remain zero.
+
+## Source/control and clock audit
+
+All 100 fixed submissions and 599 components passed a fresh original-byte, component-offset and renderer replay. All 20 source controls are retained, including their 81 components: 41 visible-text, 39 retained non-text and one empty-text component. An alternative-wording crosscheck found 12 cues across five controls. Development inspection of those excerpts found third-party acquisition, underwriting, compensation, reorganization and reported-execution contexts; none established an additional issuer open-market authorization. These findings do not certify whole-source negatives or estimate recall.
+
+All 100 headers contain a calendar-valid raw acceptance string. Source-specific timezone semantics remain unverified, so the audit supplies no normalized acceptance times or public-time guarantees. The registered cached archive-prefix replay verified 69 member headers, with zero matches to the 2006–2015 pilot. That partial archive is dated 2022-07-26; non-membership in a prefix is not evidence of absence or dissemination timing. Public times certified remain zero.
+
+The prepared source-only review bundle contains 31 unique filings: the 11 existing action-context source filings plus all 20 fixed controls. Original containers and complete extracted component links passed 143 local-link checks. Proposed classifications, scores, owner answers and per-source sampling roles are withheld. Non-text coverage limitations remain explicit. No reviewer is assigned and no independent decisions are recorded; this bundle does not replace original full-programme QA.
+
+The [aggregate source-audit checkpoint](protocols/corporate-event-alpha-v1/repurchase-source-audit-checkpoint-v1.json) records counts, evidence identities, limitations and checks. The active local entrypoint is repurchase_source_audit.py with build and validate commands. The private repurchase-study-status-v4.html report links the audit, source-only review bundle and model-readiness worklist. All prior snapshots and review receipts remain intact. No new filing acquisition, market-provider access, returns or regressions occurred; all 17 outcome-firewall counters remain zero.
+
+The [outcome-blind model draft](protocols/corporate-event-alpha-v1/repurchase-model-design-draft-v1.json) retains the original 21-session event study as primary and proposes a later secondary regression comparing increases with new authorizations. It is a draft, not registered analysis or permission to fit a model. Dependence, inference and multiplicity choices must be resolved before outcomes; event-date clustering can distort naive event-study tests. [Kolari and Pynnonen (2010)](https://doi.org/10.1093/rfs/hhq072).
+
+The immediate dependencies are an independent full-source reviewer and accession-specific timing evidence. A prospective timing worklist identifies the five current-release candidates across four candidate archive-date URLs, with no requests sent and no claim that those routes or date semantics are validated. Applicable event QA must precede separately authorized Phase-3 historical identity/economics/calendar/rights work. The final model and analysis authorization must then precede outcome access. Model-eligible rows currently remain zero; no new owner teaching batch is queued.
 
 ## Route to first empirical results
 

@@ -1,0 +1,116 @@
+{
+  "acceptance_timezones_independently_verified": 0,
+  "action_records_retained": 14,
+  "analysis_readiness_sha256": "444808daac6b39962ab6a3df52a121661569fcd8ec7b85f6176b8084d14be300",
+  "archive_member_headers_replayed": 69,
+  "component_statuses": {
+    "EMPTY_VISIBLE_TEXT_RETAINED": 1,
+    "NON_TEXT_COMPONENT_RETAINED": 326,
+    "VISIBLE_TEXT_EXTRACTED": 272
+  },
+  "components_replayed": 599,
+  "control_component_statuses": {
+    "EMPTY_VISIBLE_TEXT_RETAINED": 1,
+    "NON_TEXT_COMPONENT_RETAINED": 39,
+    "VISIBLE_TEXT_EXTRACTED": 41
+  },
+  "control_cue_development_context_review": {
+    "additional_issuer_authorization_established_by_inspected_cues": 0,
+    "context_category_counts": {
+      "DIRECTOR_COMPENSATION_AWARD": 1,
+      "HOLDING_COMPANY_REORGANIZATION_AND_AWARDS": 7,
+      "NEGATED_QUARTER_EXECUTION": 1,
+      "THIRD_PARTY_ACQUISITION_CONTEXT": 2,
+      "UNDERWRITER_PURCHASE_OPTION": 1
+    },
+    "control_filings_with_cues": 5,
+    "cue_excerpts_reviewed": 12,
+    "independent_gold_labels_added": 0,
+    "manifest_sha256": "4e022549a57c07893b8740ad0c037e2b8d60639519be0a8c8b2ac0fb73d2087b",
+    "whole_source_negative_labels_added": 0
+  },
+  "controls_with_crosscheck_cues": 5,
+  "date": "2026-11-26",
+  "final_qa_authorized": false,
+  "firewall_counters": {
+    "BHAR": 0,
+    "CAR": 0,
+    "CCM_queries": 0,
+    "CRSP_observation_queries": 0,
+    "Compustat_financial_observation_queries": 0,
+    "Monte_Carlo": 0,
+    "abnormal_returns": 0,
+    "backtests": 0,
+    "bootstrap": 0,
+    "event_price_joins": 0,
+    "event_returns": 0,
+    "market_provider_queries": 0,
+    "optimizations": 0,
+    "portfolio_simulations": 0,
+    "prospective_accesses": 0,
+    "regressions": 0,
+    "stock_returns": 0
+  },
+  "fixed_control_components": 81,
+  "fixed_control_filings": 20,
+  "full_extraction_authorized": false,
+  "headers_with_one_calendar_valid_acceptance": 100,
+  "immediate_blockers": [
+    "Independent full-source reviewer not assigned",
+    "No accession-specific public-time evidence for the pilot in the audited cache"
+  ],
+  "independent_full_source_reviews_completed": 0,
+  "later_phase_requirements": [
+    "Explicit Phase-3 licensed historical identity/economics/calendar/rights authority",
+    "Prospective final model/inference registration and explicit outcome-analysis authorization"
+  ],
+  "market_data_accessed": false,
+  "model_design_draft_sha256": "f46a97dffc4fc468996a8c95a430bbe4fc48a14b646c7e176d04f4f6fd2773cf",
+  "model_design_status": "DRAFT_ONLY_NOT_REGISTERED_FOR_EXECUTION",
+  "model_eligible_rows": 0,
+  "negative_controls_certified": 0,
+  "new_network_requests": 0,
+  "original_718_sample_changes": 0,
+  "output_manifest_sha256": "728768f6efdb54f5fa060f3ae6682a6d19f2d28b8502b4eb3e7ab2cb4bc13a32",
+  "phase3_authorized": false,
+  "pilot_accessions_in_cached_archive_prefix": 0,
+  "public_times_certified": 0,
+  "registered_action_clocks_ready": 0,
+  "regression_design_matrix_built": false,
+  "regressions_authorized": false,
+  "research_qualifying_events": 0,
+  "review_packets_prepared": 31,
+  "reviewer_assigned": false,
+  "security_mappings_queried": 0,
+  "software_checks": {
+    "mypy": "PASS",
+    "mypy_source_files": 78,
+    "original_protocol": "VALID",
+    "pytest_passed": 1003,
+    "ruff": "PASS",
+    "source_audit_output_replay": "PASS"
+  },
+  "source_only_packet_link_audit": {
+    "blank_templates_have_no_decisions": true,
+    "cue_context_passages_reviewed": 12,
+    "independent_labels_added": 0,
+    "local_source_links_verified": 143,
+    "review_packets": 31,
+    "source_audit_manifest_sha256": "728768f6efdb54f5fa060f3ae6682a6d19f2d28b8502b4eb3e7ab2cb4bc13a32",
+    "source_negative_labels_added": 0,
+    "source_only_fields_checked": true,
+    "status": "POST_BUILD_SOURCE_AND_PACKET_INTEGRITY_AUDIT_PASS"
+  },
+  "status": "SOURCE_INTEGRITY_PASS_GATES_CLOSED",
+  "submissions_replayed": 100,
+  "timing_evidence_worklist": {
+    "candidate_archive_dates": 4,
+    "current_release_candidates": 5,
+    "new_requests_sent": 0,
+    "routes_in_target_years_verified": false,
+    "unique_accessions": 5,
+    "worklist_sha256": "0e37b71761e06d03ad5cf64d84c9265429177d313217433e1f8b3a403c56a45e"
+  },
+  "total_control_crosscheck_cues": 12,
+  "version": "repurchase-source-audit-checkpoint-v1"
+}
