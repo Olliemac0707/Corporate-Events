@@ -1,0 +1,18 @@
+{
+  "version": "sec-partial-feed-scan-policy-v1",
+  "mode": "OFFLINE_ONLY",
+  "scope": "Bounded sequential scan of cached compressed fragments for exact accession members and internal accession fields.",
+  "max_compressed_bytes": 210763776,
+  "max_decoded_bytes": 8589934592,
+  "max_target_member_bytes": 33554432,
+  "max_fragments": 5,
+  "exact_target_name_and_internal_accession_required": true,
+  "tar_header_checksum_required": true,
+  "partial_gzip_checksum_verified": false,
+  "prefix_miss_proves_absence": false,
+  "archive_membership_certifies_public_time": false,
+  "unrelated_filing_bodies_extracted": false,
+  "market_data_allowed": false,
+  "regressions_allowed": false,
+  "original_718_sample_changes": 0
+}

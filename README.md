@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-26:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,142 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,170 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -156,6 +156,8 @@ The authorized run completed all eight ranges, receiving 365,284,503 bytes. Offl
 Archive membership does not by itself certify the day of dissemination or establish the earliest public announcement. Both public clocks remain unresolved, and no research events or model rows are certified. The offline sec_two_archive_content_check.py entrypoint compares source-linked component hashes without networking or altering the earlier records. The private repurchase-study-status-v8.html report links the completed validation milestone. The remaining three candidates require another evidence route or prospective review of the existing request limits.
 
 A subsequent [offline passage replay](protocols/corporate-event-alpha-v1/sec-mothers-span-replay-checkpoint-v1.json) checked the nine previously recorded action-support and capacity passages for the 2008 filing. All nine appear in the archive rendering. The first component's rendered text still differs, while both exhibits render identically. This targeted comparison preserves the mismatch and does not establish full-source factual accuracy or public timing.
+
+The registered sec_partial_feed_search.py client can search the remaining three target accessions in two version-matched archive prefixes. The plan allows at most four further 50 MiB ranges for each URL, or 400 MiB total, and stops each archive's search when its targets are found. The separately registered scanner matched known target-member hashes in offline replays of the two previously verified archives. An incomplete prefix cannot verify the full gzip checksum or prove a missing accession absent; an archive match does not certify a public time. This client preserves the original per-URL request limits and all outcome gates.
 
 Code publication is separate from scientific certification.
 

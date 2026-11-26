@@ -1,0 +1,8 @@
+{
+  "version": "sec-partial-feed-search-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_partial_feed_search.py": "44f7b1a1199675750c3f701ff1d17a9c75716dc644a83f0f51891757cd37f26b",
+    "tests/test_sec_partial_feed_search.py": "58f1a9d9da018ced860b0577ef96df13ec779f2f61743bf8db60b901b3f027d5",
+    "protocols/corporate-event-alpha-v1/sec-partial-feed-search-policy-v1.json": "6ea848de89ea1465ff0154a844a41374105c28c9d73236736ef2d79299e8a995"
+  }
+}

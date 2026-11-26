@@ -1,0 +1,8 @@
+{
+  "version": "sec-partial-feed-scan-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_partial_feed_scan.py": "530d48657c757e7429263732c8c8f8d5cb8f5568f83124ffb5fbe4b727d0d744",
+    "tests/test_sec_partial_feed_scan.py": "7cf22c1e8f1bda08af4c18401ebb3279825d32e4526ac4cf2f2a37645bed95aa",
+    "protocols/corporate-event-alpha-v1/sec-partial-feed-scan-policy-v1.json": "59a66c02a43a381a58df83287b9b66409a6383f3c2882c442578a34a3981261c"
+  }
+}
