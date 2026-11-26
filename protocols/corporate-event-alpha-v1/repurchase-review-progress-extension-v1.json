@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-review-progress-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_review_progress.py": "4aafc9cd1af926d6d2499249a0bc39860aec9bf66a478b8fe1e6c788a22c7b8a",
+    "tests/test_repurchase_review_progress.py": "bdc12ae6b88609c075b9cd7c9f8984cb962e9ca9bb943273a9f33c7c699a1064",
+    "protocols/corporate-event-alpha-v1/repurchase-review-progress-policy-v1.json": "2b51894037b5892c896df9d222aa953d4b2c4239ca334d8efd04f8493dc59182"
+  }
+}

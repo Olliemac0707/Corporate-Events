@@ -1,0 +1,30 @@
+{
+  "version": "repurchase-review-progress-v1",
+  "authorization": "USER_AUTHORIZED_TRACK_CONFIRMED_FACTS_AND_REMAINING_REVIEW_2026_11_26",
+  "scope": "Offline accounting for three explicitly submitted human excerpt answers; retain original context predictions, parser disagreements and original scores",
+  "post_label_accounting_design": true,
+  "threshold_and_weight_retuning": false,
+  "original_triage_manifest_sha256": "5401d7af511ab5e1c02e18a27ced8adc2ec6d8f8eb817b7f7dec7601c633a80c",
+  "source_context_manifest_sha256": "165f5d64120c00f53964626b5a95ae225e4c7e4f42e1705f3cf4ed77d2d7ae4b",
+  "priority_threshold": 35,
+  "private_inputs": {
+    "review-progress-targets-v1.json": "5efa5304f86dc9be46670a0799d71f5723b0f10d88754f70daf25201f9beed2f",
+    "triage-human-excerpt-check-v1.json": "0c08a49831c5ab0f5e90ce89bb98057edcea2567ff683b4d29c7522d02587dea",
+    "triage-human-excerpt-check-v1-display.json": "05a09759348e0a0b4409b6c251d3e5e2ec951bd6a452320b1b003cce4fdcdab4",
+    "triage-human-excerpt-check-v1-decisions.json": "061c733363164dc7f85b8e7b042ede7c162cc75dd78e67a0c7419baff3fa8d26"
+  },
+  "remaining_priority": "Recompute original point aggregation after removing only explicitly confirmed question-scoped warning codes; retain all other cases, passages, scientific blockers and audit membership",
+  "disagreement_or_uncertainty": "Retain unresolved flags and require adjudication; no invented decision or probability",
+  "agreement_denominator": "Displayed fact questions compared with frozen source-context interpretations, not baseline-parser accuracy, population accuracy or full-source QA",
+  "next_review_wave": "Prepare up to three short checks from still-open original first-wave priority packets; show exact source context and no predictions or expected answers",
+  "owner_feedback_scope": "Human excerpt checks of development-exposed material; not independent full-filing gold",
+  "automatic_acceptance": false,
+  "independent_gold_from_owner_excerpt_checks": false,
+  "first_wave_membership_changes": 0,
+  "original_718_sample_changes": 0,
+  "network_allowed": false,
+  "market_data_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false
+}
