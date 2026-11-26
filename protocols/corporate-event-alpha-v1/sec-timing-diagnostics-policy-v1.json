@@ -1,0 +1,58 @@
+{
+  "version": "sec-timing-diagnostics-v1",
+  "scope": "Four exact SEC archive-prefix diagnostic requests for five selected accessions; user-authorized only after offline tests and preflight pass. No retry, redirect, expansion or earlier-budget reset.",
+  "proposal_file": "requirements-validation-v1/authorization-proposal.json",
+  "authorization_file": "timing-diagnostics-authorization-v1.json",
+  "private_inputs": {
+    "requirements-validation-v1/authorization-proposal.json": "6f7a8ebf3a11735df780d0143ee9da8b91c4a2de24ceaaddbbbb44e5c795a84f",
+    "timing-diagnostics-authorization-v1.json": "88d5e93320fe50274f7edabaf8e6677a7af864ee3ede29f7d641461ae4c467e1",
+    "timing-prior-global-attempts-v1.json": "087333640fb4ebfd72567f0902020eea2f6dac7a70a3ed1f36afb4b6650029df",
+    "repurchase-timing-evidence-worklist-v1.json": "0e37b71761e06d03ad5cf64d84c9265429177d313217433e1f8b3a403c56a45e",
+    "requirements-validation-v1/output-manifest.json": "5e6cfa6109de525a5e8e7f59056f59ebd3c073a6dfafea096d47093118d4c808"
+  },
+  "approved_urls": [
+    "https://www.sec.gov/Archives/edgar/Feed/2007/QTR3/20070802.nc.tar.gz",
+    "https://www.sec.gov/Archives/edgar/Feed/2008/QTR3/20080730.nc.tar.gz",
+    "https://www.sec.gov/Archives/edgar/Feed/2010/QTR3/20100928.nc.tar.gz",
+    "https://www.sec.gov/Archives/edgar/Feed/2011/QTR4/20111130.nc.tar.gz"
+  ],
+  "prior_global_attempt_counts_file": "timing-prior-global-attempts-v1.json",
+  "old_budget_hashes": {
+    "repurchase-acquisition-v1/byte-budget.json": "9bfa8fb93687b54ea8de6e1b36bfc6b57171f9d3f2208f4c476e6dd44270509e",
+    "repurchase-acquisition-v1/request-budget.json": "1216c9df051db1db5ff326075442c4c8c91e6c3246a97be159b8f919fd69aa34",
+    "repurchase-discovery-v1/crawl-sorted-v1-budget.json": "65a433a5066272697624fe265be60314e763218b9576983b1c66509853e9cca8",
+    "repurchase-discovery-v1/crawl-v2-budget.json": "934e9b363554596c6ca8e6a6861a9eacac0ec6e0b06ad648c2786e7ca6cffa19",
+    "repurchase-discovery-v1/diagnostic-budget.json": "4bf76bdcb2b652610f06615b2741445995f59214853c3d4a06016c5c3c098b2f",
+    "repurchase-discovery-v1/exports-budget.json": "55b052ca43c7aee7f3ed1525045b6ec7b7e60946b916016fb4f2bd57df53d327",
+    "repurchase-discovery-v1/root-profile-diagnostic-budget.json": "aa17c8c003a9e45619159b2195c3dfaa14e85f464967c7d57dbec151a5bc5a73",
+    "repurchase-discovery-v1/sorted-profile-diagnostic-budget.json": "bae85ea4ad4ad46097630af4f7d548e899531fc70411c59e9665cd7f4c467b0c",
+    "authority-evidence-v1/download-budget.json": "54405e57b296258380592e4587d80f18f04caf9aaaecd6e0231cfcd6da55a441",
+    "authority-evidence-v2/download-budget.json": "9911af85f8a9747c8a39d1f59dc141c0c63b16b8c8c79e3e4d733e87a69e7ca0"
+  },
+  "limits": {
+    "maximum_HTTP_requests_including_failures": 4,
+    "maximum_attempts_per_URL": 1,
+    "maximum_received_body_bytes_total": 4194304,
+    "maximum_received_body_bytes_per_response": 1048576,
+    "maximum_decoded_bytes_per_prefix": 33554432,
+    "minimum_request_start_spacing_seconds": 0.5,
+    "concurrency": 1,
+    "socket_timeout_seconds": 30,
+    "redirects_allowed": false,
+    "automatic_retries_allowed": false,
+    "whole_archive_download_allowed": false,
+    "old_budget_resets_allowed": false
+  },
+  "representation_rules": "Require 206, identity encoding, a bounded Content-Range and matching Content-Length. A small complete representation is acceptable only within the approved 206 prefix; no 200/full-GET fallback.",
+  "persistence_rules": "Reserve before connecting; atomically charge every application-received chunk, including partial failures; retain stopped states and raw fragments; no automatic resume after incomplete execution.",
+  "raw_cache": "Private immutable SHA256 objects, with metadata, ledger and completion receipt; contact is never written to outputs.",
+  "timing_rules": "Exact target header matches are archive-membership observations only. A prefix miss is not absence, and neither response date nor archive date label certifies original public time.",
+  "scientific_gates_unchanged": true,
+  "original_718_sample_changes": 0,
+  "market_data_allowed": false,
+  "returns_allowed": false,
+  "regressions_allowed": false,
+  "full_extraction_authorized": false,
+  "final_qa_authorized": false,
+  "phase3_authorized": false
+}

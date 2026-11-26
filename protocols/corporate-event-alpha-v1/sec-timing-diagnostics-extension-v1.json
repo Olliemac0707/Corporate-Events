@@ -1,0 +1,8 @@
+{
+  "version": "sec-timing-diagnostics-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_timing_diagnostics.py": "af81874c6a909964fcc3d8b0240add74e85f2fce5abbd5f61477375c3c514ee6",
+    "tests/test_sec_timing_diagnostics.py": "1246a730222cd48123c12e19b6aee10ed7f588edeaf971704fa88ba074346a89",
+    "protocols/corporate-event-alpha-v1/sec-timing-diagnostics-policy-v1.json": "5879c92abcd07aeb2f7ec80484d40165e240a4d4228954ca511693a2ce95c2c3"
+  }
+}
