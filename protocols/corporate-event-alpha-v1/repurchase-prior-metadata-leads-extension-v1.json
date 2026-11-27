@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-prior-metadata-leads-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_prior_metadata_leads.py": "1fb8678a60395baabdd7a075bc63a0873acd22c0b30ddc249402836457fdfb5c",
+    "tests/test_repurchase_prior_metadata_leads.py": "e66a0cf1133c59a155d70e82535cc79485884d17631e20010de8bacbf62adf21",
+    "protocols/corporate-event-alpha-v1/repurchase-prior-metadata-leads-policy-v1.json": "1538a8b09b75920b38babcd00b426579799a997da648980776a87630943f65f0"
+  }
+}

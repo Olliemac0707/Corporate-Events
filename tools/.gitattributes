@@ -31,3 +31,8 @@ corporate_events/sec_two_archive_content_check.py -text
 corporate_events/sec_partial_feed_scan.py -text
 corporate_events/sec_partial_feed_search.py -text
 corporate_events/sec_stopped_feed_continuation.py -text
+corporate_events/sec_continuation_forensic_replay.py -text
+corporate_events/repurchase_five_clock_inventory.py -text
+corporate_events/repurchase_prior_metadata_leads.py -text
+corporate_events/repurchase_prior_index_leads.py -text
+corporate_events/sec_prior_lead_acquisition.py -text

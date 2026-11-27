@@ -29,7 +29,7 @@ GitHub Actions runs the checks on Windows/Python 3.12. Tests use synthetic input
 
 ## Research status
 
-Latest local development checkpoint, 2026-11-26:
+Latest local development checkpoint, 2026-11-27:
 
 | Milestone | Status |
 | --- | --- |
@@ -39,7 +39,7 @@ Latest local development checkpoint, 2026-11-26:
 | Original pilot parser | event-parsers-development-v4.1 |
 | Original pilot provisional mentions | 69; not 69 unique certified events |
 | Accepted research events | 0 |
-| Latest recorded software checks | 1,177 tests passed; Ruff and mypy passed |
+| Latest recorded software checks | 1,226 tests passed; Ruff and mypy passed |
 | Targeted interpretation check | 12 earlier teaching questions and eight later repurchase excerpt responses; not independent full-source gold |
 | Accuracy, precision, recall and probability calibration | Not established |
 | Returns, regressions, CAR/BHAR, portfolios and backtests | Not run |
@@ -159,9 +159,15 @@ A subsequent [offline passage replay](protocols/corporate-event-alpha-v1/sec-mot
 
 The registered sec_partial_feed_search.py client can search the remaining three target accessions in two version-matched archive prefixes. The plan allows at most four further 50 MiB ranges for each URL, or 400 MiB total, and stops each archive's search when its targets are found. The separately registered scanner matched known target-member hashes in offline replays of the two previously verified archives. An incomplete prefix cannot verify the full gzip checksum or prove a missing accession absent; an archive match does not certify a public time. This client preserves the original per-URL request limits and all outcome gates.
 
-The partial search stopped during its fifth response when the transfer ended early. It received 258,998,272 bytes, retained the incomplete fragment and did not retry. Offline replay found two more target accessions: one in the completed ranges and one in the retained fragment. Their five and two document components respectively match the cached source components after line-ending and delimiter normalization. Four of the five candidate accessions have now been found in archive members; the fifth remains unlocated within the scanned prefix. The [aggregate checkpoint](protocols/corporate-event-alpha-v1/sec-partial-feed-search-checkpoint-v1.json) records the stop, budgets and limits of the evidence.
+The partial search stopped during its fifth response when the transfer ended early. It received 258,998,272 bytes, retained the incomplete fragment and did not retry. Offline replay found two more target accessions: one in the completed ranges and one in the retained fragment. Their five and two document components respectively match the cached source components after line-ending and delimiter normalization. At that checkpoint, four of the five candidate accessions had been found in archive members; the fifth remained unlocated within the scanned prefix. The [aggregate checkpoint](protocols/corporate-event-alpha-v1/sec-partial-feed-search-checkpoint-v1.json) records the stop, budgets and limits of the evidence.
 
-The separately registered sec_stopped_feed_continuation.py client is prepared for one additional range of at most 50 MiB after the saved fragment. It requires explicit continuation approval because the earlier registered search prohibited automatic restart after a failed transfer. The request would use the one remaining attempt allowed for that URL; even on success, the resulting prefix would not include the entire archive or verify its full gzip checksum. No public-release day is certified by the partial search.
+The separately registered sec_stopped_feed_continuation.py client received approval for one additional range. That request returned HTTP 206, but a local ledger write did not complete and the original command reported FileExistsError. Its durable state, pending write and saved fragment remain unchanged; the underlying write failure was not captured. A separate offline forensic replay found the fifth target in the saved bytes. The durable fragment contains 49,283,072 bytes; the pending ledger records a 50,331,648-byte received high-water mark. The difference was not saved in the fragment. No request or budget was reset.
+
+All five target accessions have now been found in SEC archive members: two in checksum-verified complete archives and three in partial prefixes without a full gzip checksum. The fifth filing's two components match the existing cached filing after line-ending and delimiter normalization. The earlier 2008 component mismatch remains documented. Neither archive membership nor a filing date establishes a verified public-release day.
+
+The [five-filing timing checkpoint](protocols/corporate-event-alpha-v1/sec-five-filing-clock-evidence-checkpoint-v1.json) records that three filings state announcement dates before the corresponding archive labels. A bounded search of the cached repurchase-query metadata found no additional matches in the selected windows; a separate search of four cached SEC master indexes found 13 same-filer metadata leads, including three earlier 8-Ks. Those filing contents, roles and relevance remain unverified, and a search miss cannot prove there was no earlier disclosure.
+
+The separately registered sec_prior_lead_acquisition.py client is ready for those three earlier 8-Ks, subject to explicit approval: at most three requests, 8 MiB each and 24 MiB total. It only validates and caches complete SEC submission containers; no source-content interpretation or event extraction is performed by acquisition. The private repurchase-study-status-v10.html report contains the five-case timing inventory and links the proposed source scope. All public clocks, independent factual QA and market-analysis gates remain unresolved.
 
 Code publication is separate from scientific certification.
 

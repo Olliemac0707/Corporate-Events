@@ -1,0 +1,8 @@
+{
+  "version": "sec-prior-lead-acquisition-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_prior_lead_acquisition.py": "5f90bd45e80bd1470e8e84bb6fdd6461d5b507745f8d937a2e3494364298c3dc",
+    "tests/test_sec_prior_lead_acquisition.py": "dcf6e85a439164f7b704312581066ec5762f0c911cd0525950aaddfa73f058b1",
+    "protocols/corporate-event-alpha-v1/sec-prior-lead-acquisition-policy-v1.json": "d4aae6727c2ec3000fc15b5352fbb9a05add564892d723ec78c18f3206c1527d"
+  }
+}

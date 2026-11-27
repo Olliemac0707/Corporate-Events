@@ -1,0 +1,8 @@
+{
+  "version": "sec-continuation-forensic-replay-extension-v1",
+  "files": {
+    "tools/corporate_events/sec_continuation_forensic_replay.py": "f581db12c71ce77e90eaa798bb1b2874459bb99d5a3c349f1ab5adbb7375ba16",
+    "tests/test_sec_continuation_forensic_replay.py": "c35dc54de7dcf068b7f66599171cdb27cfdb3c1082c26ce09c627d9e2da81832",
+    "protocols/corporate-event-alpha-v1/sec-continuation-forensic-replay-policy-v1.json": "61bf000479abecc01606df0d3f15d42d3f5cb5f8b1084b76bd9844543bb04fc8"
+  }
+}

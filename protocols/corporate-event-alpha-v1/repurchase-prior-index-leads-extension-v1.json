@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-prior-index-leads-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_prior_index_leads.py": "c7a4fbb9ea908cfdd2f033ebc5c4a6c8fdb419054ffc4e9e645f32c1b40cd56d",
+    "tests/test_repurchase_prior_index_leads.py": "a424d734e8cfe60c257207986a6fd4b559c0e320ccbd3d360428d0ef84b3f4b2",
+    "protocols/corporate-event-alpha-v1/repurchase-prior-index-leads-policy-v1.json": "89a188f04a5e08d65cd660f8c7cace499ec528adfceec17ba64c3b69054903d7"
+  }
+}

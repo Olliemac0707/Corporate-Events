@@ -1,0 +1,8 @@
+{
+  "version": "repurchase-five-clock-inventory-extension-v1",
+  "files": {
+    "tools/corporate_events/repurchase_five_clock_inventory.py": "76675246f6ff7a2b289d2d97fd857e0276452016de46059721c47720dfcb5d72",
+    "tests/test_repurchase_five_clock_inventory.py": "075dec3c6cc3497e78399e7a9e0101cf0cc9ec6f3e5f05cf86f0f4fb30583abd",
+    "protocols/corporate-event-alpha-v1/repurchase-five-clock-inventory-policy-v1.json": "dbf31fe263be72cdf6089dcda636de1156caa6936bdd04ca711580d72b4a942e"
+  }
+}

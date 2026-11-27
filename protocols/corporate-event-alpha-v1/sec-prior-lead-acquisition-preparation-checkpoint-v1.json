@@ -1,0 +1,26 @@
+{
+  "version": "sec-prior-lead-acquisition-preparation-checkpoint-v1",
+  "date": "2026-11-27",
+  "status": "OFFLINE_READY_AWAITING_EXPLICIT_APPROVAL",
+  "scope": "Three earlier SEC 8-K source leads from the cached historical master index.",
+  "request_cap": 3,
+  "per_response_byte_cap": 8388608,
+  "new_body_byte_cap": 25165824,
+  "source_contents_may_be_unrelated": true,
+  "new_HTTP_requests": 0,
+  "authorization_created": false,
+  "unapproved_acquire": "DENIED_BEFORE_CONTACT_AND_CONNECTION",
+  "in_firewall_synthetic_transport": "PASS_ZERO_REAL_HTTP",
+  "prior_budgets_reset": 0,
+  "public_times_certified": 0,
+  "market_data_accessed": false,
+  "regressions_run": 0,
+  "original_718_sample_changes": 0,
+  "registry_sha256": "3e32012e07817fc533460180fcc3d052086eb30b444fd832b555d71431617268",
+  "manifest_sha256": "7e7aaf83a2eb41953c378d9203e183ef20d13dee3a7d2ea20acc18db9e26ab50",
+  "software_checks": {
+    "pytest": "1226 passed",
+    "Ruff": "PASS",
+    "mypy": "PASS_104_SOURCE_FILES"
+  }
+}
